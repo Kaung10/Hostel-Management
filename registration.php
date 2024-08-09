@@ -137,7 +137,7 @@ return true;
 </div>
 
 <div class="form-group">
-<label class="col-sm-2 control-label">Contact No : </label>
+<label class="col-sm-2 control-label">Ph No : </label>
 <div class="col-sm-8">
 <input type="text" name="contact" id="contact"  class="form-control" required="required" pattern="09[0-9]{7,9}" title="09XXXXXXXXX">
 </div>
