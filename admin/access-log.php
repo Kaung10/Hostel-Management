@@ -50,17 +50,7 @@ check_login();
 											<th>Login Time</th>
 										</tr>
 									</thead>
-									<tfoot>
-										<tr>
-											<th>Sno.</th>
-											<th>User Id</th>
-											<th>User Email /Reg No.</th>
-											<th>IP</th>
-											<th>City</th>
-											<th>Country</th>
-											<th>Login Time</th>
-										</tr>
-									</tfoot>
+
 									<tbody>
 <?php	
 $aid=$_SESSION['id'];
