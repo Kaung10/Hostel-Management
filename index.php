@@ -12,7 +12,7 @@
         <div class="navbar">
             <img src="logo.svg" class="logo">
             <ul>
-                <li><a href="#">Home</a></li>
+                <li class="active"><a href="#">Home</a></li>
                 <li><a href="#">ACADEMIC</a></li>
                 <li><a href="#">RESEARCH</a></li>
                 <li><a href="#">COLLABORATION</a></li>
@@ -29,6 +29,7 @@
         </div>
 
     </div>
+    <script src= "click.js"></script>
 </body>
 </html>
 
