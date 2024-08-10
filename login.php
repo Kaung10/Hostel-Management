@@ -101,7 +101,7 @@ return true;
     <div class="navbar">
         <img src='logo.svg' class="logo">
         <ul>
-            <li><a href="index.php">Home</a></li>
+            <li  class="active"><a href="index.php">Home</a></li>
             <li><a href="#">ACADEMIC</a></li>
             <li><a href="#">RESEARCH</a></li>
             <li><a href="#">COLLABORATION</a></li>
@@ -152,5 +152,6 @@ return true;
 	<script src="js/fileinput.js"></script>
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
+	<script src= "click.js"></script>
 </body>
 </html>
