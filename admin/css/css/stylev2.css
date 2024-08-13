@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css?family=Tangerine');
+
+*{ 
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins',sans-serif;
+}
+body{ 
+    background-image : linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url("./Background.jpg");
+    /* background: url('./Background.jpg'); */
+
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+section{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    /* background-image : linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url('/bg2.png');
+    /* background: url('/bg.img')no-repeat; */
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+
+.form-box{
+    position: relative;
+    width: 500px;
+    height: 650px;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+
+h2{ 
+    font-size: 2em;
+    color: #ffff;
+    text-align: center;
+}
+
+.inputbox{ 
+    position: relative;
+    margin: 30px 0 ;
+    width: 310px;
+    border-bottom: 2px solid #ffff;
+}
+
+.inputbox label{ 
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform:translateY(-50%) ;
+    color: #ffff;
+    font-size: 1em;
+    pointer-events: none;
+    transition: .5s;
+}
+input:focus ~ label, 
+input:valid ~ label{
+    top: -5px;
+}
+.inputbox input{ 
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    padding: 0 35px 0 5px;
+    color: #ffff;
+}
+
+.inputbox ion-icon{ 
+    position: absolute;
+    right: 8px;
+    color: #ffff;
+    font-size: 1.2em;
+    top:20px;
+    
+}
+.forget{ 
+    margin: -15px 0 15px;
+    font-size: .8em;
+    color: #ffff;
+    display: flex;
+    justify-content: center;
+
+}
+
+.foget label input{ 
+    margin-right: 3px;
+}
+
+.forget label a{ 
+    color: #ffff;
+    text-decoration: none;
+
+}
+
+.forget label a:hover{ 
+    text-decoration: underline;
+}
+
+button { 
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    background: #ffff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition-timing-function: ease-in-out;
+    transition: 1s;
+    
+}
+button:hover{ 
+    background: #009688;
+}
+.register { 
+    font-size: .9em;
+    color: #ffff;
+    text-align: center;
+    margin:25px 0 10px; 
+
+}
+
+.register p a { 
+    text-decoration: none;
+    color: #ffff;
+    font-weight: 600;
+
+}
+
+.register p a:hover{ 
+ text-decoration: underline;
+}
+
+.navbar{
+    width:100% ;
+    margin: auto; 
+    padding: 35px 0; 
+    display: flex; 
+    align-items: center ; 
+    justify-content: space-between; 
+    height: 20px;
+
+}
+
+.logo{ 
+    width:120px;
+    cursor : pointer; 
+}
+.navbar ul li{ 
+    list-style:none ;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+.navbar ul li a { 
+    text-decoration: none;
+    color: #fff; 
+    text-transform: uppercase;
+    transition:ease-in-out 0.5s;
+}
+
+.navbar ul li a:hover{ 
+    color: #009688;
+
+}
+
+.navbar ul li::after{ 
+    content: '';
+    height: 3px;
+    width: 100%;
+    background: #ffff; 
+    position:absolute; 
+    left:0; 
+    bottom:-10px;
+    transition: 0.5s; 
+}
+.navbar ul li::after:hover{ 
+    background: whitesmoke;
+}
+
+
+.navbar ul li:hover::after{ 
+    width:100%; 
+
+}
+
+
+/* .gender-selection{ 
+    position: relative;
+    margin: 30px 0 ;
+    width: 310px;
+    border-bottom: 2px solid #ffff;
+} */
+
+ .gender-selection label.text-uppercase.text-sm { 
+    color: #ffff;
+    font-size: 1em;
+    pointer-events: none;
+    font-family: 'poppins',sans-serif, sans-serif;
+
+} 
+
+/* Hide the default radio button */
+input[type="radio"] {
+    display: none;
+}
+
+/* Gender selection container */
+.gender-selection {
+    display: flex;
+    gap: 20px; /* Space between male and female options */
+}
+
+/* Create a custom radio button */
+.custom-radio {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-family: 'poppins',sans-serif, sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.custom-radio .checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid gray;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    margin-right: 8px;
+    transition: border-color 0.2s ease;
+}
+
+/* When the radio button is checked, change the border color and add the inner circle */
+.custom-radio input[type="radio"]:checked + .checkmark {
+    border-color: skyblue;
+}
+
+.custom-radio input[type="radio"]:checked + .checkmark::after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    background: skyblue;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
