@@ -50,9 +50,9 @@ catch(Exception $e)
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
     <title>Student Registration Form</title>
-   <link rel="stylesheet" href="stylev2.css">
-   <link rel="stylesheet" href="style.css">
-<script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>
+   <link rel="stylesheet" href="css/stylev2.css">
+   <!-- <link rel="stylesheet" href="css/style.css"> -->
+   <script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>
 <script type="text/javascript" src="js/validation.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
