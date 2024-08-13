@@ -85,7 +85,7 @@ return true;
             <div class="form-value">
                 <form action="" class="mt" method="post"> 
                 
-                <legend>Registration</legend>
+                <h2>Registration</h2>
 					<div class="inputbox">
 					<ion-icon name="briefcase-outline"></ion-icon> 
 
@@ -158,19 +158,7 @@ return true;
 </div>
     </section>
 
-    <style>
-
-legend {
-    font-size: 24px; 
-    font-weight: bold; 
-    padding: 0 10px;
-    background-color: #3e454c;
-    color: white; 
-    position: absolute;
-    top: -15px; 
-    left: 10px; 
-}
-</style>
+  
 
 </div>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
