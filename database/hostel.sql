@@ -302,7 +302,7 @@ CREATE TABLE `roomregistration` (
   `pmnatetState` varchar(500) DEFAULT NULL,
   `postingDate` timestamp NULL DEFAULT current_timestamp(),
   `updationDate` varchar(500) DEFAULT NULL,
-  `request` int(11) DEFAULT NULL
+  `request` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
