@@ -7,7 +7,7 @@
 
 	<style>
 		ul li a{ 
-			background:black; 
+			background:#009688; 
 			transition:ease-in-out 0.5s; 
 
 		}
@@ -27,7 +27,7 @@
 		<a href="#" class="logo" style="font-size:16px; background:#009688; color:white;">Hostel Management System</a>
 		<span class="menu-btn"><i class="fa fa-bars"></i></span>
 		<ul class="ts-profile-nav">
-			<li class="ts-account" style="background:black;" S>
+			<li class="ts-account" style="background:#009688;" S>
 				<a href="#"><img src="img/ts-avatar.jpg" class="ts-avatar hidden-side" alt=""> Account <i class="fa fa-angle-down hidden-side"></i></a>
 				<ul>
 					<li><a href="admin-profile.php">My Account</a></li>
