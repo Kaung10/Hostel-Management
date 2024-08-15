@@ -5,7 +5,7 @@ include('includes/checklogin.php');
 check_login();
 
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
 
 <head>
@@ -71,7 +71,9 @@ $stmt->close();
 											<div class="panel-body bk-success text-light">
 												<div class="stat-panel text-center">
 <?php
-$result1 ="SELECT count(*) FROM rooms ";
+
+$result1 ="SELECT (SELECT COUNT(*) FROM alinkar) + (SELECT COUNT(*) FROM mudra) AS total_count";
+
 $stmt1 = $mysqli->prepare($result1);
 $stmt1->execute();
 $stmt1->bind_result($count1);
