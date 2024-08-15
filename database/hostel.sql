@@ -162,9 +162,8 @@ INSERT INTO `alinkar` (`id`, `seater`, `avaliable`, `room_no`) VALUES
 -- Table structure for table `hosteldetails`
 --
 
-CREATE TABLE `hosteldetails` (
-  `mudra` int(11) DEFAULT NULL,
-  `alinkar` int(11) DEFAULT NULL,
+CREATE TABLE `fees` (
+  `hostelName` varchar(500) DEFAULT NULL,
   `fees` int(11) DEFAULT NULL,
   `meal_expenses` int(11) DEFAULT NULL,
   `posting_date` int(11) DEFAULT NULL
@@ -302,7 +301,7 @@ CREATE TABLE `roomregistration` (
   `pmnatetState` varchar(500) DEFAULT NULL,
   `postingDate` timestamp NULL DEFAULT current_timestamp(),
   `updationDate` varchar(500) DEFAULT NULL,
-  `request` varchar(500) DEFAULT NULL
+  `request` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
