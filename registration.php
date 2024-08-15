@@ -111,7 +111,7 @@ return true;
 <div class="form-group">
 <label class="col-sm-2 control-label" >Registration No : </label>
 <div class="col-sm-8">
-<input type="text" name="regno" id="regno"  class="form-control" required="required" onBlur="checkRegnoAvailability()" pattern="YKPT-\d{5}" title="YKPT-XXXXX">
+<input type="text" name="regno" id="regno"  class="form-control" required="required" value="YKPT-" onBlur="checkRegnoAvailability()" pattern="YKPT-\d{5}" title="YKPT-XXXXX">
 <span id="user-reg-availability" style="font-size:12px;"></span>
 </div>
 </div>
