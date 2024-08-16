@@ -3,13 +3,13 @@ session_start();
 include('includes/config.php');
 if(isset($_POST['submit']))
 {
-    $regno = $_POST['regno'];
-    $name = $_POST['name'];
-    $gender = $_POST['gender'];
-    $contactno = $_POST['contact'];
-    $emailid = $_POST['email'];
-    $password = $_POST['password'];
-    
+$regno=$_POST['regno'];
+$name=$_POST['name'];
+
+$gender=$_POST['gender'];
+$contactno=$_POST['contact'];
+$emailid=$_POST['email'];
+$password=$_POST['password'];
 	$result ="SELECT count(*) FROM userRegistration WHERE email=? || regNo=?";
 		$stmt = $mysqli->prepare($result);
 		$stmt->bind_param('ss',$email,$regno);
@@ -24,10 +24,9 @@ echo"<script>alert('Registration number or email id already registered.');</scri
 
 try
 {
-	
-$query = "insert into userRegistration(regNo, name, gender, contactNo, email, password) values(?, ?, ?, ?, ?, ?)";
+	$query="insert into  userRegistration(regNo,name,gender,contactNo,email,password) values(?,?,?,?,?,?)";
 $stmt = $mysqli->prepare($query);
-$rc = $stmt->bind_param('sssiss', $regno, $name, $gender, $contactno, $emailid, $password);
+$rc=$stmt->bind_param('sssiss',$regno,$name,$gender,$contactno,$emailid,$password);
 $stmt->execute();
 echo"<script>alert('Student Succssfully register');</script>";
 
@@ -35,12 +34,10 @@ echo"<script>window.location.href = 'index.php';</script>";
 }
 catch(Exception $e)
 {
-    echo "<script>alert('Error: " . $e->getMessage() . "');</script>";
-}
-
+	echo "<script>alert('Error! Duplicate Email detected.')</script>";
 }
 }
-
+}
 ?>
 
 <!DOCTYPE html>
@@ -53,14 +50,6 @@ catch(Exception $e)
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
     <title>Student Registration Form</title>
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
-	<link rel="stylesheet" href="css/bootstrap-social.css">
-	<link rel="stylesheet" href="css/bootstrap-select.css">
-	<link rel="stylesheet" href="css/fileinput.min.css">
-	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
-
    <link rel="stylesheet" href="stylev2.css">
    <!-- <link rel="stylesheet" href="css/style.css"> -->
    <script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>
@@ -69,54 +58,13 @@ catch(Exception $e)
 <script type="text/javascript">
 function valid()
 {
-
-    var password = document.registration.password.value;
-    var confirmPassword = document.registration.cpassword.value;
-
-    if (password.length < 8) {
-        alert("Password must be at least 8 characters long!");
-        document.registration.password.focus();
-        return false;
-    }
-
-    var lowerCaseLetters = /[a-z]/g;
-    if (!password.match(lowerCaseLetters)) {
-        alert("Password must contain at least one lowercase letter!");
-        document.registration.password.focus();
-        return false;
-    }
-
-    var upperCaseLetters = /[A-Z]/g;
-    if (!password.match(upperCaseLetters)) {
-        alert("Password must contain at least one uppercase letter!");
-        document.registration.password.focus();
-        return false;
-    }
-
-    var numbers = /[0-9]/g;
-    if (!password.match(numbers)) {
-        alert("Password must contain at least one number!");
-        document.registration.password.focus();
-        return false;
-    }
-
-    if (password !== confirmPassword) {
-        alert("Password and Confirm Password do not match!");
-        document.registration.cpassword.focus();
-        return false;
-    }
-
-    return true;
-
-
-
-// if(document.registration.password.value!= document.registration.cpassword.value)
-// {
-// alert("Password and Re-Type Password Field do not match  !!");
-// document.registration.cpassword.focus();
-// return false;
-// }
-// return true;
+if(document.registration.password.value!= document.registration.cpassword.value)
+{
+alert("Password and Re-Type Password Field do not match  !!");
+document.registration.cpassword.focus();
+return false;
+}
+return true;
 }
 </script>
 </head>
@@ -141,18 +89,15 @@ function valid()
 					<div class="inputbox">
 					<ion-icon name="briefcase-outline"></ion-icon> 
 
-<input id="regno" type="text" placeholder="Registration No" name="regno" class="form-control" required="true" pattern="YKPT-\d{5}" title="YKPT-XXXXX">
+                        <input id="regno" type="text" placeholder="Registration No " name="" class="form-control " required="true" pattern="YKPT-\d{5}" title="YKPT-XXXXX">
                         <label for="" class="text-uppercase text-sm">Registration No </label>
                     </div>
 
 					<div class="inputbox">
 					<ion-icon name="people-outline"></ion-icon>
-                        <input id="fname" type="text" placeholder="Name" name="name" class="form-control " required="true">
+                        <input id="" type="text" placeholder="Name" name="fname" class="form-control " required="true">
                         <label for="" class="text-uppercase text-sm">Name</label>
                     </div>
-
-					
-
 					<div class="gender-selection">
                     <label for="" class="text-uppercase text-sm">Gender                     <ion-icon name="transgender-outline"></ion-icon>  
                     </label> 
@@ -166,41 +111,41 @@ function valid()
     <span class="checkmark"></span>
     Female
   </label>
+
 </div>
 
                     
 
 					<div class="inputbox">
 					<ion-icon name="call-outline"></ion-icon>
-                        <input id="contactS" type="text" placeholder="Phone Number" name="contact" class="form-control mb" required="true" pattern="09[0-9]{7,9}" title="09XXXXXXXXX">
+                        <input id="" type="text" placeholder="Phone Number" name="" class="form-control mb" required="true" pattern="09[0-9]{7,9}" title="09XXXXXXXXX">
                         <label for="" class="text-uppercase text-sm">Phone Number </label>
                     </div>
 					
 					<div class="inputbox">
                         <ion-icon name="mail-outline"></ion-icon>
-                        <input id="email" type="text" placeholder="Email" name="email" class="form-control mb" required="true" onBlur="checkAvailability()">
+                        <input id="email" type="text" placeholder="Email" name="emailreg" class="form-control mb" required="true">
                         <label for="" class="text-uppercase text-sm">Email</label>
                     </div>
 
                     <div class="inputbox">
                         <ion-icon name="lock-closed-outline"></ion-icon>
-                    <input id="password" type="password" placeholder="Password" name="password" class="form-control mb" required="true"required> 
+                    <input id="pass" type="password" placeholder="Password" name="password" class="form-control mb" required="true"required> 
+                    <!-- <input type="password" name="password" class="form-control mb" required="true" title="Enter your password"required> -->
                     <label for="" class="text-uppercase text-sm">Password</label>
                     </div>
 
 					<div class="inputbox">
                         <ion-icon name="lock-closed-outline"></ion-icon>
-                    <input id="cpassword" type="password" placeholder="Confirm Password" name="cpassword" class="form-control mb" required="true"required> 
+                    <input id="pass" type="password" placeholder="Confirm Password" name="password" class="form-control mb" required="true"required> 
                     <!-- <input type="password" name="password" class="form-control mb" required="true" title="Enter your password"required> -->
                     <label for="" class="text-uppercase text-sm">Confirm Password</label>
                     </div>
                     
                                    
-                    <!-- <div class="forget">
-                        <label for=""><input type="checkbox">Accept<a href=".php" class="text-light"> all informations</a></label>   
-                    </div>
-					 -->
-                    <button type="submit" name="submit" value="login" class="btn btn-primary" >Register </button>
+                    
+					
+                    <button type="submit" name="login" value="login" >Register</button>
                     <div class="register">    </div>
                 
                 </form>
@@ -275,7 +220,53 @@ alert('error');
 
 		<!-- Add this script inside the head section of your HTML -->
 
+function valid() {
+    // Other validation code...
 
+    var password = document.registration.password.value;
+    var confirmPassword = document.registration.cpassword.value;
+
+    // Password should be at least 8 characters long
+    if (password.length < 8) {
+        alert("Password must be at least 8 characters long!");
+        document.registration.password.focus();
+        return false;
+    }
+
+    // Password should contain at least one lowercase letter
+    var lowerCaseLetters = /[a-z]/g;
+    if (!password.match(lowerCaseLetters)) {
+        alert("Password must contain at least one lowercase letter!");
+        document.registration.password.focus();
+        return false;
+    }
+
+    // Password should contain at least one uppercase letter
+    var upperCaseLetters = /[A-Z]/g;
+    if (!password.match(upperCaseLetters)) {
+        alert("Password must contain at least one uppercase letter!");
+        document.registration.password.focus();
+        return false;
+    }
+
+    // Password should contain at least one number
+    var numbers = /[0-9]/g;
+    if (!password.match(numbers)) {
+        alert("Password must contain at least one number!");
+        document.registration.password.focus();
+        return false;
+    }
+
+    // Password should match the confirmed password
+    if (password !== confirmPassword) {
+        alert("Password and Confirm Password do not match!");
+        document.registration.cpassword.focus();
+        return false;
+    }
+
+    // Other validation code...
+    return true;
+}
 
 
     </script>
@@ -308,4 +299,9 @@ return true;
 		cursor: pointer; 
 	}
 </style>
+
+
+
+
+
 </html>
