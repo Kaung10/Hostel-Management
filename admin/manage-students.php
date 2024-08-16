@@ -115,18 +115,7 @@ for ($i = 1; $i <= 10; $i++) {
 											<th>Action</th>
 										</tr>
 									</thead>
-									<tfoot>
-										<tr>
-											<th>Sno.</th>
-											<th>Student Name</th>
-											<th>Reg no</th>
-											<th>Contact no </th>
-											<th>Room no  </th>
-											<th>Seater </th>
-											<th>Semester </th>
-											<th>Action</th>
-										</tr>
-									</tfoot>
+									
 									<tbody>
 <?php	
 $aid=$_SESSION['id'];

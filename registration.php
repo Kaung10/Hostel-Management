@@ -98,9 +98,6 @@ return true;
                         <input id="" type="text" placeholder="Name" name="fname" class="form-control " required="true">
                         <label for="" class="text-uppercase text-sm">Name</label>
                     </div>
-
-					
-
 					<div class="gender-selection">
                     <label for="" class="text-uppercase text-sm">Gender                     <ion-icon name="transgender-outline"></ion-icon>  
                     </label> 
@@ -114,6 +111,7 @@ return true;
     <span class="checkmark"></span>
     Female
   </label>
+
 </div>
 
                     
@@ -145,9 +143,7 @@ return true;
                     </div>
                     
                                    
-                    <div class="forget">
-                        <label for=""><input type="checkbox">Accept<a href=".php" class="text-light"> all informations</a></label>   
-                    </div>
+                    
 					
                     <button type="submit" name="login" value="login" >Register</button>
                     <div class="register">    </div>

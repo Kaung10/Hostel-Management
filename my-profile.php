@@ -107,32 +107,25 @@ Last Updation date : &nbsp; <?php echo $row->updationDate;?>
 <div class="form-group">
 <label class="col-sm-2 control-label"> Name : </label>
 <div class="col-sm-8">
-<input type="text" name="fname" id="fname"  class="form-control" value="<?php echo $row->name;?>"   required="required" >
+<input type="text" name="fname" id="fname"  class="form-control" value="<?php echo $row->name;?>"   required="required" readonly>
 </div>
 </div>
-
 
 
 <div class="form-group">
-<label class="col-sm-2 control-label">Gender : </label>
-<div class="col-sm-8">
-<select name="gender" class="form-control" required="required">
-<option value="<?php echo $row->gender;?>"><?php echo $row->gender;?></option>
-<?php
-if ($row->gender != 'Male' && $row->gender!='male'){
-		echo "<option value='Male'>Male</option>";
-        	}
-		else{
-        echo "<option value='Female'>Female</option>";
-            }
-?>
+    <label class="col-sm-2 control-label">Gender : </label>
+    <div class="col-sm-8">
+        <input name="gender" class="form-control" required="required" value="<?php echo $row->gender;?>" readonly>
+        </input>
+    </div>
+</div>
+
+
 <!-- <option value="male">Male</option>
 <option value="female">Female</option> -->
 
 
-</select>
-</div>
-</div>
+
 
 <div class="form-group">
 <label class="col-sm-2 control-label">Contact No : </label>
