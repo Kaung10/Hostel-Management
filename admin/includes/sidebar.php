@@ -63,6 +63,7 @@
 					<ul>
 						<li><a href="create-room.php" >Add a Room</a></li>
 						<li><a href="manage-rooms.php">Manage Rooms</a></li>
+                        <li><a href="update-fees.php">Update fees</a></li>
 					</ul>
 				</li>
 

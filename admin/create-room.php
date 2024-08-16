@@ -4,30 +4,44 @@ include('includes/config.php');
 include('includes/checklogin.php');
 check_login();
 //code for add courses
-if(isset($_POST['submit']))
-{
-$seater=$_POST['seater'];
-$roomno=$_POST['rmno'];
-$fees=$_POST['fee'];
-$sql="SELECT room_no FROM rooms where room_no=?";
-$stmt1 = $mysqli->prepare($sql);
-$stmt1->bind_param('i',$roomno);
-$stmt1->execute();
-$stmt1->store_result(); 
-$row_cnt=$stmt1->num_rows;;
-if($row_cnt>0)
-{
-echo"<script>alert('Room alreadt exist');</script>";
+if (isset($_POST['submit'])) {
+    $seater = $_POST['seater'];
+    $roomno = $_POST['rmno'];
+    $hostel = $_POST['hostel'];
+
+    // Determine which table to use based on the selected hostel
+    if ($hostel == 'alinkar') {
+        $table = 'alinkar';
+    } elseif ($hostel == 'mudra') {
+        $table = 'mudra';
+    } else {
+        echo "<script>alert('Invalid hostel selected');</script>";
+        exit;
+    }
+
+    // Prepare SQL statement to check if the room number exists in the selected table
+    $sql = "SELECT room_no FROM $table WHERE room_no=?";
+    $stmt1 = $mysqli->prepare($sql);
+    $stmt1->bind_param('i', $roomno);
+    $stmt1->execute();
+    $stmt1->store_result();
+    $row_cnt = $stmt1->num_rows;
+
+    if ($row_cnt > 0) {
+        // Room number already exists
+        echo "<script>alert('Room number already exists in the selected hostel');</script>";
+    } else {
+        // Insert a new row into the selected table
+        $query = "INSERT INTO $table (seater, avaliable, room_no) VALUES (?, ?, ?)";
+        $stmt2 = $mysqli->prepare($query);
+        $stmt2->bind_param('iii', $seater, $seater, $roomno); // Set 'available' column to the same value as 'seater'
+        $stmt2->execute();
+        echo "<script>alert('Room has been added successfully');</script>";
+    }
+
 }
-else
-{
-$query="insert into  rooms (seater,room_no,fees) values(?,?,?)";
-$stmt = $mysqli->prepare($query);
-$rc=$stmt->bind_param('iii',$seater,$roomno,$fees);
-$stmt->execute();
-echo"<script>alert('Room has been added successfully');</script>";
-}
-}
+?>
+
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
@@ -97,23 +111,26 @@ echo"<script>alert('Room has been added successfully');</script>";
 <option value="1">Single Seater</option>
 <option value="2">Two Seater</option>
 <option value="3">Three Seater</option>
-<option value="4">Four Seater</option>
-<option value="5">Five Seater</option>
 </Select>
 </div>
 </div>
 <div class="form-group">
 <label class="col-sm-2 control-label">Room No.</label>
 <div class="col-sm-8">
-<input type="text" class="form-control" name="rmno" id="rmno" value="" required="required">
+<input type="number" min="0" class="form-control" name="rmno" id="rmno" value="" required="required">
 </div>
 </div>
+
 <div class="form-group">
-<label class="col-sm-2 control-label">Fee(Per Student)</label>
-<div class="col-sm-8">
-<input type="text" class="form-control" name="fee" id="fee" value="" required="required">
-</div>
-</div>
+        <label class="col-sm-2 control-label">Select Hostel</label>
+        <div class="col-sm-8">
+            <select name="hostel" class="form-control" required>
+                <option value="">Select Hostel</option>
+                <option value="alinkar">Alinkar</option>
+                <option value="mudra">Mudra</option>
+            </select>
+        </div>
+    </div>
 
 <div class="col-sm-8 col-sm-offset-2">
 <input class="btn btn-primary" type="submit" name="submit" value="Create Room" >
