@@ -1,6 +1,6 @@
 <?php
-$dbuser="root";
-$dbpass="";
+$dbuser="hostel";
+$dbpass="hostel";
 $host="localhost";
 $db="hostel";
 $mysqli =new mysqli($host,$dbuser, $dbpass, $db);

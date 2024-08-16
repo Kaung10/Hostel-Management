@@ -61,13 +61,16 @@
 
 					<li><a href="#" class="text-primary"><i class="fa fa-desktop  text-primary"></i> Rooms</a>
 					<ul>
+ 
 						<li><a href="create-room.php" class="text-primary" >Add a Room</a></li>
 						<li><a href="manage-rooms.php" class="text-primary">Manage Rooms</a></li>
+                        <li><a href="update-fees.php" class="text-primary">Update fees</a></li>
 					</ul>
 				</li>
 
 				<li><a href="registration.php" class="text-primary"><i class="fa fa-user text-primary"></i>Student Registration</a></li>
 				<li><a href="manage-students.php" class="text-primary"><i class="fa fa-user text-primary"></i>Manage Students</a></li>
+                <li><a href="requests.php" class="text-primary"><i class="fa fa-file  text-primary"></i>Request Forms</a></li>
 				<li><a href="access-log.php" class="text-primary"><i class="fa fa-file  text-primary"></i>User Access logs</a></li>
 
                 
