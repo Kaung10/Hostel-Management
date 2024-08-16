@@ -261,19 +261,26 @@ while($row=$res->fetch_object())
 
 
 <div class="form-group">
-<label class="col-sm-2 control-label">Fees Per Month</label>
+<label class="col-sm-2 control-label">Hostel Fee</label>
 <div class="col-sm-8">
-<input type="text" name="fpm" id="fpm"  class="form-control" readonly="true">
+<input type="text" name="fpm" id="fpm"  class="form-control" value="25000" readonly="true">
 </div>
 </div>
 
 <div class="form-group">
+<label class="col-sm-2 control-label">Food Fee Per Month</label>
+<div class="col-sm-8">
+<input type="text" name="" id=""  class="form-control" value="93000" readonly="true">
+</div>
+</div>
+
+<!-- <div class="form-group">
 <label class="col-sm-2 control-label">Food Status</label>
 <div class="col-sm-8">
 <input type="radio" value="0" name="foodstatus"> Without Food
 <input type="radio" value="1" name="foodstatus" checked="checked"> With Food(90,000 mmk Per Month Extra)
 </div>
-</div>	
+</div>	 -->
 
 <div class="form-group">
 <label class="col-sm-2 control-label">Stay From</label>
@@ -287,7 +294,6 @@ while($row=$res->fetch_object())
 <div class="col-sm-8">
 <!-- <select name="duration" id="duration" class="form-control"> -->
 <input type="text" name="duration" id="duration"  class="form-control" value="5" readonly >
-</select>
 </div>
 </div>
 
@@ -338,7 +344,7 @@ $aid=$_SESSION['id'];
 <div class="form-group">
 <label class="col-sm-2 control-label">Name : </label>
 <div class="col-sm-8">
-<input type="text" name="name" id="name"  class="form-control" value="<?php echo $row->name;?>" >
+<input type="text" name="name" id="name"  class="form-control" value="<?php echo $row->name;?>" readonly >
 </div>
 </div>
 
