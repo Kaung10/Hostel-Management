@@ -28,10 +28,10 @@ section{
 }
 
 .form-box{
+    
     position: relative;
     width: 500px;
     height: 650px;
-    padding-top: 80px;
     background: transparent;
     display: flex;
     justify-content: center;
