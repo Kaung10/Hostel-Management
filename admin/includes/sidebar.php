@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<style>
+	<!-- <style>
         .ts-sidebar {
             background: whitesmoke;
         }
@@ -47,28 +47,28 @@
         .selected {
             background:#009688; 
         }
-    </style>
+    </style> -->
 </head>
 <body>
 	
 
 
-<nav class="ts-sidebar">
+<nav class="ts-sidebar bg-white ">
 			<ul class="ts-sidebar-menu">
 			
-				<li class="ts-label">Admin Mode</li>
-				<li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+				<li class="ts-label mt-4 text-primary">Admin Mode</li>
+				<li><a href="dashboard.php" class="text-primary"><i class="fa fa-dashboard text-primary"></i> Dashboard</a></li>
 
-					<li><a href="#"><i class="fa fa-desktop"></i> Rooms</a>
+					<li><a href="#" class="text-primary"><i class="fa fa-desktop  text-primary"></i> Rooms</a>
 					<ul>
-						<li><a href="create-room.php" >Add a Room</a></li>
-						<li><a href="manage-rooms.php">Manage Rooms</a></li>
+						<li><a href="create-room.php" class="text-primary" >Add a Room</a></li>
+						<li><a href="manage-rooms.php" class="text-primary">Manage Rooms</a></li>
 					</ul>
 				</li>
 
-				<li><a href="registration.php"><i class="fa fa-user"></i>Student Registration</a></li>
-				<li><a href="manage-students.php"><i class="fa fa-users"></i>Manage Students</a></li>
-				<li><a href="access-log.php"><i class="fa fa-file"></i>User Access logs</a></li>
+				<li><a href="registration.php" class="text-primary"><i class="fa fa-user text-primary"></i>Student Registration</a></li>
+				<li><a href="manage-students.php" class="text-primary"><i class="fa fa-user text-primary"></i>Manage Students</a></li>
+				<li><a href="access-log.php" class="text-primary"><i class="fa fa-file  text-primary"></i>User Access logs</a></li>
 
                 
 		</nav>
