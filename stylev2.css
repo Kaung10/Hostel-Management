@@ -36,6 +36,7 @@ section{
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-bottom: 50px;
     border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
@@ -44,6 +45,8 @@ h2{
     font-size: 2em;
     color: #ffff;
     text-align: center;
+    margin-top: 75px;
+
 }
 
 .inputbox{ 
@@ -170,32 +173,38 @@ button:hover{
     text-decoration: none;
     color: #fff; 
     text-transform: uppercase;
-    transition:ease-in-out 0.5s;
+    /* transition:ease-in-out 0.5s; */
 }
 
-.navbar ul li a:hover{ 
+/* .navbar ul li a:hover{ 
     color: #009688;
 
-}
+} */
 
 .navbar ul li::after{ 
     content: '';
     height: 3px;
-    width: 100%;
-    background: #ffff; 
+    width: 0%;  /* change 0 from 100 to remove underline */
+    background: #009688; 
     position:absolute; 
     left:0; 
     bottom:-10px;
     transition: 0.5s; 
 }
 .navbar ul li::after:hover{ 
-    background: whitesmoke;
+    /* background: whitesmoke; */
+    width: 100%;
 }
 
 
 .navbar ul li:hover::after{ 
     width:100%; 
+    text-decoration: underline; 
 
+}
+
+.navbar ul li.active::after {
+    width: 100%; /* Keep the underline visible for the active item */
 }
 
 

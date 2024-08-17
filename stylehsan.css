@@ -169,19 +169,19 @@ button:hover{
     text-decoration: none;
     color: #fff; 
     text-transform: uppercase;
-    transition:ease-in-out 0.5s;
+    /* transition:ease-in-out 0.5s; */
 }
 
-.navbar ul li a:hover{ 
+/* .navbar ul li a:hover{ 
     color: #009688;
 
-}
+} */
 
 .navbar ul li::after{ 
     content: '';
     height: 3px;
-    width: 100%;
-    background: #ffff; 
+    width: 0%;  /* change 0 from 100 to remove underline */
+    background: #009688; 
     position:absolute; 
     left:0; 
     bottom:-10px;
