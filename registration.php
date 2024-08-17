@@ -17,9 +17,11 @@ $password=$_POST['password'];
 $stmt->bind_result($count);
 $stmt->fetch();
 $stmt->close();
-if($count>0)
-{
-echo"<script>alert('Registration number or email id already registered.');</script>";
+
+if(!preg_match("/^YKPT-\d{5}$/", $regno)) {
+    echo "<script>alert('Registration No format is invalid! Please follow the format YKPT-XXXXX.');</script>";
+} elseif($count > 0) {
+    echo "<script>alert('Registration number or email id already registered.');</script>";
 }else{
 
 try
@@ -95,7 +97,7 @@ catch(Exception $e)
 					<div class="inputbox">
 					<ion-icon name="briefcase-outline"></ion-icon> 
 
-                        <input id="regno" type="text" placeholder="Registration No " name="" class="form-control " required="true" pattern="YKPT-\d{5}" title="YKPT-XXXXX">
+                        <input id="regno" type="text" placeholder="Registration No " name="regno" class="form-control " required="true" pattern="YKPT-\d{5}" title="YKPT-XXXXX">
                         <label for="" class="text-uppercase text-sm">Registration No </label>
                     </div>
 
