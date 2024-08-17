@@ -22,6 +22,11 @@ check_login();
 	<link rel="stylesheet" href="css/style.css">
 
     <style>
+        h2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -114,48 +119,59 @@ check_login();
             <?php
             // Handle AJAX request
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
-                $status = isset($_POST['status']) ? intval($_POST['status']) : 0;
+    $id = intval($_POST['id'] ?? 0);
+    $status = intval($_POST['status'] ?? 0);
+    $hostel = htmlspecialchars($_POST['hostel'] ?? '');
+    $roomno = intval($_POST['roomNumber'] ?? 0);
 
-                if ($id > 0 && ($status === 0 || $status === 1)) {
-                    // Update query
-                    $query = "UPDATE roomregistration SET request = ? WHERE id = ?";
-                    $stmt = $mysqli->prepare($query);
-                    $stmt->bind_param("ii", $status, $id);
-                    if ($stmt->execute()) {
-                        echo "success";
-                    } else {
-                        echo "error: " . $stmt->error;
-                    }
-                    $stmt->close();
-                } else {
-                    echo "error: Invalid input";
-                }
+    if ($id > 0 && ($status === 0 || $status === 1)) {
+        $hostel = strtolower($hostel);
+        if ($status===0){
+        $query1 = "UPDATE $hostel SET available = available + 1 WHERE room_no = ?";
+        $stmt1 = $mysqli->prepare($query1);
+        $stmt1->bind_param("i", $roomno);
+        $stmt1->execute();
+        $stmt1->close();
+    }
 
-                $mysqli->close();
-                exit;
-            }
-            
+        $query = "UPDATE roomregistration SET request = ? WHERE id = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("ii", $status, $id);
+
+        echo $stmt->execute() ? "success" : "error: " . $stmt->error;
+        $stmt->close();
+    } else {
+        echo "error: Invalid input";
+    }
+
+    $mysqli->close();
+    exit;
+}
+
             // Query to fetch data where request column is 2
-            $query = "SELECT * FROM roomregistration WHERE request = 2";
-            $result = $mysqli->query($query);
+$query = "SELECT * FROM roomregistration WHERE request = 2";
+$result = $mysqli->query($query);
 
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $hostel = strcasecmp($row['gender'], 'male') == 0 ? "Alinkar" : "Mudra";
+        $roomNumber = htmlspecialchars($row['roomno']);
+        $id = htmlspecialchars($row['id']);
 
-                    // Determine the label and room number
-                    $label = (strcasecmp($row['gender'], 'male') == 0) ? "Alinkar" : "Mudra";
+                    // Determine the hostel and room number
+                    $hostel = (strcasecmp($row['gender'], 'male') == 0) ? "Alinkar" : "Mudra";
                     $roomNumber = htmlspecialchars($row['roomno']);
                     $id = htmlspecialchars($row['id']);
                     // show list using php function if you want to change UI, it is herew
                     // echo '<div class="form-bar" id="item-' . $id . '">';
-                    echo '<tr>';
+                    echo '<tr id="item-' . $id . '">';
                     echo '<td><span class="name">' . htmlspecialchars($row['name']) . '</span></td>';
-                    echo '<td><span class="info">'.$label.'</span></td>';
+                    echo '<td><span class="info">'.$hostel.'</span></td>';
                     echo '<td><span class="info">'.$roomNumber.'</span></td>';
                     echo '<td><span class="actions">
-                          <button class="confirm-button btn btn-success fs-6 me" onclick="updateRequest(' . $id . ', 1)"><i class="fa-solid fa-check"></i></button>
-                          <button class="cancel-button btn btn-danger fs-6 " onclick="updateRequest(' . $id . ', 0)"><i class="fa-solid fa-xmark"></i></button>
+                          <button class="confirm-button btn btn-success fs-6 me" onclick="updateRequest(' . $id . ', 0, \'' . $hostel . '\', ' . $roomNumber . ')"><i class="fa-solid fa-check"></i></button>
+                          <button class="cancel-button btn btn-danger fs-6 " onclick="updateRequest(' . $id . ', 1, \'' . $hostel . '\', ' . $roomNumber . ')"><i class="fa-solid fa-xmark"></i></button>
+                          <button class="btn btn-info fs-6"><a href="student-details.php?id='.$id.'>" title="View Full Details"><i class="fa fa-desktop">view</i></a>&nbsp;&nbsp;</button>
                           </span></td>';
                     echo '</tr>';
                     echo '</div>';
@@ -165,44 +181,67 @@ check_login();
             //     echo 'No requests found.';
             // }
 
-            // Close connection
-            $mysqli->close();
-            ?>
-        </div>
-    </main>
+?>
 
-    <script>
-        function updateRequest(id, status) {
+</div>
+<!-- Need to modify -->
+<h2>Canceled Student Request List</h2>
+<div>
+    <?php
+$query = "SELECT * FROM roomregistration WHERE request = 1";
+$result = $mysqli->query($query);
+
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $hostel = strcasecmp($row['gender'], 'male') == 0 ? "Alinkar" : "Mudra";
+        $roomNumber = htmlspecialchars($row['roomno']);
+        $id = htmlspecialchars($row['id']);
+
+        // show list using php function if you want to change UI, it is here
+        echo '<div class="form-bar" id="item-' . $id . '">';
+        echo '<span class="name">' . htmlspecialchars($row['name']) . '</span>';
+        echo '<span class="info">' . $hostel . ' --> ' . $roomNumber . '</span>';
+        echo '<span class="actions">';
+        echo '<a href="student-details.php?id='.$id.'>" title="View Full Details"><i class="fa fa-desktop">view</i></a>&nbsp;&nbsp;';
+        echo '</span>';
+        echo '</div>';
+    }
+}
+?>
+</div>
+<!-- end -->
+</main>
+
+<script>
+function updateRequest(id, status, hostel, roomNumber) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "", true); // Set your endpoint URL here
+    xhr.open("POST", "", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-        console.log('Response Text:', xhr.responseText); // Debugging output
-        if (xhr.status === 200) {
-            // Check if response text ends with "success"
-            if (xhr.responseText.trim().endsWith("success")) {
-                var element = document.getElementById('item-' + id);
-                if (element) {
-                    element.style.display = 'none';
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                if (xhr.responseText.trim().endsWith("success")) {
+                    document.getElementById('item-' + id).style.display = 'none';
+                    alert("Request successfully updated!");
+                } else {
+                    alert('Error updating request: ' + xhr.responseText);
                 }
             } else {
-                alert('Error updating request: ' + xhr.responseText);
+                alert('HTTP Error: ' + xhr.status);
             }
-        } else {
-            alert('HTTP Error: ' + xhr.status);
         }
-    }
-};
-
+    };
 
     xhr.onerror = function () {
         alert('Request failed');
     };
 
-    xhr.send("id=" + encodeURIComponent(id) + "&status=" + encodeURIComponent(status));
+    xhr.send("id=" + encodeURIComponent(id) + "&status=" + encodeURIComponent(status) + "&hostel=" + encodeURIComponent(hostel) + "&roomNumber=" + encodeURIComponent(roomNumber));
 }
+</script>
+
 
     </script>
     	<!-- Loading Scripts -->

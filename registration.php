@@ -17,9 +17,11 @@ $password=$_POST['password'];
 $stmt->bind_result($count);
 $stmt->fetch();
 $stmt->close();
-if($count>0)
-{
-echo"<script>alert('Registration number or email id already registered.');</script>";
+
+if(!preg_match("/^YKPT-\d{5}$/", $regno)) {
+    echo "<script>alert('Registration No format is invalid! Please follow the format YKPT-XXXXX.');</script>";
+} elseif($count > 0) {
+    echo "<script>alert('Registration number or email id already registered.');</script>";
 }else{
 
 try
@@ -40,38 +42,23 @@ catch(Exception $e)
 }
 ?>
 
-<!doctype html>
-<html lang="en" class="no-js">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
-	<title>User Registration</title>
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
-	<link rel="stylesheet" href="css/bootstrap-social.css">
-	<link rel="stylesheet" href="css/bootstrap-select.css">
-	<link rel="stylesheet" href="css/fileinput.min.css">
-	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
-	<link rel="stylesheet" href="css/style.css">
-<script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>
+
+    <link rel="stylesheet" href="stylev2.css">
+
+   <script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>
 <script type="text/javascript" src="js/validation.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
-function valid()
-{
-if(document.registration.password.value!= document.registration.cpassword.value)
-{
-alert("Password and Re-Type Password Field do not match  !!");
-document.registration.cpassword.focus();
-return false;
-}
-return true;
-}
+
 
 </script>
 
@@ -86,109 +73,95 @@ return true;
 		cursor: pointer; 
 	}
 </style>
+
 </head>
 <body>
-	<?php include('includes/header.php');?>
-	<div class="ts-main-content">
-		<?php include('includes/sidebar.php');?>
-		<div class="content-wrapper">
-			<div class="container-fluid">
+    <div class="body">
+    <div class="navbar">
+        <img src='logo.svg' class="logo">
+        <ul>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="login.php">User Login</a></li>
+           
+        </ul>
+    </div>
+    <section> 
 
-				<div class="row">
-					<div class="col-md-12">
+    
+        <div class="form-box">
+            <div class="form-value">
+                <!-- <form action="" class="mt" method="post" name="registration" onSubmit="return valid();">  -->
+                <form method="post" action="" name="registration" class="form-horizontal" onSubmit="return valid();">
+                
+                <h2>Registration</h2>
+					<div class="inputbox">
+					<ion-icon name="briefcase-outline"></ion-icon> 
+
+                        <input id="regno" type="text" placeholder="Registration No " name="regno" class="form-control " required="true" pattern="YKPT-\d{5}" title="YKPT-XXXXX">
+                        <label for="" class="text-uppercase text-sm">Registration No </label>
+                    </div>
+
+					<div class="inputbox">
+					<ion-icon name="people-outline"></ion-icon>
+                    <input id="fname" type="text" placeholder="Name" name="name" class="form-control " required="true">
+                    <label for="" class="text-uppercase text-sm">Name</label>
+                    </div>
+					<div class="gender-selection">
+                    <label for="" class="text-uppercase text-sm">Gender                     <ion-icon name="transgender-outline"></ion-icon>  
+                    </label> 
+  <label class="custom-radio">
+    <input type="radio" name="gender" value="male" />
+    <span class="checkmark"></span>
+    Male
+  </label>
+  <label class="custom-radio">
+    <input type="radio" name="gender" value="female" />
+    <span class="checkmark"></span>
+    Female
+  </label>
+
+</div>
+
+                    
+
+					<div class="inputbox">
+					<ion-icon name="call-outline"></ion-icon>
+                    <input id="contactS" type="text" placeholder="Phone Number" name="contact" class="form-control mb" required="true" pattern="09[0-9]{7,9}" title="09XXXXXXXXX">
+                    <label for="" class="text-uppercase text-sm">Phone Number </label>
+                    </div>
 					
-						<h2 class="page-title">Student Registration </h2>
+					<div class="inputbox">
+                        <ion-icon name="mail-outline"></ion-icon>
+                        <input id="email" type="text" placeholder="Email" name="email" class="form-control mb" required="true" onBlur="checkAvailability()">
+                        <label for="" class="text-uppercase text-sm">Email</label>
+                    </div>
 
-						<div class="row">
-							<div class="col-md-12">
-								<div class="panel panel-primary" >
-									<div class="panel-heading" style="background:#009688" >Fill all Info</div>
-									<div class="panel-body">
-			<form method="post" action="" name="registration" class="form-horizontal" onSubmit="return valid();">
-											
-										
+                    <div class="inputbox">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                    <input id="password" type="password" placeholder="Password" name="password" class="form-control mb" required="true"> 
+                    <label for="" class="text-uppercase text-sm">Password</label>
+                    </div>
 
-<div class="form-group">
-<label class="col-sm-2 control-label" >Registration No : </label>
-<div class="col-sm-8">
-<input type="text" name="regno" id="regno"  class="form-control" required="required" value="YKPT-" onBlur="checkRegnoAvailability()" pattern="YKPT-\d{5}" title="YKPT-XXXXX">
-<span id="user-reg-availability" style="font-size:12px;"></span>
+					<div class="inputbox">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                    <input id="cpassword" type="password" placeholder="Confirm Password" name="cpassword" class="form-control mb" required="true"> 
+                    <label for="" class="text-uppercase text-sm">Confirm Password</label>
+                    </div>
+					
+                    <button type="submit" name="submit" value="Register" class="btn btn-primary" >Register </button>
+                    <div class="register">    </div>
+                </form>
+					
+            </div>
 </div>
-</div>
+    </section>
 
+  
 
-<div class="form-group">
-<label class="col-sm-2 control-label">Name : </label>
-<div class="col-sm-8">
-<input type="text" name="name" id="fname"  class="form-control" required="required" >
 </div>
-</div>
-
-<div class="form-group">
-<label class="col-sm-2 control-label">Gender : </label>
-<div class="col-sm-8">
-<select name="gender" class="form-control" required="required">
-<option value="">Select Gender</option>
-<option value="male">Male</option>
-<option value="female">Female</option>
-
-</select>
-</div>
-</div>
-
-<div class="form-group">
-<label class="col-sm-2 control-label">Ph No : </label>
-<div class="col-sm-8">
-<input type="text" name="contact" id="contact"  class="form-control" required="required" pattern="09[0-9]{7,9}" title="09XXXXXXXXX">
-</div>
-</div>
-
-
-<div class="form-group">
-<label class="col-sm-2 control-label">Email id: </label>
-<div class="col-sm-8">
-<input type="email" name="email" id="email"  class="form-control" onBlur="checkAvailability()" required="required">
-<span id="user-availability-status" style="font-size:12px;"></span>
-</div>
-</div>
-
-<div class="form-group">
-<label class="col-sm-2 control-label">Password: </label>
-<div class="col-sm-8">
-<input type="password" name="password" id="password"  class="form-control" required="required">
-</div>
-</div>
-
-
-<div class="form-group">
-<label class="col-sm-2 control-label">Confirm Password : </label>
-<div class="col-sm-8">
-<input type="password" name="cpassword" id="cpassword"  class="form-control" required="required">
-</div>
-</div>
-						
-
-
-
-<div class="col-sm-6 col-sm-offset-4">
-<button class="btn btn-default" type="reset">Reset</button>
-<input type="submit" name="submit" Value="Register" class="btn btn-primary" >
-</div>
-</form>
-
-									</div>
-									</div>
-								</div>
-							</div>
-						</div>
-							</div>
-						</div>
-					</div>
-				</div> 	
-			</div>
-		</div>
-	</div>
-	<script src="js/jquery.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap-select.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.dataTables.min.js"></script>
@@ -198,7 +171,9 @@ return true;
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
 </body>
-	<script>
+
+
+<script>
 function checkAvailability() {
 
 $("#loaderIcon").show();
@@ -239,6 +214,7 @@ alert('error');
 }
 </script>
 
+
 <script>
         function goToPage(page) {
             window.location.href = page;
@@ -246,11 +222,21 @@ alert('error');
 
 		<!-- Add this script inside the head section of your HTML -->
 
-function valid() {
-    // Other validation code...
-
+        function valid() {
     var password = document.registration.password.value;
     var confirmPassword = document.registration.cpassword.value;
+    var email = document.registration.email.value;
+
+    // Allowed email domains
+    var allowedDomains = ["@gmail.com", "@ucsy.edu.mm", "@icloud.com"];
+    var emailDomain = email.substring(email.lastIndexOf("@"));
+
+    // Check if email domain is allowed
+    if (!allowedDomains.includes(emailDomain)) {
+        alert("Email domain not allowed! Please use @gmail.com, @ucsy.edu.mm, or @icloud.com.");
+        document.registration.email.focus();
+        return false;
+    }
 
     // Password should be at least 8 characters long
     if (password.length < 8) {
@@ -260,25 +246,29 @@ function valid() {
     }
 
     // Password should contain at least one lowercase letter
-    var lowerCaseLetters = /[a-z]/g;
-    if (!password.match(lowerCaseLetters)) {
+    if (!/[a-z]/.test(password)) {
         alert("Password must contain at least one lowercase letter!");
         document.registration.password.focus();
         return false;
     }
 
     // Password should contain at least one uppercase letter
-    var upperCaseLetters = /[A-Z]/g;
-    if (!password.match(upperCaseLetters)) {
+    if (!/[A-Z]/.test(password)) {
         alert("Password must contain at least one uppercase letter!");
         document.registration.password.focus();
         return false;
     }
 
     // Password should contain at least one number
-    var numbers = /[0-9]/g;
-    if (!password.match(numbers)) {
+    if (!/[0-9]/.test(password)) {
         alert("Password must contain at least one number!");
+        document.registration.password.focus();
+        return false;
+    }
+
+    // Password should contain at least one special character
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+        alert("Password must contain at least one special character!");
         document.registration.password.focus();
         return false;
     }
@@ -290,11 +280,23 @@ function valid() {
         return false;
     }
 
-    // Other validation code...
     return true;
 }
 
 
+
+
     </script>
 
+
+
+
+
 </html>
+
+
+
+
+
+
+
