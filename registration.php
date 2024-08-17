@@ -104,9 +104,6 @@ catch(Exception $e)
                     <input id="fname" type="text" placeholder="Name" name="name" class="form-control " required="true">
                     <label for="" class="text-uppercase text-sm">Name</label>
                     </div>
-
-					
-
 					<div class="gender-selection">
                     <label for="" class="text-uppercase text-sm">Gender                     <ion-icon name="transgender-outline"></ion-icon>  
                     </label> 
@@ -120,6 +117,7 @@ catch(Exception $e)
     <span class="checkmark"></span>
     Female
   </label>
+
 </div>
 
                     
@@ -147,7 +145,6 @@ catch(Exception $e)
                     <input id="cpassword" type="password" placeholder="Confirm Password" name="cpassword" class="form-control mb" required="true"> 
                     <label for="" class="text-uppercase text-sm">Confirm Password</label>
                     </div>
-                    
 					
                     <button type="submit" name="submit" value="Register" class="btn btn-primary" >Register </button>
                     <div class="register">    </div>

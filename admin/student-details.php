@@ -70,62 +70,56 @@ $cnt=1;
 while($row=$res->fetch_object())
 	  {
 	  	?>
-
 <tr>
-<td colspan="6" style="text-align:center; color:blue"><h3>Room Realted Info</h3></td>
+<td colspan="6" style="text-align:center; color:#009688"><h3>Room Realted Info</h3></td>
 </tr>
 <tr>
 	<th>Registration Number :</th>
-<td><?php echo $row->regno;?></td>
+<td colspan="2"><?php echo $row->regno;?></td>
 <th>Apply Date :</th>
-<td colspan="3"><?php echo $row->postingDate;?></td>
+<td colspan="2"><?php echo $row->postingDate;?></td>
 </tr>
-
-
 
 <tr>
 <td><b>Room no :</b></td>
-<td><?php echo $row->roomno;?></td>
-<td><b>Seater :</b></td>
-<td><?php echo $row->seater;?></td>
-<td><b>Fees PM :</b></td>
-<td><?php echo $fpm=$row->feespm;?></td>
+<td colspan="2"><?php echo $row->roomno;?></td>
+<th><b>Seater :</b></th>
+<td colspan="2"><?php echo $row->seater;?></td>
+<!-- <td><b>Fees PM :</b></td> -->
+<!-- <td><?php echo $fpm=$row->feespm;?></td> -->
 </tr>
 
 <tr>
-<td><b>Food Status:</b></td>
-<td>
-<?php if($row->foodstatus==0)
-{
-echo "Without Food";
-}
-else
-{
-echo "With Food";
-}
-;?></td>
-<td><b>Stay From :</b></td>
-<td><?php echo $row->stayfrom;?></td>
-<td><b>Duration:</b></td>
-<td><?php echo $dr=$row->duration;?> Months</td>
+<td><b>Duration :</b></td>
+ <td colspan="2"> 5 </td>
+
+<th><b>Stay From :</b></th>
+<td colspan="2"><?php echo $row->stayfrom;?></td>
+
+<!-- <td><b>Duration:</b></td> -->
+<!-- <td><?php echo $dr=$row->duration;?> Months</td> -->
 </tr>
 
-<tr><th>Hostel Fee:</th>
-<td><?php echo $hf=$dr*$fpm?></td>
-<th>Food Fee:</th>
-<td colspan="3"><?php 
+<tr>
+<th>Hostel Fee:</th>
+<td colspan="2">25000</td>
+<th>Food Fee Per Month:</th>
+<td colspan="2">
+<?php 
 if($row->foodstatus==1)
 { 
 echo $ff=(90000*$dr);
 } else { 
 echo $ff=0;
-echo "<span style='padding-left:2%; color:red;'>(You booked hostel without food).<span>";
-}?></td>
+// echo "<span style='padding-left:2%; color:red;'>(You booked hostel without food).<span>";
+}?>
+</td>
 </tr>
 <tr>
 <th>Total Fee :</th>
 <th colspan="5"><?php echo $hf+$ff;?></th>
 </tr>
+
 <tr>
 <td colspan="6" style="color:red"><h4>Personal Info</h4></td>
 </tr>

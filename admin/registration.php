@@ -1,4 +1,4 @@
-s<?php
+<?php
 session_start();
 include('includes/config.php');
 include('includes/checklogin.php');
@@ -216,17 +216,24 @@ while($row=$res->fetch_object())
 <div class="form-group">
 <label class="col-sm-2 control-label">Fees Per Month</label>
 <div class="col-sm-8">
-<input type="text" name="fpm" id="fpm"  class="form-control" readonly="true">
+<input type="text" name="fpm" id="fpm"  class="form-control" value ="25000" readonly="true">
 </div>
 </div>
 
 <div class="form-group">
+<label class="col-sm-2 control-label">Food Per Month</label>
+<div class="col-sm-8">
+<input type="text" name="" id=""  class="form-control" value="93000" readonly="true">
+</div>
+</div>
+
+<!-- <div class="form-group">
 <label class="col-sm-2 control-label">Food Status</label>
 <div class="col-sm-8">
 <input type="radio" value="0" name="foodstatus"> Without Food
 <input type="radio" value="1" name="foodstatus" checked="checked"> With Food(90000 MMK Per Month Extra)
 </div>
-</div>	
+</div>	 -->
 
 <div class="form-group">
 <label class="col-sm-2 control-label">Stay From</label>
@@ -238,21 +245,9 @@ while($row=$res->fetch_object())
 <div class="form-group">
 <label class="col-sm-2 control-label">Duration</label>
 <div class="col-sm-8">
-<select name="duration" id="duration" class="form-control">
-<option value="">Select Duration in Month</option>
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-<option value="6">6</option>
-<option value="7">7</option>
-<option value="8">8</option>
-<option value="9">9</option>
-<option value="10">10</option>
-<option value="11">11</option>
-<option value="12">12</option>
-</select>
+<!-- <select name="duration" id="duration" class="form-control"> -->
+<input type="text" name="duration" id="duration"  class="form-control" value="5" readonly >
+<!-- </select> -->
 </div>
 </div>
 
@@ -282,7 +277,7 @@ while($row=$res->fetch_object())
 <div class="form-group">
 <label class="col-sm-2 control-label">Registration No : </label>
 <div class="col-sm-8">
-<input type="text" name="regno" id="regno"  class="form-control" required="required"  onBlur="checkRegnoAvailability()">
+<input type="text" name="regno" id="regno"  class="form-control" required="required" value="YKPT-"> <!--onBlur="checkRegnoAvailability()-->
 <span id="user-reg-availability" style="font-size:12px;"></span>
 </div>
 </div>

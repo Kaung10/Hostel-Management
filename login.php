@@ -31,7 +31,7 @@ try{
 			$city = $addrDetailsArr['geoplugin_city'];
 			$country = $addrDetailsArr['geoplugin_countryName'];
 
-			$log = "insert into userLog(userId,userEmail,userIp,city,country) values('$uid','$uemail','$ip','$city','$country')";
+			$log = "insert into userlog(userId,userEmail,userIp,city,country) values('$uid','$uemail','$ip','$city','$country')";
 			$mysqli -> query($log);
 
 			header("location:dashboard.php");
@@ -108,7 +108,7 @@ return true;
             <li><a href="https://ucsy.edu.mm/page291.do">COLLABORATION</a></li>
             <li><a href="#">ABOUT US</a></li>
             <li><a href="#"> <ion-icon name="call-outline"> </ion-icon> (+95) 9 443440479</a></li>
-			
+           
         </ul>
     </div>
     <section> 
@@ -155,5 +155,6 @@ return true;
 	<script src="js/fileinput.js"></script>
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
+	<script src= "click.js"></script>
 </body>
 </html>
