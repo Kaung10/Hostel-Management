@@ -12,6 +12,11 @@ check_login();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request Forms</title>
     <style>
+        h2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -153,6 +158,7 @@ if ($result->num_rows > 0) {
         echo '<div class="form-bar" id="item-' . $id . '">';
         echo '<span class="name">' . htmlspecialchars($row['name']) . '</span>';
         echo '<span class="info">' . $hostel . ' --> ' . $roomNumber . '</span>';
+        echo '<a href="student-details.php?id='.$id.'>" title="View Full Details"><i class="fa fa-desktop">view</i></a>&nbsp;&nbsp;';
         echo '<span class="actions">';
         echo '<button class="cancel-button" onclick="updateRequest(' . $id . ', 0, \'' . $hostel . '\', ' . $roomNumber . ')">Cancel</button>';
         echo '<button class="confirm-button" onclick="updateRequest(' . $id . ', 1, \'' . $hostel . '\', ' . $roomNumber . ')">Confirm</button>';
@@ -164,6 +170,30 @@ if ($result->num_rows > 0) {
 }
 ?>
 
+</div>
+<h2>Canceled Student Request List</h2>
+<div>
+    <?php
+$query = "SELECT * FROM roomregistration WHERE request = 1";
+$result = $mysqli->query($query);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $hostel = strcasecmp($row['gender'], 'male') == 0 ? "Alinkar" : "Mudra";
+        $roomNumber = htmlspecialchars($row['roomno']);
+        $id = htmlspecialchars($row['id']);
+
+        // show list using php function if you want to change UI, it is here
+        echo '<div class="form-bar" id="item-' . $id . '">';
+        echo '<span class="name">' . htmlspecialchars($row['name']) . '</span>';
+        echo '<span class="info">' . $hostel . ' --> ' . $roomNumber . '</span>';
+        echo '<span class="actions">';
+        echo '<a href="student-details.php?id='.$id.'>" title="View Full Details"><i class="fa fa-desktop">view</i></a>&nbsp;&nbsp;';
+        echo '</span>';
+        echo '</div>';
+    }
+}
+?>
 </div>
 </main>
 
