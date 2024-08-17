@@ -110,94 +110,92 @@ check_login();
 
             // Handle AJAX request
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
-                $status = isset($_POST['status']) ? intval($_POST['status']) : 0;
+    $id = intval($_POST['id'] ?? 0);
+    $status = intval($_POST['status'] ?? 0);
+    $hostel = htmlspecialchars($_POST['hostel'] ?? '');
+    $roomno = intval($_POST['roomNumber'] ?? 0);
 
-                if ($id > 0 && ($status === 0 || $status === 1)) {
-                    // Update query
-                    $query = "UPDATE roomregistration SET request = ? WHERE id = ?";
-                    $stmt = $mysqli->prepare($query);
-                    $stmt->bind_param("ii", $status, $id);
-                    if ($stmt->execute()) {
-                        echo "success";
-                    } else {
-                        echo "error: " . $stmt->error;
-                    }
-                    $stmt->close();
-                } else {
-                    echo "error: Invalid input";
-                }
+    if ($id > 0 && ($status === 0 || $status === 1)) {
+        $label = strtolower($hostel);
+        if ($status===0){
+        $query1 = "UPDATE $label SET available = available + 1 WHERE room_no = ?";
+        $stmt1 = $mysqli->prepare($query1);
+        $stmt1->bind_param("i", $roomno);
+        $stmt1->execute();
+        $stmt1->close();
+    }
 
-                $mysqli->close();
-                exit;
-            }
-            
+        $query = "UPDATE roomregistration SET request = ? WHERE id = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("ii", $status, $id);
+
+        echo $stmt->execute() ? "success" : "error: " . $stmt->error;
+        $stmt->close();
+    } else {
+        echo "error: Invalid input";
+    }
+
+    $mysqli->close();
+    exit;
+}
+
             // Query to fetch data where request column is 2
-            $query = "SELECT * FROM roomregistration WHERE request = 2";
-            $result = $mysqli->query($query);
+$query = "SELECT * FROM roomregistration WHERE request = 2";
+$result = $mysqli->query($query);
 
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $hostel = strcasecmp($row['gender'], 'male') == 0 ? "Alinkar" : "Mudra";
+        $roomNumber = htmlspecialchars($row['roomno']);
+        $id = htmlspecialchars($row['id']);
 
-                    // Determine the label and room number
-                    $label = (strcasecmp($row['gender'], 'male') == 0) ? "Alinkar" : "Mudra";
-                    $roomNumber = htmlspecialchars($row['roomno']);
-                    $id = htmlspecialchars($row['id']);
+        // show list using php function if you want to change UI, it is here
+        echo '<div class="form-bar" id="item-' . $id . '">';
+        echo '<span class="name">' . htmlspecialchars($row['name']) . '</span>';
+        echo '<span class="info">' . $hostel . ' --> ' . $roomNumber . '</span>';
+        echo '<span class="actions">';
+        echo '<button class="cancel-button" onclick="updateRequest(' . $id . ', 0, \'' . $hostel . '\', ' . $roomNumber . ')">Cancel</button>';
+        echo '<button class="confirm-button" onclick="updateRequest(' . $id . ', 1, \'' . $hostel . '\', ' . $roomNumber . ')">Confirm</button>';
+        echo '</span>';
+        echo '</div>';
+    }
+} else {
+    echo 'No requests found.';
+}
+?>
 
-                    // show list using php function if you want to change UI, it is herew
-                    echo '<div class="form-bar" id="item-' . $id . '">';
-                    echo '<span class="name">' . htmlspecialchars($row['name']) . '</span>';
-                    echo '<span class="info">' . $label . ' --> ' . $roomNumber . '</span>';
-                    echo '<span class="actions">';
-                    echo '<button class="cancel-button" onclick="updateRequest(' . $id . ', 0)">Cancel</button>';
-                    echo '<button class="confirm-button" onclick="updateRequest(' . $id . ', 1)">Confirm</button>';
-                    echo '</span>';
-                    echo '</div>';
-                }
-            } else {
-                echo 'No requests found.';
-            }
+</div>
+</main>
 
-            // Close connection
-            $mysqli->close();
-            ?>
-        </div>
-    </main>
-
-    <script>
-        function updateRequest(id, status) {
+<script>
+function updateRequest(id, status, hostel, roomNumber) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "", true); // Set your endpoint URL here
+    xhr.open("POST", "", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-        console.log('Response Text:', xhr.responseText); // Debugging output
-        if (xhr.status === 200) {
-            // Check if response text ends with "success"
-            if (xhr.responseText.trim().endsWith("success")) {
-                var element = document.getElementById('item-' + id);
-                if (element) {
-                    element.style.display = 'none';
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                if (xhr.responseText.trim().endsWith("success")) {
+                    document.getElementById('item-' + id).style.display = 'none';
+                    alert("Request successfully updated!");
+                } else {
+                    alert('Error updating request: ' + xhr.responseText);
                 }
             } else {
-                alert('Error updating request: ' + xhr.responseText);
+                alert('HTTP Error: ' + xhr.status);
             }
-        } else {
-            alert('HTTP Error: ' + xhr.status);
         }
-    }
-};
-
+    };
 
     xhr.onerror = function () {
         alert('Request failed');
     };
 
-    xhr.send("id=" + encodeURIComponent(id) + "&status=" + encodeURIComponent(status));
+    xhr.send("id=" + encodeURIComponent(id) + "&status=" + encodeURIComponent(status) + "&hostel=" + encodeURIComponent(hostel) + "&roomNumber=" + encodeURIComponent(roomNumber));
 }
+</script>
 
-    </script>
 
 </body>
 </html>
