@@ -128,7 +128,7 @@ $cnt=1;
 while($row=$res->fetch_object())
 	  {
 	  	?>
-<tr><td><?php echo $cnt;;?></td>
+<tr><td><?php echo $cnt;?></td>
 <td><?php echo $row->name;?></td>
 <td><?php echo $row->regno;?></td>
 <td><?php echo $row->contactno;?></td>
