@@ -41,7 +41,7 @@
 .navbar ul li::after{ 
     content: '';
     height: 3px;
-    width: 100%;
+    width: 0%;  /* change 0 from 100 to remove underline */
     background: #009688; 
     position:absolute; 
     left:0; 
@@ -51,8 +51,13 @@
 
 .navbar ul li:hover::after{ 
     width:100%; 
-
+    text-decoration: underline;
 }
+
+.navbar ul li.active::after {
+    width: 100%; /* Keep the underline visible for the active item */
+}
+
 
 .content{ 
     width: 100%;

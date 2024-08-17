@@ -28,13 +28,15 @@ section{
 }
 
 .form-box{
+    
     position: relative;
-    width: 400px;
-    height: 450px;
+    width: 500px;
+    height: 650px;
     background: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-bottom: 50px;
     border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
@@ -43,6 +45,8 @@ h2{
     font-size: 2em;
     color: #ffff;
     text-align: center;
+    margin-top: 75px;
+
 }
 
 .inputbox{ 
@@ -188,11 +192,82 @@ button:hover{
     transition: 0.5s; 
 }
 .navbar ul li::after:hover{ 
-    background: whitesmoke;
+    /* background: whitesmoke; */
+    width: 100%;
 }
 
 
 .navbar ul li:hover::after{ 
     width:100%; 
+    text-decoration: underline; 
 
+}
+
+.navbar ul li.active::after {
+    width: 100%; /* Keep the underline visible for the active item */
+}
+
+
+/* .gender-selection{ 
+    position: relative;
+    margin: 30px 0 ;
+    width: 310px;
+    border-bottom: 2px solid #ffff;
+} */
+
+ .gender-selection label.text-uppercase.text-sm { 
+    color: #ffff;
+    font-size: 1em;
+    pointer-events: none;
+    font-family: 'poppins',sans-serif, sans-serif;
+
+} 
+
+/* Hide the default radio button */
+input[type="radio"] {
+    display: none;
+}
+
+/* Gender selection container */
+.gender-selection {
+    display: flex;
+    gap: 20px; /* Space between male and female options */
+}
+
+/* Create a custom radio button */
+.custom-radio {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-family: 'poppins',sans-serif, sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.custom-radio .checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid gray;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    margin-right: 8px;
+    transition: border-color 0.2s ease;
+}
+
+/* When the radio button is checked, change the border color and add the inner circle */
+.custom-radio input[type="radio"]:checked + .checkmark {
+    border-color: skyblue;
+}
+
+.custom-radio input[type="radio"]:checked + .checkmark::after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    background: skyblue;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

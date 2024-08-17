@@ -80,10 +80,12 @@ catch (Exception $e)
 	<meta name="theme-color" content="#3e454c">
     <title>Student Registration</title>
    <link rel="stylesheet" href="stylehsan.css">
+   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>
 <script type="text/javascript" src="js/validation.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
+	
 function valid()
 {
 if(document.registration.password.value!= document.registration.cpassword.value)
@@ -102,10 +104,11 @@ return true;
         <img src='logo.svg' class="logo">
         <ul>
             <li><a href="index.php">Home</a></li>
-            <li><a href="#">ACADEMIC</a></li>
-            <li><a href="#">RESEARCH</a></li>
-            <li><a href="#">COLLABORATION</a></li>
-            <li><a href="#">CAMPUS</a></li>
+            <li><a href="https://ucsy.edu.mm/">ACADEMIC</a></li>
+            <li><a href="https://ucsy.edu.mm/page291.do">COLLABORATION</a></li>
+            <li><a href="#">ABOUT US</a></li>
+            <li><a href="#"> <ion-icon name="call-outline"> </ion-icon> (+95) 9 443440479</a></li>
+           
         </ul>
     </div>
     <section> 
@@ -152,5 +155,6 @@ return true;
 	<script src="js/fileinput.js"></script>
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
+	<script src= "click.js"></script>
 </body>
 </html>
