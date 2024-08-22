@@ -16,7 +16,7 @@
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="https://ucsy.edu.mm/">ACADEMIC</a></li>
                 <li><a href="https://ucsy.edu.mm/page291.do">COLLABORATION</a></li>
-                <li><a href="#">ABOUT US</a></li>
+                <li><a href="aboutus.html">ABOUT US</a></li>
                 <li><a href="#"> <ion-icon name="call-outline"> </ion-icon> (+95) 9 443440479</a></li>
             </ul>
         </div>
