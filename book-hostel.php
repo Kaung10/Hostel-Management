@@ -212,7 +212,19 @@ $uid=$_SESSION['login'];
 
 </div>
 
+<?php
+$aid = $_SESSION['id'];
 
+$stmt = $mysqli->prepare("SELECT gender FROM userregistration WHERE id = ?");
+$stmt->bind_param('i', $aid);
+$stmt->execute();
+$stmt->bind_result($genderfilter);
+$stmt->fetch();
+
+echo "<h1>" . htmlspecialchars($genderfilter) . "</h1>";
+
+$stmt->close();
+?>
 
 
 											
@@ -221,16 +233,39 @@ $uid=$_SESSION['login'];
 <div class="col-sm-8">
 <select name="seater" id="seater"class="form-control" required> 
 <option value="">Select Seater</option>
-<?php $query ="SELECT DISTINCT seater FROM rooms";
+<?php 
+
+if($genderfilter==='male'){
+    $query ="SELECT DISTINCT seater FROM alinkar";
 $stmt2 = $mysqli->prepare($query);
 $stmt2->execute();
 $res=$stmt2->get_result();
 while($row=$res->fetch_object())
 {
-?>
+    ?>
+
 <option value="<?php echo $row->seater;?>"> <?php echo $row->seater;?></option>
-<?php } ?>
+<option>this male test</option>
+
+<?php }
+
+}else if($genderfilter==='female'){
+$query ="SELECT DISTINCT seater FROM mudra";
+$stmt2 = $mysqli->prepare($query);
+$stmt2->execute();
+$res=$stmt2->get_result();
+while($row=$res->fetch_object())
+{
+    ?>
+<option value="<?php echo $row->seater;?>"> <?php echo $row->seater;?></option>
+<option>this female test</option>
+
+<?php }} ?>
+
 </select> 
+
+
+
 
 
 </div>
@@ -241,7 +276,7 @@ while($row=$res->fetch_object())
 <div class="col-sm-8">
 <select name="room" id="room"class="form-control" onBlur="checkAvailability()" required> 
 <option value="">Select Room</option>
-<?php $query ="SELECT * FROM rooms WHERE available!=0 " ;
+<?php $query ="SELECT room_no FROM alinkar WHERE seater=3 AND available!=0 " ;
 $stmt2 = $mysqli->prepare($query);
 $stmt2->execute();
 $res=$stmt2->get_result();
