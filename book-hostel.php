@@ -3,13 +3,28 @@ session_start();
 include('includes/config.php');
 include('includes/checklogin.php');
 check_login();
+
+
+$aid = $_SESSION['id'];
+
+$stmt = $mysqli->prepare("SELECT gender FROM userregistration WHERE id = ?");
+$stmt->bind_param('i', $aid);
+$stmt->execute();
+$stmt->bind_result($genderfilter);
+$stmt->fetch();
+
+//echo "<h1>" . htmlspecialchars($genderfilter) . "</h1>";
+
+$stmt->close();
+
+
 //code for registration
 if(isset($_POST['submit']))
 {
 $roomno=$_POST['room'];
 $seater=$_POST['seater'];
 $feespm=$_POST['fpm'];
-$foodstatus=$_POST['foodstatus'];
+//$foodstatus=$_POST['foodstatus'];
 $stayfrom=$_POST['stayf'];
 $duration=$_POST['duration'];
 $semester=$_POST['semester'];
@@ -86,23 +101,47 @@ echo"<script>alert('Student Succssfully register');</script>";
 
 
 
-$(document).ready(function () {
-$('#seater').change(function () {
-var selectedSeater = $(this).val();
-getRoom(selectedSeater);
+// $(document).ready(function () {
+// $('#seater').change(function () {
+// var selectedSeater = $(this).val();
+// getRoom(selectedSeater);
+// });
+
+// function getRoom(val) {
+// $.ajax({
+// type: "POST",
+// url: "get_seater.php",
+// data: 'seater=' + val,
+// success: function (data) {
+//     console.log(data);
+// $('#room').html(data);
+// }
+// });
+// }
+// });
+    $(document).ready(function () {
+    $('#seater').change(function () {
+        var selectedSeater = $(this).val();
+        var genderFilter = '<?php echo $genderfilter; ?>'; // Add this line to include the PHP variable
+        getRoom(selectedSeater, genderFilter);
+    });
+
+    function getRoom(seater, gender) {
+        $.ajax({
+            type: "POST",
+            url: "get_seater.php",
+            data: {
+                seater: seater,
+                gender: gender  // Add gender to the data sent via POST
+            },
+            success: function (data) {
+                //console.log(data);  // Debugging output
+                $('#room').html(data);
+            }
+        });
+    }
 });
 
-function getRoom(val) {
-$.ajax({
-type: "POST",
-url: "get_seater.php",
-data: 'seater=' + val,
-success: function (data) {
-$('#room').html(data);
-}
-});
-}
-});
 
 $(document).ready(function () {
 $('#room').change(function () {
@@ -212,19 +251,7 @@ $uid=$_SESSION['login'];
 
 </div>
 
-<?php
-$aid = $_SESSION['id'];
 
-$stmt = $mysqli->prepare("SELECT gender FROM userregistration WHERE id = ?");
-$stmt->bind_param('i', $aid);
-$stmt->execute();
-$stmt->bind_result($genderfilter);
-$stmt->fetch();
-
-echo "<h1>" . htmlspecialchars($genderfilter) . "</h1>";
-
-$stmt->close();
-?>
 
 
 											
@@ -234,7 +261,6 @@ $stmt->close();
 <select name="seater" id="seater"class="form-control" required> 
 <option value="">Select Seater</option>
 <?php 
-
 if($genderfilter==='male'){
     $query ="SELECT DISTINCT seater FROM alinkar";
 $stmt2 = $mysqli->prepare($query);
@@ -276,7 +302,7 @@ while($row=$res->fetch_object())
 <div class="col-sm-8">
 <select name="room" id="room"class="form-control" onBlur="checkAvailability()" required> 
 <option value="">Select Room</option>
-<?php $query ="SELECT room_no FROM alinkar WHERE seater=3 AND available!=0 " ;
+<?php $query ="SELECT * FROM alinkar WHERE available!=0 " ;
 $stmt2 = $mysqli->prepare($query);
 $stmt2->execute();
 $res=$stmt2->get_result();
