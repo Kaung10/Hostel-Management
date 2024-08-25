@@ -17,21 +17,18 @@ try{
 
 		$_SESSION['id'] = $id;							
 		$_SESSION['login'] = $email;					
-		$uip = $_SERVER['REMOTE_ADDR'];					
 		$ldate=date('d/m/Y h:i:s', time());				
 
 		if($rs)
 		{
+			// $id = $_SESSION['id'];
 			$uid = $_SESSION['id'];
 			$uemail = $_SESSION['login'];
-			$ip = $_SERVER['REMOTE_ADDR'];
 
-			$geopluginURL='http://www.geoplugin.net/php.gp?ip='.$ip;
-			$addrDetailsArr = unserialize(file_get_contents($geopluginURL));
-			$city = $addrDetailsArr['geoplugin_city'];
-			$country = $addrDetailsArr['geoplugin_countryName'];
+			// $geopluginURL='http://www.geoplugin.net/php.gp?ip='.$ip;
+			// $addrDetailsArr = unserialize(file_get_contents($geopluginURL));
 
-			$log = "insert into userlog(userId,userEmail,userIp,city,country) values('$uid','$uemail','$ip','$city','$country')";
+			$log = "insert into userlog(userId,userEmail,loginTime) values('$uid','$uemail','$ldate')";
 			$mysqli -> query($log);
 
 			header("location:dashboard.php");
@@ -46,7 +43,6 @@ try{
 			$rs = $stmt -> fetch();
 
 			$_SESSION['id'] = $id;
-			$uip = $_SERVER['REMOTE_ADDR'];
 			$ldate = date('d/m/Y h:i:s', time());
 
 			if($rs)

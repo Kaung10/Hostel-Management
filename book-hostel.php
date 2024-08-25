@@ -21,38 +21,43 @@ $stmt->close();
 //code for registration
 if(isset($_POST['submit']))
 {
-$roomno=$_POST['room'];
-$seater=$_POST['seater'];
-$feespm=$_POST['fpm'];
-//$foodstatus=$_POST['foodstatus'];
-$stayfrom=$_POST['stayf'];
-$duration=$_POST['duration'];
-$semester=$_POST['semester'];
-$regno=$_POST['regno'];
-$name=$_POST['name'];
-$gender=$_POST['gender'];
-$contactno=$_POST['contact'];
-$emailid=$_POST['email'];
-$emcntno=$_POST['econtact'];
-$gurname=$_POST['gname'];
-$gurrelation=$_POST['grelation'];
-$gurcntno=$_POST['gcontact'];
-$caddress=$_POST['address'];
-$ccity=$_POST['city'];
-$cstate=$_POST['state'];
-$paddress=$_POST['paddress'];
-$pcity=$_POST['pcity'];
-$pstate=$_POST['pstate'];
-$query="insert into  roomregistration(roomno,seater,feespm,foodstatus,stayfrom,duration,semester,regno,name,gender,contactno,emailid,egycontactno,guardianName,guardianRelation,guardianContactno,corresAddress,corresCIty,corresState,pmntAddress,pmntCity,pmnatetState) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-$stmt = $mysqli->prepare($query);
-$rc=$stmt->bind_param('iiiisissssisississssss',$roomno,$seater,$feespm,$foodstatus,$stayfrom,$duration,$semester,$regno,$name,$gender,$contactno,$emailid,$emcntno,$gurname,$gurrelation,$gurcntno,$caddress,$ccity,$cstate,$paddress,$pcity,$pstate,);
-$stmt->execute();
-$query="UPDATE Rooms SET available=available-1 WHERE room_no=?";
-$stmt = $mysqli->prepare($query);
-$rc=$stmt->bind_param('s',$roomno);
-$stmt->execute();
-echo"<script>alert('Student Succssfully register');</script>";
-}
+    $roomno = $_POST['room'];
+    $seater = $_POST['seater'];
+    $stayfrom = $_POST['stayf'];
+    $semester = $_POST['semester'];
+    $regNo = $_POST['regno'];
+    $name = $_POST['name'];
+    $gender = $_POST['gender'];
+    $contactno = $_POST['contact'];
+    $emailid = $_POST['email'];
+    $egyptcontactno = $_POST['econtact'];
+    $guardianName = $_POST['gname'];
+    $guardianRelation = $_POST['grelation'];
+    $guardianContactno = $_POST['gcontact'];
+    $corresAddress = $_POST['address'];
+    $corresCity = $_POST['city'];
+    $corresState = $_POST['state'];
+    $pmntAddress = $_POST['paddress'];
+    $pmntCity = $_POST['pcity'];
+    $pmntState = $_POST['pstate'];
+    $postingDate = $_POST['postingDate'];
+    $updationDate = $_POST['updationDate'];
+    $request = $_POST['submit'];
+
+    $query = "INSERT INTO roomregistration (roomno, seater, stayfrom, semester, regNo, name, gender, contactno, emailid, egyptcontactno, guardianName, guardianRelation, guardianContactno, corresAddress, corresCity, corresState, pmntAddress, pmntCity, pmntState, postingDate, updationDate, request) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+ $stmt = $mysqli->prepare($query);
+        $rc = $stmt->bind_param('iissssssssssssssss', $roomno, $seater, $stayfrom, $semester, $regNo, $name, $gender, $contactno, $emailid, $egyptcontactno, $guardianName, $guardianRelation, $guardianContactno, $corresAddress, $corresCity, $corresState, $pmntAddress, $pmntCity, $pmntState, $request);
+        $stmt->execute();
+        $stmt->close();
+
+// Insert into userregistration
+        $query1 = "INSERT INTO userregistration (regNo, Name, gender, contactNo, email, password) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt1 = $mysqli->prepare($query1);
+        $stmt1->bind_param('sssiss', $regNo, $name, $gender, $contactno, $emailid, $contactno);
+        $stmt1->execute();
+        echo "<script>alert('Student Successfully registered');</script>";
+    }
+
 ?>
 
 <!doctype html>
