@@ -19,8 +19,9 @@ $stmt->close();
 
 
 //code for registration
-if(isset($_POST['submit']))
+if(isset($_POST['submit'])) 
 {
+    // Collecting POST data
     $roomno = $_POST['room'];
     $seater = $_POST['seater'];
     $stayfrom = $_POST['stayf'];
@@ -30,7 +31,7 @@ if(isset($_POST['submit']))
     $gender = $_POST['gender'];
     $contactno = $_POST['contact'];
     $emailid = $_POST['email'];
-    $egyptcontactno = $_POST['econtact'];
+    $egycontactno = $_POST['econtact'];
     $guardianName = $_POST['gname'];
     $guardianRelation = $_POST['grelation'];
     $guardianContactno = $_POST['gcontact'];
@@ -40,26 +41,29 @@ if(isset($_POST['submit']))
     $pmntAddress = $_POST['paddress'];
     $pmntCity = $_POST['pcity'];
     $pmntState = $_POST['pstate'];
-    $postingDate = $_POST['postingDate'];
-    $updationDate = $_POST['updationDate'];
-    $request = $_POST['submit'];
+    $request = 2;
+    $postingDate = date('Y-m-d'); // Assuming you want today's date
+    $updationDate = $postingDate; // or another date as needed
 
-    $query = "INSERT INTO roomregistration (roomno, seater, stayfrom, semester, regNo, name, gender, contactno, emailid, egyptcontactno, guardianName, guardianRelation, guardianContactno, corresAddress, corresCity, corresState, pmntAddress, pmntCity, pmntState, postingDate, updationDate, request) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
- $stmt = $mysqli->prepare($query);
-        $rc = $stmt->bind_param('iissssssssssssssss', $roomno, $seater, $stayfrom, $semester, $regNo, $name, $gender, $contactno, $emailid, $egyptcontactno, $guardianName, $guardianRelation, $guardianContactno, $corresAddress, $corresCity, $corresState, $pmntAddress, $pmntCity, $pmntState, $request);
-        $stmt->execute();
-        $stmt->close();
+    // Prepare and execute SQL query for roomregistration
+    $query = "INSERT INTO roomregistration (roomno, seater, stayfrom, semester, regNo, name, gender, contactno, emailid, egycontactno, guardianName, guardianRelation, guardianContactno, corresAddress, corresCity, corresState, pmntAddress, pmntCity, pmntState, postingDate, updationDate, request) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param('iissssssssssssssssssii', $roomno, $seater, $stayfrom, $semester, $regNo, $name, $gender, $contactno, $emailid, $egycontactno, $guardianName, $guardianRelation, $guardianContactno, $corresAddress, $corresCity, $corresState, $pmntAddress, $pmntCity, $pmntState, $postingDate, $updationDate, $request);
+    $stmt->execute();
+    $stmt->close();
 
-// Insert into userregistration
-        $query1 = "INSERT INTO userregistration (regNo, Name, gender, contactNo, email, password) VALUES (?, ?, ?, ?, ?, ?)";
-        $stmt1 = $mysqli->prepare($query1);
-        $stmt1->bind_param('sssiss', $regNo, $name, $gender, $contactno, $emailid, $contactno);
-        $stmt1->execute();
-        echo "<script>alert('Student Successfully registered');</script>";
-    }
+    // Prepare and execute SQL query for userregistration
+    $hashedPassword = password_hash($contactno, PASSWORD_BCRYPT); // Hashing the password
+    $query1 = "INSERT INTO userregistration (regNo, Name, gender, contactNo, email, password) VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt1 = $mysqli->prepare($query1);
+    $stmt1->bind_param('sssiss', $regNo, $name, $gender, $contactno, $emailid, $hashedPassword);
+    $stmt1->execute();
+    $stmt1->close();
 
+    // Provide feedback to the user
+    echo "<script>alert('Student Successfully registered');</script>";
+}
 ?>
-
 <!doctype html>
 <html lang="en" class="no-js">
 <head>
@@ -140,7 +144,7 @@ if(isset($_POST['submit']))
                 gender: gender  // Add gender to the data sent via POST
             },
             success: function (data) {
-                //console.log(data);  // Debugging output
+                console.log(data);  // Debugging output
                 $('#room').html(data);
             }
         });
@@ -149,31 +153,39 @@ if(isset($_POST['submit']))
 
 
 $(document).ready(function () {
-$('#room').change(function () {
-var selectedRoom = $(this).val();
-getseat(selectedRoom);
-});
+    $('#room').change(function () {
+        var selectedRoom = $(this).val();
+        var selectedGender = '<?php echo $genderfilter; ?>';
+        getseat(selectedRoom, selectedGender);
+    });
 
-function getseat(val) {
-$.ajax({
-type: "POST",
-url: "get_seater.php",
-data: 'room=' + val,
-success: function (data) {
-$('#seater').html(data);
-}
-});
-$.ajax({
-type: "POST",
-url: "get_seater.php",
-data:'rid='+val,
-success: function(data){
-//alert(data);
-$('#fpm').val(data);
-}
-});
-}
-});
+     function getseat(room, gender) {
+        $.ajax({
+            type: "POST",
+            url: "get_seater.php",
+            data: {
+                room: room,
+                gender: gender
+            },
+            success: function (data) {
+                console.log(data);
+                $('#seater').html(data);
+            }
+        });
+            $.ajax({
+            type: "POST",
+            url: "get_seater.php",
+            data: {
+                gender: gender
+            },
+            success: function (data) {
+                $('#fpm').val(data);
+            }
+        });
+
+
+        }
+    });
 
 // function getSeater(val) {
 // $.ajax({
@@ -276,7 +288,6 @@ while($row=$res->fetch_object())
     ?>
 
 <option value="<?php echo $row->seater;?>"> <?php echo $row->seater;?></option>
-<option>this male test</option>
 
 <?php }
 
@@ -289,7 +300,6 @@ while($row=$res->fetch_object())
 {
     ?>
 <option value="<?php echo $row->seater;?>"> <?php echo $row->seater;?></option>
-<option>this female test</option>
 
 <?php }} ?>
 
@@ -307,7 +317,10 @@ while($row=$res->fetch_object())
 <div class="col-sm-8">
 <select name="room" id="room"class="form-control" onBlur="checkAvailability()" required> 
 <option value="">Select Room</option>
-<?php $query ="SELECT * FROM alinkar WHERE available!=0 " ;
+<?php 
+
+if($genderfilter==='male'){
+    $query ="SELECT room_no FROM alinkar WHERE available != 0 ";
 $stmt2 = $mysqli->prepare($query);
 $stmt2->execute();
 $res=$stmt2->get_result();
@@ -315,7 +328,20 @@ while($row=$res->fetch_object())
 {
 ?>
 <option data-seater="<?php echo $row->seater;?>" value="<?php echo $row->room_no;?>"> <?php echo $row->room_no;?></option>
-<?php } ?>
+<?php } 
+
+}else if($genderfilter==='female'){
+    $query ="SELECT room_no FROM mudra WHERE available != 0 ";
+    $stmt2 = $mysqli->prepare($query);
+    $stmt2->execute();
+    $res=$stmt2->get_result();
+    while($row=$res->fetch_object())
+    {
+?>
+<option data-seater="<?php echo $row->seater;?>" value="<?php echo $row->room_no;?>"><?php echo $row->room_no;?></option>
+
+<?php }} ?>
+
 </select> 
 <span id="room-availability-status" style="font-size:12px;"></span>
 
@@ -323,20 +349,56 @@ while($row=$res->fetch_object())
 </div>
 
 
+<?php
+    if($genderfilter === 'male'){
+        $query = "SELECT fees FROM fees WHERE hostelName = 'alinkar'";
+    }
+    else if ($genderfilter === 'female'){
+        $query = "SELECT fees FROM fees WHERE hostelName = 'mudra'";
+    }
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $res=$stmt->get_result();
+    $meal_expenses = null;
+if ($row = $res->fetch_assoc()) {
+    $fees = $row['fees'];
+}
 
+$stmt->close();
+?>
 
 
 <div class="form-group">
 <label class="col-sm-2 control-label">Hostel Fee</label>
 <div class="col-sm-8">
-<input type="text" name="fpm" id="fpm"  class="form-control" value="25000" readonly="true">
+<input type="text" name="fpm" id="fpm"  class="form-control" value="<?php echo htmlspecialchars($fees); ?>" readonly="true">
 </div>
 </div>
+<?php
+    if($genderfilter === 'male'){
+        $query = "SELECT meal_expenses FROM fees WHERE hostelName = 'alinkar'";
+    }
+    else if ($genderfilter === 'female'){
+        $query = "SELECT meal_expenses FROM fees WHERE hostelName = 'mudra'";
+    }
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $res=$stmt->get_result();
+    $meal_expenses = null;
+if ($row = $res->fetch_assoc()) {
+    $meal_expenses = $row['meal_expenses'];
+}
+
+$stmt->close();
+?>
+
+
+
 
 <div class="form-group">
 <label class="col-sm-2 control-label">Food Fee Per Month</label>
 <div class="col-sm-8">
-<input type="text" name="" id=""  class="form-control" value="93000" readonly="true">
+<input type="text" name="" id=""  class="form-control" value="<?php echo htmlspecialchars($meal_expenses); ?>" readonly="true">
 </div>
 </div>
 
