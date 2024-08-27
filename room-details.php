@@ -78,7 +78,7 @@ while($row=$res->fetch_object())
 </tr>
 <tr>
 	<th>Registration Number :</th>
-<td colspan="2"><?php echo $row->regno;?></td>
+<td colspan="2"><?php echo $row->regNo;?></td>
 <th>Apply Date :</th>
 <td colspan="2"><?php echo $row->postingDate;?></td>
 </tr>
@@ -107,20 +107,25 @@ while($row=$res->fetch_object())
 <th>Hostel Fee:</th>
 <td colspan="2">25000</td>
 <th>Food Fee Per Month:</th>
-<td colspan="2">
-<?php 
-if($row->foodstatus==1)
-{ 
-echo $ff=(90000*$dr);
-} else { 
-echo $ff=0;
-// echo "<span style='padding-left:2%; color:red;'>(You booked hostel without food).<span>";
-}?>
-</td>
+ <td colspan="2">
+93000
+
+
+ <!-- // if($row-> foodstatus==1)
+// { 
+// echo $ff=(90000*$dr);
+// } else { 
+// echo $ff=0;
+// // echo "<span style='padding-left:2%; color:red;'>(You booked hostel without food).<span>";
+// } -->
+
+</td> 
 </tr>
 <tr>
 <th>Total Fee :</th>
-<th colspan="5"><?php echo $hf+$ff;?></th>
+<td colspan="2">
+128000
+</td>
 </tr>
 
 <tr>
@@ -129,7 +134,7 @@ echo $ff=0;
 
 <tr>
 <td><b>Reg No. :</b></td>
-<td><?php echo $row->regno;?></td>
+<td><?php echo $row->regNo;?></td>
 <td><b>Full Name :</b></td>
 <td><?php echo $row->name;?></td>
 <td><b>Email :</b></td>
@@ -167,7 +172,7 @@ echo $ff=0;
 <tr>
 <td><b>Correspondense Address</b></td>
 <td colspan="2">
-<?php echo $row->corresAddress;?><br />
+<?php echo $row->corresAddress;?><br/>
 <?php echo $row->corresCIty;?><br />
 <?php echo $row->corresState;?>
 
