@@ -709,6 +709,11 @@ li {
 .ts-sidebar-menu .open > a {
   background: rgba(51, 56, 62, 0.35);
 }
+
+.ts-sidebar-menu > .open > a {
+  background: #ffffff;
+  border-left: 3px solid blue;
+}
 .ts-sidebar-menu > .open > a {
   background: #ffffff;
   border-left: 3px solid blue;

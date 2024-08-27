@@ -88,7 +88,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12">
-						<h2 class="page-title" style="margin-top:4%">Manage Registred Students</h2>
+						<h2 class="page-title" style="margin-top:1%">Manage Registred Students</h2>
 						<div class="panel panel-default">
 							
 							<div class="panel-heading"style="background:#009688; color:white;">All Room Details</div>
@@ -129,13 +129,13 @@ while($row=$res->fetch_object())
 	  {
 	  	?>
 <tr><td><?php echo $cnt;?></td>
-<td><?php echo $row->name;?></td>
-<td><?php echo $row->regno;?></td>
-<td><?php echo $row->contactno;?></td>
-<td><?php echo $row->roomno;?></td>
-<td><?php echo $row->seater;?></td>
-<td><?php echo $row->semester;?></td>
-<td>
+<td class="fs-6"><?php echo $row->name;?></td>
+<td class="fs-6"><?php echo $row->regno;?></td>
+<td class="fs-6"><?php echo $row->contactno;?></td>
+<td class="fs-6"><?php echo $row->roomno;?></td>
+<td class="fs-6"><?php echo $row->seater;?></td>
+<td class="fs-6"><?php echo $row->semester;?></td>
+<td class="text-center">
 <a href="student-details.php?id=<?php echo $row->id;?>" title="View Full Details"><i class="fa fa-desktop"></i></a>&nbsp;&nbsp;
 <a href="manage-students.php?del=<?php echo $row->id;?>" title="Delete Record" onclick="return confirm('Do you want to delete');"><i class="fa fa-close"></i></a></td>
 										</tr>

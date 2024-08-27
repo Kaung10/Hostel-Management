@@ -42,7 +42,6 @@ if (isset($_POST['submit'])) {
 
 ?>
 
-?>
 <!doctype html>
 <html lang="en" class="no-js">
 <head>
@@ -55,7 +54,7 @@ if (isset($_POST['submit'])) {
 	<title>Create Room</title>
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">>
+	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
 	<link rel="stylesheet" href="css/bootstrap-social.css">
 	<link rel="stylesheet" href="css/bootstrap-select.css">
 	<link rel="stylesheet" href="css/fileinput.min.css">
@@ -89,7 +88,7 @@ if (isset($_POST['submit'])) {
 				<div class="row">
 					<div class="col-md-12">
 					
-						<h2 class="page-title">Update fees </h2>
+						<h2 class="page-title mt-3">Update fees </h2>
 	
 						<div class="row">
 							<div class="col-md-12">

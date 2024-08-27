@@ -78,7 +78,7 @@ if(isset($_GET['del']))
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12">
-						<h2 class="page-title" style="margin-top: 4%">Room Management</h2>
+						<h2 class="page-title" style="margin-top: 1%">Room Management</h2>
 						<div class="panel panel-default">
 							<div class="panel-heading" style="color:white; background:#009688;">All Room Details</div>
 

@@ -53,7 +53,6 @@
         <div class="fs-3 d-flex align-items-center text-white" >Hostel Management System</div>
       </a>
 
-	  <button class="menu-btn">$</button>
     </div>
     <!-- Collapsible wrapper -->
 
@@ -94,20 +93,6 @@
   <!-- Container wrapper -->
 </nav>
 <!-- Navbar -->
-
-<!-- <div class=""">
-		<a href="#" class="logo" style="font-size:16px; background:#009688; color:white;">Hostel Management System</a>
-		<span class="menu-btn"><i class="fa fa-bars"></i></span>
-		<ul class="ts-profile-nav">
-			<li class="ts-account" style="background:#009688;" S>
-				<a href="#"><img src="img/ts-avatar.jpg" class="ts-avatar hidden-side" alt=""> Account <i class="fa fa-angle-down hidden-side"></i></a>
-				<ul>
-					<li><a href="admin-profile.php">My Account</a></li>
-					<li><a href="logout.php">Logout</a></li>
-				</ul>
-			</li>
-		</ul>
-	</div> -->
 
 	</body>
 
