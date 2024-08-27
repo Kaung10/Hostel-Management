@@ -71,7 +71,7 @@
             src="../img/ts-avatar.jpg"
             class="border border-3 border-white rounded-circle"
             width="45%" 
-			height="45%"
+			      height="45%"
             alt="Black and White Portrait of a Man"
           />
         </a>
