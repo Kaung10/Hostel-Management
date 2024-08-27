@@ -3,43 +3,67 @@ session_start();
 include('includes/config.php');
 include('includes/checklogin.php');
 check_login();
+
+
+$aid = $_SESSION['id'];
+
+$stmt = $mysqli->prepare("SELECT gender FROM userregistration WHERE id = ?");
+$stmt->bind_param('i', $aid);
+$stmt->execute();
+$stmt->bind_result($genderfilter);
+$stmt->fetch();
+
+//echo "<h1>" . htmlspecialchars($genderfilter) . "</h1>";
+
+$stmt->close();
+
+
 //code for registration
-if(isset($_POST['submit']))
+if(isset($_POST['submit'])) 
 {
-$roomno=$_POST['room'];
-$seater=$_POST['seater'];
-$feespm=$_POST['fpm'];
-$foodstatus=$_POST['foodstatus'];
-$stayfrom=$_POST['stayf'];
-$duration=$_POST['duration'];
-$semester=$_POST['semester'];
-$regno=$_POST['regno'];
-$name=$_POST['name'];
-$gender=$_POST['gender'];
-$contactno=$_POST['contact'];
-$emailid=$_POST['email'];
-$emcntno=$_POST['econtact'];
-$gurname=$_POST['gname'];
-$gurrelation=$_POST['grelation'];
-$gurcntno=$_POST['gcontact'];
-$caddress=$_POST['address'];
-$ccity=$_POST['city'];
-$cstate=$_POST['state'];
-$paddress=$_POST['paddress'];
-$pcity=$_POST['pcity'];
-$pstate=$_POST['pstate'];
-$query="insert into  roomregistration(roomno,seater,feespm,foodstatus,stayfrom,duration,semester,regno,name,gender,contactno,emailid,egycontactno,guardianName,guardianRelation,guardianContactno,corresAddress,corresCIty,corresState,pmntAddress,pmntCity,pmnatetState) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-$stmt = $mysqli->prepare($query);
-$rc=$stmt->bind_param('iiiisissssisississssss',$roomno,$seater,$feespm,$foodstatus,$stayfrom,$duration,$semester,$regno,$name,$gender,$contactno,$emailid,$emcntno,$gurname,$gurrelation,$gurcntno,$caddress,$ccity,$cstate,$paddress,$pcity,$pstate,);
-$stmt->execute();
-$query="UPDATE Rooms SET available=available-1 WHERE room_no=?";
-$stmt = $mysqli->prepare($query);
-$rc=$stmt->bind_param('s',$roomno);
-$stmt->execute();
-echo"<script>alert('Student Succssfully register');</script>";
+    // Collecting POST data
+    $roomno = $_POST['room'];
+    $seater = $_POST['seater'];
+    $stayfrom = $_POST['stayf'];
+    $semester = $_POST['semester'];
+    $regNo = $_POST['regno'];
+    $name = $_POST['name'];
+    $gender = $_POST['gender'];
+    $contactno = $_POST['contact'];
+    $emailid = $_POST['email'];
+    $egycontactno = $_POST['econtact'];
+    $guardianName = $_POST['gname'];
+    $guardianRelation = $_POST['grelation'];
+    $guardianContactno = $_POST['gcontact'];
+    $corresAddress = $_POST['address'];
+    $corresCity = $_POST['city'];
+    $corresState = $_POST['state'];
+    $pmntAddress = $_POST['paddress'];
+    $pmntCity = $_POST['pcity'];
+    $pmntState = $_POST['pstate'];
+    $request = 2;
+    $postingDate = date('Y-m-d'); // Assuming you want today's date
+    $updationDate = $postingDate; // or another date as needed
+
+    // Prepare and execute SQL query for roomregistration
+    $query = "INSERT INTO roomregistration (roomno, seater, stayfrom, semester, regNo, name, gender, contactno, emailid, egycontactno, guardianName, guardianRelation, guardianContactno, corresAddress, corresCity, corresState, pmntAddress, pmntCity, pmntState, postingDate, updationDate, request) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param('iissssssssssssssssssii', $roomno, $seater, $stayfrom, $semester, $regNo, $name, $gender, $contactno, $emailid, $egycontactno, $guardianName, $guardianRelation, $guardianContactno, $corresAddress, $corresCity, $corresState, $pmntAddress, $pmntCity, $pmntState, $postingDate, $updationDate, $request);
+    $stmt->execute();
+    $stmt->close();
+
+    // Prepare and execute SQL query for userregistration
+    $hashedPassword = password_hash($contactno, PASSWORD_BCRYPT); // Hashing the password
+    $query1 = "INSERT INTO userregistration (regNo, Name, gender, contactNo, email, password) VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt1 = $mysqli->prepare($query1);
+    $stmt1->bind_param('sssiss', $regNo, $name, $gender, $contactno, $emailid, $hashedPassword);
+    $stmt1->execute();
+    $stmt1->close();
+
+    // Provide feedback to the user
+    echo "<script>alert('Student Successfully registered');</script>";
 }
 ?>
-
 <!doctype html>
 <html lang="en" class="no-js">
 <head>
@@ -86,50 +110,82 @@ echo"<script>alert('Student Succssfully register');</script>";
 
 
 
+// $(document).ready(function () {
+// $('#seater').change(function () {
+// var selectedSeater = $(this).val();
+// getRoom(selectedSeater);
+// });
+
+// function getRoom(val) {
+// $.ajax({
+// type: "POST",
+// url: "get_seater.php",
+// data: 'seater=' + val,
+// success: function (data) {
+//     console.log(data);
+// $('#room').html(data);
+// }
+// });
+// }
+// });
+    $(document).ready(function () {
+    $('#seater').change(function () {
+        var selectedSeater = $(this).val();
+        var genderFilter = '<?php echo $genderfilter; ?>'; // Add this line to include the PHP variable
+        getRoom(selectedSeater, genderFilter);
+    });
+
+    function getRoom(seater, gender) {
+        $.ajax({
+            type: "POST",
+            url: "get_seater.php",
+            data: {
+                seater: seater,
+                gender: gender  // Add gender to the data sent via POST
+            },
+            success: function (data) {
+                console.log(data);  // Debugging output
+                $('#room').html(data);
+            }
+        });
+    }
+});
+
+
 $(document).ready(function () {
-$('#seater').change(function () {
-var selectedSeater = $(this).val();
-getRoom(selectedSeater);
-});
+    $('#room').change(function () {
+        var selectedRoom = $(this).val();
+        var selectedGender = '<?php echo $genderfilter; ?>';
+        getseat(selectedRoom, selectedGender);
+    });
 
-function getRoom(val) {
-$.ajax({
-type: "POST",
-url: "get_seater.php",
-data: 'seater=' + val,
-success: function (data) {
-$('#room').html(data);
-}
-});
-}
-});
+     function getseat(room, gender) {
+        $.ajax({
+            type: "POST",
+            url: "get_seater.php",
+            data: {
+                room: room,
+                gender: gender
+            },
+            success: function (data) {
+                console.log(data);
+                $('#seater').html(data);
+            }
+        });
+            $.ajax({
+            type: "POST",
+            url: "get_seater.php",
+            data: {
+                gender: gender
+            },
+            success: function (data) {
+                $('#fpm').val(data);
+            }
+        });
 
-$(document).ready(function () {
-$('#room').change(function () {
-var selectedRoom = $(this).val();
-getseat(selectedRoom);
-});
 
-function getseat(val) {
-$.ajax({
-type: "POST",
-url: "get_seater.php",
-data: 'room=' + val,
-success: function (data) {
-$('#seater').html(data);
-}
-});
-$.ajax({
-type: "POST",
-url: "get_seater.php",
-data:'rid='+val,
-success: function(data){
-//alert(data);
-$('#fpm').val(data);
-}
-});
-}
-});
+        }
+    });
 
 // function getSeater(val) {
 // $.ajax({
@@ -221,16 +277,36 @@ $uid=$_SESSION['login'];
 <div class="col-sm-8">
 <select name="seater" id="seater"class="form-control" required> 
 <option value="">Select Seater</option>
-<?php $query ="SELECT DISTINCT seater FROM rooms";
+<?php 
+if($genderfilter==='male'){
+    $query ="SELECT DISTINCT seater FROM alinkar";
 $stmt2 = $mysqli->prepare($query);
 $stmt2->execute();
 $res=$stmt2->get_result();
 while($row=$res->fetch_object())
 {
-?>
+    ?>
+
 <option value="<?php echo $row->seater;?>"> <?php echo $row->seater;?></option>
-<?php } ?>
+
+<?php }
+
+}else if($genderfilter==='female'){
+$query ="SELECT DISTINCT seater FROM mudra";
+$stmt2 = $mysqli->prepare($query);
+$stmt2->execute();
+$res=$stmt2->get_result();
+while($row=$res->fetch_object())
+{
+    ?>
+<option value="<?php echo $row->seater;?>"> <?php echo $row->seater;?></option>
+
+<?php }} ?>
+
 </select> 
+
+
+
 
 
 </div>
@@ -241,7 +317,10 @@ while($row=$res->fetch_object())
 <div class="col-sm-8">
 <select name="room" id="room"class="form-control" onBlur="checkAvailability()" required> 
 <option value="">Select Room</option>
-<?php $query ="SELECT * FROM rooms WHERE available!=0 " ;
+<?php 
+
+if($genderfilter==='male'){
+    $query ="SELECT room_no FROM alinkar WHERE available != 0 ";
 $stmt2 = $mysqli->prepare($query);
 $stmt2->execute();
 $res=$stmt2->get_result();
@@ -249,7 +328,20 @@ while($row=$res->fetch_object())
 {
 ?>
 <option data-seater="<?php echo $row->seater;?>" value="<?php echo $row->room_no;?>"> <?php echo $row->room_no;?></option>
-<?php } ?>
+<?php } 
+
+}else if($genderfilter==='female'){
+    $query ="SELECT room_no FROM mudra WHERE available != 0 ";
+    $stmt2 = $mysqli->prepare($query);
+    $stmt2->execute();
+    $res=$stmt2->get_result();
+    while($row=$res->fetch_object())
+    {
+?>
+<option data-seater="<?php echo $row->seater;?>" value="<?php echo $row->room_no;?>"><?php echo $row->room_no;?></option>
+
+<?php }} ?>
+
 </select> 
 <span id="room-availability-status" style="font-size:12px;"></span>
 
@@ -257,20 +349,56 @@ while($row=$res->fetch_object())
 </div>
 
 
+<?php
+    if($genderfilter === 'male'){
+        $query = "SELECT fees FROM fees WHERE hostelName = 'alinkar'";
+    }
+    else if ($genderfilter === 'female'){
+        $query = "SELECT fees FROM fees WHERE hostelName = 'mudra'";
+    }
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $res=$stmt->get_result();
+    $meal_expenses = null;
+if ($row = $res->fetch_assoc()) {
+    $fees = $row['fees'];
+}
 
+$stmt->close();
+?>
 
 
 <div class="form-group">
 <label class="col-sm-2 control-label">Hostel Fee</label>
 <div class="col-sm-8">
-<input type="text" name="fpm" id="fpm"  class="form-control" value="25000" readonly="true">
+<input type="text" name="fpm" id="fpm"  class="form-control" value="<?php echo htmlspecialchars($fees); ?>" readonly="true">
 </div>
 </div>
+<?php
+    if($genderfilter === 'male'){
+        $query = "SELECT meal_expenses FROM fees WHERE hostelName = 'alinkar'";
+    }
+    else if ($genderfilter === 'female'){
+        $query = "SELECT meal_expenses FROM fees WHERE hostelName = 'mudra'";
+    }
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $res=$stmt->get_result();
+    $meal_expenses = null;
+if ($row = $res->fetch_assoc()) {
+    $meal_expenses = $row['meal_expenses'];
+}
+
+$stmt->close();
+?>
+
+
+
 
 <div class="form-group">
 <label class="col-sm-2 control-label">Food Fee Per Month</label>
 <div class="col-sm-8">
-<input type="text" name="" id=""  class="form-control" value="93000" readonly="true">
+<input type="text" name="" id=""  class="form-control" value="<?php echo htmlspecialchars($meal_expenses); ?>" readonly="true">
 </div>
 </div>
 
