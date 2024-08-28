@@ -10,7 +10,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navigation Menu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
+
+   
+    <!-- Font Awesome -->
+	<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+	rel="stylesheet"
+	/>
+	<!-- Google Fonts -->
+	<link
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+	rel="stylesheet"
+	/>
+	<!-- MDB -->
+	<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css"
+	rel="stylesheet"
+	/>
+
+    <!-- <style>
         .ts-sidebar {
             background: whitesmoke;
         }
@@ -51,26 +69,38 @@
         .selected {
             background:#009688; 
         }
-    </style>
+    </style> -->
 </head>
 <body>
-    <nav class="ts-sidebar">
-    <ul class="ts-sidebar-menu">
-    <?PHP if(isset($_SESSION['id']))
-				{?>
-            <li class="ts-label">Main</li>
-            <li><a <?php if(strpos($current_url, 'dashboard.php') !== false) echo 'class="selected"'; ?> href="dashboard.php" style="color: black;"><i class="fa fa-desktop"></i>Dashboard</a></li>
-            <li><a <?php if(strpos($current_url, 'book-hostel.php') !== false) echo 'class="selected"'; ?> href="book-hostel.php" style="color: black;"><i class="fa fa-file-o"></i>Book Hostel</a></li>
-            <li><a <?php if(strpos($current_url, 'room-details.php') !== false) echo 'class="selected"'; ?> href="room-details.php" style="color: black;"><i class="fa fa-file-o"></i>Room Details</a></li>
-            <li><a <?php if(strpos($current_url, 'my-profile.php') !== false) echo 'class="selected"'; ?> href="my-profile.php" style="color: black;"><i class="fa fa-user"></i> My Profile</a></li>
-            <li><a <?php if(strpos($current_url, 'change-password.php') !== false) echo 'class="selected"'; ?> href="change-password.php" style="color: black;"><i class="fa fa-files-o"></i>Change Password</a></li>
-            <?php } else { ?>
-				
-				<li><a <?php if(strpos($current_url, 'registration.php') !== false) echo 'class="selected"'; ?> href="registration.php" style="color: black;"><i class="fa fa-files-o"></i> User Registration</a></li>
-				<li><a href="index.php"style="color: black;"><i class="fa fa-users"></i> User Login</a></li>
-				<?php } ?>
-        </ul>
-    </nav>
-</body>
 
+        <nav class="ts-sidebar bg-white ">
+			<ul class="ts-sidebar-menu bg-white">
+			
+				<li class="ts-label mt-4 text-primary  bg-white">Main</li>
+				<li><a href="dashboard.php" class="text-primary  bg-white"><i class="fa fa-dashboard text-primary"></i> Dashboard</a></li>
+
+				<!-- <li><a href="#" class="text-primary"><i class="fa fa-desktop  text-primary"></i> Rooms</a>
+					<ul>
+						<li><a href="create-room.php" class="text-primary" >Add a Room</a></li>
+						<li><a href="manage-rooms.php" class="text-primary">Manage Rooms</a></li>
+                        <li><a href="update-fees.php" class="text-primary">Update fees</a></li>
+					</ul>
+				</li> -->
+
+				<!-- <li><a href="registration.php" class="text-primary"><i class="fa fa-user text-primary"></i>Student Registration</a></li> -->
+				<li><a href="book-hostel.php" class="text-primary  bg-white"><i class="fa fa-file-o text-primary"></i>Book Hostel</a></li>
+                <li><a href="room-details.php" class="text-primary  bg-white"><i class="fa fa-file-o text-primary"></i>Room Details</a></li>
+				<li><a href="my-profile.php" class="text-primary  bg-white"><i class="fa fa-user text-primary"></i>My Profile</a></li>
+                <li><a href="change-password.php" class="text-primary  bg-white"><i class="fa fa-files-o text-primary"></i>Change Password</a></li>
+            </ul>
+		</nav>
+
+        
+    
+</body>
+<!-- MDB -->
+<script
+	type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"
+	></script>
 </html>

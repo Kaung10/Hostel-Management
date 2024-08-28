@@ -51,9 +51,9 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 
 
 					<div class="col-md-12">
-						<h2 class="page-title" style="margin-top:4%">Rooms Details</h2>
+						<h2 class="page-title" style="margin-top:1%">Rooms Details</h2>
 						<div class="panel panel-default">
-							<div class="panel-heading" style="background:#009688;">All Room Details</div>
+							<div class="panel-heading text-white" style="background:#009688;">All Room Details</div>
 							<div class="panel-body">
 			<table id="zctb" class="table table-bordered " cellspacing="0" width="100%" border="1">
 									

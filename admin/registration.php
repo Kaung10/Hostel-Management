@@ -74,7 +74,7 @@ echo"<script>alert('Student Succssfully register');</script>";
 	<title>Student Hostel Registration</title>
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">>
+	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
 	<link rel="stylesheet" href="css/bootstrap-social.css">
 	<link rel="stylesheet" href="css/bootstrap-select.css">
 	<link rel="stylesheet" href="css/fileinput.min.css">
@@ -155,7 +155,7 @@ $('#fpm').val(data);
 				<div class="row">
 					<div class="col-md-12">
 					
-						<h2 class="page-title">Registration </h2>
+						<h2 class="page-title mt-3">Registration </h2>
 
 						<div class="row">
 							<div class="col-md-12">
