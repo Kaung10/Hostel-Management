@@ -130,7 +130,7 @@ while($row=$res->fetch_object())
 	  	?>
 <tr><td><?php echo $cnt;?></td>
 <td class="fs-6"><?php echo $row->name;?></td>
-<td class="fs-6"><?php echo $row->regno;?></td>
+<td class="fs-6"><?php echo $row->regNo;?></td>
 <td class="fs-6"><?php echo $row->contactno;?></td>
 <td class="fs-6"><?php echo $row->roomno;?></td>
 <td class="fs-6"><?php echo $row->seater;?></td>
