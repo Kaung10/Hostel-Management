@@ -111,8 +111,8 @@ if ($result->num_rows > 0) {
                     echo '<td><span class="info fs-6">'.$roomNumber.'</span></td>';
                     echo '<td class="text-center"><span class="actions">
                           <div class="d-grid gap-2 d-md-block">
-                            <button class="confirm-button btn btn-success fs-5 me-md-2 " onclick="updateRequest(' . $id . ', 0, \'' . $hostel . '\', ' . $roomNumber . ')"><i class="fa-solid fa-check"></i></button>
-                            <button class="cancel-button btn btn-danger fs-5 me-md-2" onclick="updateRequest(' . $id . ', 1, \'' . $hostel . '\', ' . $roomNumber . ')"><i class="fa-solid fa-xmark"></i></button>
+                            <button class="confirm-button btn btn-success fs-5 me-md-2 " onclick="updateRequest(' . $id . ', 1, \'' . $hostel . '\', ' . $roomNumber . ')"><i class="fa-solid fa-check"></i></button>
+                            <button class="cancel-button btn btn-danger fs-5 me-md-2" onclick="updateRequest(' . $id . ', 0, \'' . $hostel . '\', ' . $roomNumber . ')"><i class="fa-solid fa-xmark"></i></button>
                             <butoon class="btn btn-primary fs-5"><a href="student-details.php?id='.$id.'"><i class="fa-solid fa-desktop text-white"></i></a></butoon>                         
                             </div>
                           </span></td>';
