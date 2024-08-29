@@ -128,14 +128,14 @@ if (!empty($_POST["room"]) && !empty($_POST["gender"])) {
 //             foreach ($rooms as $room) 
 //             {
 //                 echo "<option value='{$room->seater}'>{$room->seater}</option>";
-//                 // if($room->seater == 3 )
-//                 // {
-//                 //     echo "<option value='2'>2</option>";
-//                 // }
-//                 // else
-//                 // {
-//                 //     echo "<option value='3'>3</option>";
-//                 // }
+                // if($room->seater == 3 )
+                // {
+                //     echo "<option value='2'>2</option>";
+                // }
+                // else
+                // {
+                //     echo "<option value='3'>3</option>";
+                // }
 //             }
 //         } 
 //         else 
