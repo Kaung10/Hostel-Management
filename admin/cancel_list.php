@@ -21,7 +21,6 @@ check_login();
 	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
 	<link rel="stylesheet" href="css/style.css">
 
-
 </head>
 <body>
     <?php include('includes/header.php');?> 
@@ -33,11 +32,11 @@ check_login();
 
 				<div class="row">
 					<div class="col-md-12">
-                        
-                    <h2 class="page-title" style="margin-top:1%">Hostel Request Forms</h2>
+
+                    <h2 class="page-title" style="margin-top:1%">Cancel Student Request Lists</h2>
 						<div class="panel panel-default">
 							
-							<div class="panel-heading"style="background:#009688; color:white;">All Request</div>
+							<div class="panel-heading text-white" style="background:#009688;">All Request</div>
 							<div class="panel-body">
 
 							<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
@@ -46,9 +45,10 @@ check_login();
 											<th>Student Name</th>
 				                            <th>Hostel Name </th>
 											<th>Room Number</th>
-                                            <th>Request</th>
+                                            <th></th>
 										</tr>
 									</thead>
+									
 									<tbody>
     </div>
     </div>
@@ -89,9 +89,15 @@ check_login();
     exit;
 }
 
-            // Query to fetch data where request column is 2
-$query = "SELECT * FROM roomregistration WHERE request = 2";
+?>
+
+</div>
+<!-- Need to modify -->
+<div>
+    <?php
+$query = "SELECT * FROM roomregistration WHERE request = 1";
 $result = $mysqli->query($query);
+
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -99,34 +105,20 @@ if ($result->num_rows > 0) {
         $roomNumber = htmlspecialchars($row['roomno']);
         $id = htmlspecialchars($row['id']);
 
-                    // Determine the hostel and room number
-                    $hostel = (strcasecmp($row['gender'], 'male') == 0) ? "Alinkar" : "Mudra";
-                    $roomNumber = htmlspecialchars($row['roomno']);
-                    $id = htmlspecialchars($row['id']);
-                    // show list using php function if you want to change UI, it is herew
-                    // echo '<div class="form-bar" id="item-' . $id . '">';
-                    echo '<tr id="item-' . $id . '">';
-                    echo '<td><span class="name fs-6">' . htmlspecialchars($row['name']) . '</span></td>';
-                    echo '<td><span class="info fs-6">'.$hostel.'</span></td>';
-                    echo '<td><span class="info fs-6">'.$roomNumber.'</span></td>';
-                    echo '<td class="text-center"><span class="actions">
-                          <div class="d-grid gap-2 d-md-block">
-                            <button class="confirm-button btn btn-success fs-5 me-md-2 " onclick="updateRequest(' . $id . ', 0, \'' . $hostel . '\', ' . $roomNumber . ')"><i class="fa-solid fa-check"></i></button>
-                            <button class="cancel-button btn btn-danger fs-5 me-md-2" onclick="updateRequest(' . $id . ', 1, \'' . $hostel . '\', ' . $roomNumber . ')"><i class="fa-solid fa-xmark"></i></button>
-                            <butoon class="btn btn-primary fs-5"><a href="student-details.php?id='.$id.'"><i class="fa-solid fa-desktop text-white"></i></a></butoon>                         
-                            </div>
-                          </span></td>';
-                    echo '</tr>';
-                    echo '</div>';
-                }
-            }
-            // } else {
-            //     echo 'No requests found.';
-            // }
-
+            echo '<tr id="item-' . $id . '">';
+            echo '<td><span class="name fs-6">' . htmlspecialchars($row['name']) . '</span></td>';
+            echo '<td><span class="info fs-6">'.$hostel.'</span></td>';
+            echo '<td><span class="info fs-6">'.$roomNumber.'</span></td>';
+            echo '<td class=" text-center"><span class="actions">
+                  <butoon class="btn btn-primary fs-5"><a href="student-details.php?id='.$id.'"><i class="fa-solid fa-desktop text-white"></i></a></butoon>                         
+                  </span></td>';
+            echo '</tr>';
+            echo '</div>';
+    }
+}
 ?>
-
 </div>
+<!-- end -->
 </main>
 
 <script>

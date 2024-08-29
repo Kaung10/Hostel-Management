@@ -78,7 +78,7 @@ if(isset($_GET['del']))
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12">
-						<h2 class="page-title" style="margin-top: 4%">Room Management</h2>
+						<h2 class="page-title" style="margin-top: 1%">Room Management</h2>
 						<div class="panel panel-default">
 							<div class="panel-heading" style="color:white; background:#009688;">All Room Details</div>
 
@@ -122,7 +122,7 @@ if(isset($_GET['del']))
 
             <?php	
 $aid=$_SESSION['id'];
-$ret="select * from rooms";
+$ret="select * from roomregistration";
 $stmt= $mysqli->prepare($ret) ;
 //$stmt->bind_param('i',$aid);
 $stmt->execute() ;//ok
@@ -136,7 +136,7 @@ while($row=$res->fetch_object())
 <tr><td><?php echo $cnt;;?></td>
 
 
-<td><?php echo $row->room_no;?></td> 
+<td><?php echo $row->roomno;?></td> 
 <td><?php echo $row->seater;?></td>
 <td><?php echo $row->available;?></td>
 <td><?php echo $row->fees;?></td>

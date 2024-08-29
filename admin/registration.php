@@ -279,7 +279,7 @@ function fromHostel(gender) {
 				<div class="row">
 					<div class="col-md-12">
 					
-						<h2 class="page-title">Registration </h2>
+						<h2 class="page-title mt-3">Registration </h2>
 
 						<div class="row">
 							<div class="col-md-12">

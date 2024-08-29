@@ -134,7 +134,7 @@ catch(Exception $e)
 					<div class="inputbox">
 					<ion-icon name="briefcase-outline"></ion-icon> 
 
-                        <input id="regno" type="text" placeholder="Registration No " name="regno" class="form-control " required="true" pattern="YKPT-\d{5}" title="YKPT-XXXXX">
+                        <input id="regno" type="text" placeholder="Registration No " name="regno" class="form-control " required="true" pattern="YKPT-\d{5}" title="YKPT-XXXXX" >
                         <label for="" class="text-uppercase text-sm">Registration No </label>
                     </div>
 

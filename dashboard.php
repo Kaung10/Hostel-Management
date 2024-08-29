@@ -26,7 +26,6 @@ check_login();
 	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
 	<link rel="stylesheet" href="css/style.css">
 
-
 </head>
 
 <body>
