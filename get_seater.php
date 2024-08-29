@@ -38,7 +38,7 @@ include('includes/config.php');
 if (!empty($_POST["seater"])) {
     $selectedSeater = $_POST["seater"];
 
-    $query = "SELECT * FROM rooms WHERE seater = ? AND available!=0";
+    $query = "SELECT * FROM alinkar WHERE seater = ? AND available!=0";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param('s', $selectedSeater);
     $stmt->execute();
@@ -46,11 +46,11 @@ if (!empty($_POST["seater"])) {
     $rooms = [];
 
     while ($row = $res->fetch_object()) {
-        $rooms[] = $row;
+        $alinkar[] = $row;
     }
 
-    if (count($rooms) > 0) {
-        foreach ($rooms as $room) {
+    if (count($alinkar) > 0) {
+        foreach ($alinkar as $room) {
             echo "<option value='{$room->room_no}'>{$room->room_no}</option>";
         }
     } else {
@@ -60,20 +60,19 @@ if (!empty($_POST["seater"])) {
 
 if (!empty($_POST["room"])) {
     $selectedSeater = $_POST["room"];
-
-    $query = "SELECT DISTINCT seater FROM rooms WHERE room_no = ?";
-    $stmt = $mysqli->prepare($query);
+        $query = "SELECT * FROM alinkar WHERE available != 0";
+        $stmt2 = $mysqli->prepare($query);
     $stmt->bind_param('s', $selectedSeater);
     $stmt->execute();
     $res = $stmt->get_result();
-    $rooms = [];
+    $alinkar = [];
 
     while ($row = $res->fetch_object()) {
-        $rooms[] = $row;
+        $alinkar[] = $row;
     }
 
-    if (count($rooms) > 0) {
-        foreach ($rooms as $room) {
+    if (count($alinkar) > 0) {
+        foreach ($alinkar as $room) {
             echo "<option value='{$room->seater}'>{$room->seater}</option>";
             if($room->seater == 3 ){
                 echo "<option value='2'>2</option>";
@@ -85,23 +84,6 @@ if (!empty($_POST["room"])) {
         echo "<option value=''>No rooms available for the selected seater</option>";
     }
 }
-
-
-if(!empty($_POST["rid"])) 
-{
-$id=$_POST["rid"];
- $query ="SELECT * FROM rooms WHERE room_no = ?";
-$stmt = $mysqli->prepare($query);
-$stmt->bind_param('s',$id);
-$stmt->execute();
-$res=$stmt->get_result();
-while($row=$res->fetch_object())
-{  echo htmlentities($row->fees);
- 
- }
-}
-
-
 
 
 ?>

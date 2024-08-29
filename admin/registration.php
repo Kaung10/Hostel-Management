@@ -8,10 +8,7 @@ if(isset($_POST['submit']))
 {
 $roomno=$_POST['room'];
 $seater=$_POST['seater'];
-$feespm=$_POST['fpm'];
-$foodstatus=$_POST['foodstatus'];
 $stayfrom=$_POST['stayf'];
-$duration=$_POST['duration'];
 $semester=$_POST['semester'];
 $regno=$_POST['regno'];
 $name=$_POST['name'];
@@ -28,37 +25,16 @@ $cstate=$_POST['state'];
 $paddress=$_POST['paddress'];
 $pcity=$_POST['pcity'];
 $pstate=$_POST['pstate'];
-	$result ="SELECT count(*) FROM userRegistration WHERE email=? || regNo=?";
-		$stmt = $mysqli->prepare($result);
-		$stmt->bind_param('ss',$email,$regno);
-		$stmt->execute();
-$stmt->bind_result($count);
-$stmt->fetch();
-$stmt->close();
-if($count>0)
-{
-echo"<script>alert('Registration number or email id already registered.');</script>";
-}else{
-
-
-$query="insert into roomregistration(roomno,seater,feespm,foodstatus,stayfrom,duration,semester,regno,name,gender,contactno,emailid,egycontactno,guardianName,guardianRelation,guardianContactno,corresAddress,corresCIty,corresState,pmntAddress,pmntCity,pmnatetState) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+$request=$_POST['request'];
+$query="insert into  roomregistration(roomno,seater,stayfrom,semester,regno,name,gender,contactno,emailid,egycontactno,guardianName,guardianRelation,guardianContactno,corresAddress,corresCIty,corresState,pmntAddress,pmntCity,pmnatetState,request) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 $stmt = $mysqli->prepare($query);
-$rc=$stmt->bind_param('iiiisissssisississssss',$roomno,$seater,$feespm,$foodstatus,$stayfrom,$duration,$semester,$regno,$name,$gender,$contactno,$emailid,$emcntno,$gurname,$gurrelation,$gurcntno,$caddress,$ccity,$cstate,$paddress,$pcity,$pstate);
+$rc=$stmt->bind_param('iisssssisississssssi',$roomno,$seater,$stayfrom,$semester,$regno,$name,$gender,$contactno,$emailid,$emcntno,$gurname,$gurrelation,$gurcntno,$caddress,$ccity,$cstate,$paddress,$pcity,$pstate,$request);
 $stmt->execute();
-$stmt->close();
-
-$query="UPDATE rooms SET available=available-1 WHERE room_no=?";
+$query="UPDATE alinkar SET available=available-1 WHERE room_no=?";
 $stmt = $mysqli->prepare($query);
-$rc=$stmt->bind_param('i',$roomno);
+$rc=$stmt->bind_param('s',$roomno);
 $stmt->execute();
-$stmt->close();
-
-$query1="insert into  userregistration(regNo,Name,gender,contactNo,email,password) values(?,?,?,?,?,?)";
-$stmt1= $mysqli->prepare($query1);
-$stmt1->bind_param('sssiss',$regno,$name,$gender,$contactno,$emailid,$contactno);
-$stmt1->execute();
 echo"<script>alert('Student Succssfully register');</script>";
-}
 }
 ?>
 
@@ -74,7 +50,7 @@ echo"<script>alert('Student Succssfully register');</script>";
 	<title>Student Hostel Registration</title>
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">>
+	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
 	<link rel="stylesheet" href="css/bootstrap-social.css">
 	<link rel="stylesheet" href="css/bootstrap-select.css">
 	<link rel="stylesheet" href="css/fileinput.min.css">
@@ -84,6 +60,30 @@ echo"<script>alert('Student Succssfully register');</script>";
 <script type="text/javascript" src="js/validation.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script>
+// function getSeater(val) {
+// $.ajax({
+// type: "POST",
+// url: "get_seater.php",
+// data:'roomid='+val,
+// success: function(data){
+// //alert(data);
+// $('#seater').val(data);
+// }
+// });
+
+// $.ajax({
+// type: "POST",
+// url: "get_seater.php",
+// data:'rid='+val,
+// success: function(data){
+// //alert(data);
+// $('#fpm').val(data);
+// }
+// });
+// }
+
+
+
 $(document).ready(function () {
 $('#seater').change(function () {
 var selectedSeater = $(this).val();
@@ -117,10 +117,6 @@ success: function (data) {
 $('#seater').html(data);
 }
 });
-}
-});
-
-function getSeater(val) {
 $.ajax({
 type: "POST",
 url: "get_seater.php",
@@ -131,18 +127,20 @@ $('#fpm').val(data);
 }
 });
 }
-</script>
-<style> 
-	.btn-primary { 
-		background: #009688; 
-		transition: ease-in-out 0.5s; 
-	}
+});
 
-	.btn-primary:hover {  
-		background: #004d42 !important; /* Darker shade for hover effect */
-		cursor: pointer; 
-	}
-</style>
+// function getSeater(val) {
+// $.ajax({
+// type: "POST",
+// url: "get_seater.php",
+// data:'rid='+val,
+// success: function(data){
+// //alert(data);
+// $('#fpm').val(data);
+// }
+// });
+// }
+</script>
 
 </head>
 <body>
@@ -160,21 +158,55 @@ $('#fpm').val(data);
 						<div class="row">
 							<div class="col-md-12">
 								<div class="panel panel-primary">
-									<div class="panel-heading" style="background:#009688; color:white;">Fill all Info</div>
+									<div class="panel-heading">Fill all Info</div>
 									<div class="panel-body">
 										<form method="post" action="" class="form-horizontal">
-											
-										
+							<?php
+$uid=$_SESSION['login'];
+							 $stmt=$mysqli->prepare("SELECT emailid FROM roomregistration WHERE emailid=? || regno=? ");
+				$stmt->bind_param('ss',$uid,$uid);
+				$stmt->execute();
+				$stmt -> bind_result($email);
+				$rs=$stmt->fetch();
+				$stmt->close();
+				if($rs)
+				{ ?>
+			<h3 style="color: red" align="center">Hostel already booked by you</h3>
+			<div align="center">
+				<div class="col-md-4">&nbsp;</div>
+			<div class="col-md-4">
+										<div class="panel panel-default">
+											<div class="panel-body bk-success text-light">
+												<div class="stat-panel text-center">
+
+												<div class="stat-panel-number h1 ">My Room</div>
+													
+												</div>
+											</div>
+											<a href="room-details.php" class="block-anchor panel-footer text-center">See All &nbsp; <i class="fa fa-arrow-right"></i></a>
+										</div>
+									</div>
+								</div>
+				<?php }
+				else{
+								
+							?>			
 <div class="form-group">
-<label class="col-sm-4 control-label"><h4 style="color:white" align="left">Room Related info </h4> </label>
+<label class="col-sm-4 control-label"><h4 style="color: green" align="left">Room Related info </h4> </label>
+
+
 </div>
 
+
+
+
+											
 <div class="form-group">
 <label class="col-sm-2 control-label">Seater</label>
 <div class="col-sm-8">
 <select name="seater" id="seater"class="form-control" required> 
 <option value="">Select Seater</option>
-<?php $query ="SELECT DISTINCT seater FROM rooms";
+<?php $query ="SELECT DISTINCT seater FROM alinkar";
 $stmt2 = $mysqli->prepare($query);
 $stmt2->execute();
 $res=$stmt2->get_result();
@@ -184,18 +216,17 @@ while($row=$res->fetch_object())
 <option value="<?php echo $row->seater;?>"> <?php echo $row->seater;?></option>
 <?php } ?>
 </select> 
-<!-- <span id="room-availability-status" style="font-size:12px;"></span> -->
+<span id="room-availability-status" style="font-size:12px;"></span>
 
 </div>
 </div>
-
 
 <div class="form-group">
 <label class="col-sm-2 control-label">Room no. </label>
 <div class="col-sm-8">
-<select name="room" id="room"class="form-control" onChange="getSeater(this.value);" onBlur="checkAvailability()" required> 
+<select name="room" id="room"class="form-control" onBlur="checkAvailability()" required> 
 <option value="">Select Room</option>
-<?php $query ="SELECT * FROM rooms WHERE available!=0 " ;
+<?php $query ="SELECT * FROM alinkar WHERE available!=0 " ;
 $stmt2 = $mysqli->prepare($query);
 $stmt2->execute();
 $res=$stmt2->get_result();
@@ -212,29 +243,6 @@ while($row=$res->fetch_object())
 
 
 
-
-<div class="form-group">
-<label class="col-sm-2 control-label">Fees Per Month</label>
-<div class="col-sm-8">
-<input type="text" name="fpm" id="fpm"  class="form-control" value ="25000" readonly="true">
-</div>
-</div>
-
-<div class="form-group">
-<label class="col-sm-2 control-label">Food Per Month</label>
-<div class="col-sm-8">
-<input type="text" name="" id=""  class="form-control" value="93000" readonly="true">
-</div>
-</div>
-
-<!-- <div class="form-group">
-<label class="col-sm-2 control-label">Food Status</label>
-<div class="col-sm-8">
-<input type="radio" value="0" name="foodstatus"> Without Food
-<input type="radio" value="1" name="foodstatus" checked="checked"> With Food(90000 MMK Per Month Extra)
-</div>
-</div>	 -->
-
 <div class="form-group">
 <label class="col-sm-2 control-label">Stay From</label>
 <div class="col-sm-8">
@@ -242,18 +250,9 @@ while($row=$res->fetch_object())
 </div>
 </div>
 
-<div class="form-group">
-<label class="col-sm-2 control-label">Duration</label>
-<div class="col-sm-8">
-<!-- <select name="duration" id="duration" class="form-control"> -->
-<input type="text" name="duration" id="duration"  class="form-control" value="5" readonly >
-<!-- </select> -->
-</div>
-</div>
-
 
 <div class="form-group">
-<label class="col-sm-2 control-label"><h4 style="color: white" align="left">Personal info </h4> </label>
+<label class="col-sm-2 control-label"><h4 style="color: green" align="left">Personal info </h4> </label>
 </div>
 
 <div class="form-group">
@@ -274,19 +273,30 @@ while($row=$res->fetch_object())
 </select> </div>
 </div>
 
+<?php	
+$aid=$_SESSION['id'];
+	$ret="select * from userregistration where id=?";
+		$stmt= $mysqli->prepare($ret) ;
+	 $stmt->bind_param('i',$aid);
+	 $stmt->execute() ;//ok
+	 $res=$stmt->get_result();
+	 //$cnt=1;
+	   while($row=$res->fetch_object())
+	  {
+	  	?>
+
 <div class="form-group">
 <label class="col-sm-2 control-label">Registration No : </label>
 <div class="col-sm-8">
-<input type="text" name="regno" id="regno"  class="form-control" required="required" value="YKPT-"> <!--onBlur="checkRegnoAvailability()-->
-<span id="user-reg-availability" style="font-size:12px;"></span>
+<input type="text" name="regno" id="regno"  class="form-control" value="<?php echo $row->regNo;?>" readonly >
 </div>
 </div>
 
 
 <div class="form-group">
-<label class="col-sm-2 control-label"> Name : </label>
+<label class="col-sm-2 control-label">Name : </label>
 <div class="col-sm-8">
-<input type="text" name="name" id="name"  class="form-control" required="required" >
+<input type="text" name="name" id="name"  class="form-control" value="<?php echo $row->name;?>" >
 </div>
 </div>
 
@@ -294,18 +304,14 @@ while($row=$res->fetch_object())
 <div class="form-group">
 <label class="col-sm-2 control-label">Gender : </label>
 <div class="col-sm-8">
-<select name="gender" class="form-control" required="required">
-<option value="">Select Gender</option>
-<option value="Male">Male</option>
-<option value="Female">Female</option>
-</select>
+<input type="text" name="gender" value="<?php echo $row->gender;?>" class="form-control" readonly>
 </div>
 </div>
 
 <div class="form-group">
 <label class="col-sm-2 control-label">Contact No : </label>
 <div class="col-sm-8">
-<input type="text" name="contact" id="contact"  class="form-control" required="required" >
+<input type="text" name="contact" id="contact" value="<?php echo $row->contactNo;?>"  class="form-control" readonly>
 </div>
 </div>
 
@@ -313,11 +319,10 @@ while($row=$res->fetch_object())
 <div class="form-group">
 <label class="col-sm-2 control-label">Email id : </label>
 <div class="col-sm-8">
-<input type="email" name="email" id="email"  class="form-control" onBlur="checkEmailAvailability()" required="required">
-<span id="user-availability-status" style="font-size:12px;"></span>
+<input type="email" name="email" id="email"  class="form-control" value="<?php echo $row->email;?>"  readonly>
 </div>
 </div>
-
+<?php } ?>
 <div class="form-group">
 <label class="col-sm-2 control-label">Emergency Contact: </label>
 <div class="col-sm-8">
@@ -347,7 +352,7 @@ while($row=$res->fetch_object())
 </div>	
 
 <div class="form-group">
-<label class="col-sm-3 control-label"><h4 style="color: white" align="left">Correspondense Address </h4> </label>
+<label class="col-sm-3 control-label"><h4 style="color: green" align="left">Correspondense Address </h4> </label>
 </div>
 
 
@@ -383,9 +388,8 @@ while($row=$res->fetch_object())
 </div>							
 
 
-
 <div class="form-group">
-<label class="col-sm-3 control-label"><h4 style="color:white" align="left">Permanent Address </h4> </label>
+<label class="col-sm-3 control-label"><h4 style="color: green" align="left">Permanent Address </h4> </label>
 </div>
 
 
@@ -429,11 +433,14 @@ while($row=$res->fetch_object())
 </div>							
 
 
+
+
 <div class="col-sm-6 col-sm-offset-4">
 <button class="btn btn-default" type="submit">Cancel</button>
 <input type="submit" name="submit" Value="Register" class="btn btn-primary">
 </div>
 </form>
+<?php } ?>
 
 									</div>
 									</div>
@@ -457,7 +464,27 @@ while($row=$res->fetch_object())
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
 </body>
-<script type="text/javascript">
+
+<script>
+    // JavaScript to filter room options based on selected seater
+    // document.getElementById('seater').addEventListener('change', function () {
+    //     var selectedSeater = this.value;
+    //     var roomOptions = document.getElementById('room').options;
+
+    //     for (var i = 0; i < roomOptions.length; i++) {
+    //         var option = roomOptions[i];
+    //         var optionSeater = option.getAttribute('data-seater');
+
+    //         if (selectedSeater === '0' || selectedSeater === optionSeater) {
+    //             option.style.display = '';
+    //         } else {
+    //             option.style.display = 'none';
+    //         }
+    //     }
+    // });
+
+
+ type="text/javascript">
 	$(document).ready(function(){
         $('input[type="checkbox"]').click(function(){
             if($(this).prop("checked") == true){
@@ -481,51 +508,19 @@ success:function(data){
 $("#room-availability-status").html(data);
 $("#loaderIcon").hide();
 },
-error:function (){
-}
+error:function (){}
 });
 }
 </script>
 
-	<script>
-function checkEmailAvailability() {
 
-$("#loaderIcon").show();
-jQuery.ajax({
-url: "check_availability.php",
-data:'emailid='+$("#email").val(),
-type: "POST",
-success:function(data){
-$("#user-availability-status").html(data);
-$("#loaderIcon").hide();
-},
-error:function ()
-{
-event.preventDefault();
-alert('error');
-}
-});
-}
-</script>
-	<script>
-function checkRegnoAvailability() {
+<script type="text/javascript">
 
-$("#loaderIcon").show();
-jQuery.ajax({
-url: "check_availability.php",
-data:'regno='+$("#regno").val(),
-type: "POST",
-success:function(data){
-$("#user-reg-availability").html(data);
-$("#loaderIcon").hide();
-},
-error:function ()
-{
-event.preventDefault();
-alert('error');
-}
-});
-}
+
+
+
 </script>
+
+
 
 </html>

@@ -8,10 +8,7 @@ if(isset($_POST['submit']))
 {
 $roomno=$_POST['room'];
 $seater=$_POST['seater'];
-$feespm=$_POST['fpm'];
-$foodstatus=$_POST['foodstatus'];
 $stayfrom=$_POST['stayf'];
-$duration=$_POST['duration'];
 $semester=$_POST['semester'];
 $regno=$_POST['regno'];
 $name=$_POST['name'];
@@ -28,16 +25,24 @@ $cstate=$_POST['state'];
 $paddress=$_POST['paddress'];
 $pcity=$_POST['pcity'];
 $pstate=$_POST['pstate'];
-$query="insert into  roomregistration(roomno,seater,feespm,foodstatus,stayfrom,duration,semester,regno,name,gender,contactno,emailid,egycontactno,guardianName,guardianRelation,guardianContactno,corresAddress,corresCIty,corresState,pmntAddress,pmntCity,pmnatetState) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+$request=$_POST['request'];
+$query="insert into  roomregistration(roomno,seater,stayfrom,semester,regno,name,gender,contactno,emailid,egycontactno,guardianName,guardianRelation,guardianContactno,corresAddress,corresCIty,corresState,pmntAddress,pmntCity,pmnatetState,request) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 $stmt = $mysqli->prepare($query);
-$rc=$stmt->bind_param('iiiisissssisississssss',$roomno,$seater,$feespm,$foodstatus,$stayfrom,$duration,$semester,$regno,$name,$gender,$contactno,$emailid,$emcntno,$gurname,$gurrelation,$gurcntno,$caddress,$ccity,$cstate,$paddress,$pcity,$pstate,);
+$rc=$stmt->bind_param('iisssssisississssssi',$roomno,$seater,$stayfrom,$semester,$regno,$name,$gender,$contactno,$emailid,$emcntno,$gurname,$gurrelation,$gurcntno,$caddress,$ccity,$cstate,$paddress,$pcity,$pstate,$request);
 $stmt->execute();
-$query="UPDATE Rooms SET available=available-1 WHERE room_no=?";
-$stmt = $mysqli->prepare($query);
-$rc=$stmt->bind_param('s',$roomno);
+if ($gender == 'male') {
+    $query = "update alinkar SET available=available-1 WHERE room_no=?";
+    $stmt1 = $mysqli->prepare($query);
+}
+elseif ($gender == 'female') {
+    $query = "update mudra SET available=available-1 WHERE room_no=?";
+    $stmt1 = $mysqli->prepare($query);
+}
+$rc=$stmt1->bind_param('s',$roomno);
 $stmt->execute();
 echo"<script>alert('Student Succssfully register');</script>";
 }
+
 ?>
 
 <!doctype html>
@@ -125,7 +130,6 @@ url: "get_seater.php",
 data:'rid='+val,
 success: function(data){
 //alert(data);
-$('#fpm').val(data);
 }
 });
 }
@@ -203,12 +207,12 @@ $uid=$_SESSION['login'];
 									</div>
 								</div>
 				<?php }
-				else{
+				else
 								
 							?>			
 <div class="form-group">
 <label class="col-sm-4 control-label"><h4 style="color:white" align="left">Room Related info </h4> </label>
-
+				
 
 </div>
 
@@ -221,7 +225,7 @@ $uid=$_SESSION['login'];
 <div class="col-sm-8">
 <select name="seater" id="seater"class="form-control" required> 
 <option value="">Select Seater</option>
-<?php $query ="SELECT DISTINCT seater FROM rooms";
+<?php $query ="SELECT DISTINCT seater FROM alinkar";
 $stmt2 = $mysqli->prepare($query);
 $stmt2->execute();
 $res=$stmt2->get_result();
@@ -231,7 +235,7 @@ while($row=$res->fetch_object())
 <option value="<?php echo $row->seater;?>"> <?php echo $row->seater;?></option>
 <?php } ?>
 </select> 
-
+<span id="room-availability-status" style="font-size:12px;"></span>
 
 </div>
 </div>
@@ -241,8 +245,15 @@ while($row=$res->fetch_object())
 <div class="col-sm-8">
 <select name="room" id="room"class="form-control" onBlur="checkAvailability()" required> 
 <option value="">Select Room</option>
-<?php $query ="SELECT * FROM rooms WHERE available!=0 " ;
-$stmt2 = $mysqli->prepare($query);
+<?php 
+if ($gender == 'male') {
+    $query = "SELECT * FROM alinkar WHERE available != 0";
+    $stmt2 = $mysqli->prepare($query);
+}
+elseif ($gender == 'female') {
+    $query = "SELECT * FROM mudra WHERE available != 0";
+    $stmt2 = $mysqli->prepare($query);
+}
 $stmt2->execute();
 $res=$stmt2->get_result();
 while($row=$res->fetch_object())
@@ -256,51 +267,11 @@ while($row=$res->fetch_object())
 </div>
 </div>
 
-
-
-
-
-<div class="form-group">
-<label class="col-sm-2 control-label">Hostel Fee</label>
-<div class="col-sm-8">
-<input type="text" name="fpm" id="fpm"  class="form-control" value="25000" readonly="true">
-</div>
-</div>
-
-<div class="form-group">
-<label class="col-sm-2 control-label">Food Fee Per Month</label>
-<div class="col-sm-8">
-<input type="text" name="" id=""  class="form-control" value="93000" readonly="true">
-</div>
-</div>
-
-<!-- <div class="form-group">
-<label class="col-sm-2 control-label">Food Status</label>
-<div class="col-sm-8">
-<input type="radio" value="0" name="foodstatus"> Without Food
-<input type="radio" value="1" name="foodstatus" checked="checked"> With Food(90,000 mmk Per Month Extra)
-</div>
-</div>	 -->
-
 <div class="form-group">
 <label class="col-sm-2 control-label">Stay From</label>
 <div class="col-sm-8">
 <input type="date" name="stayf" id="stayf"  class="form-control" >
 </div>
-</div>
-
-<div class="form-group">
-<label class="col-sm-2 control-label">Duration</label>
-<div class="col-sm-8">
-<!-- <select name="duration" id="duration" class="form-control"> -->
-<input type="text" name="duration" id="duration"  class="form-control" value="5" readonly >
-</div>
-</div>
-
-
-
-<div class="form-group">
-<label class="col-sm-2 control-label"><h4 style="color: white" align="left">Personal info </h4> </label>
 </div>
 
 <div class="form-group">
@@ -488,7 +459,7 @@ while($row=$res->fetch_object())
 <input type="submit" name="submit" Value="Register" class="btn btn-primary" style="align:center; background:#009688;">
 </div>
 </form>
-<?php } ?>
+
 
 									</div>
 									</div>
@@ -559,28 +530,6 @@ error:function (){}
 });
 }
 </script>
-
-
-<script type="text/javascript">
-
-$(document).ready(function() {
-	$('#duration').keyup(function(){
-		var fetch_dbid = $(this).val();
-		$.ajax({
-		type:'POST',
-		url :"ins-amt.php?action=userid",
-		data :{userinfo:fetch_dbid},
-		success:function(data){
-	    $('.result').val(data);
-		}
-		});
-		
-
-})});
-
-
-</script>
-
 
 
 </html>

@@ -63,7 +63,8 @@
 					<ul>
  
 						<li><a href="create-room.php" class="text-primary" >Add a Room</a></li>
-						<li><a href="manage-rooms.php" class="text-primary">Manage Rooms</a></li>
+						<li><a href="manage-alinkarrooms.php" class="text-primary">Manage Alinkar Rooms</a></li>
+                        <li><a href="manage-mudrarooms.php" class="text-primary">Manage Mudra Rooms</a></li>
                         <li><a href="update-fees.php" class="text-primary">Update fees</a></li>
 					</ul>
 				</li>

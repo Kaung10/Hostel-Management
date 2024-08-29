@@ -12,7 +12,7 @@ if(isset($_GET['del']))
 		  $stmt->execute();
 		  $stmt->close();  
   
-	$adn="update rooms set available=available+1 where room_no in (select roomno from roomregistration where id=?)";
+	$adn="update alinkar set available=available+1 where room_no in (select roomno from roomregistration where id=?)";
 	  $stmt= $mysqli->prepare($adn);
 	  $stmt->bind_param('i',$id);
 		  $stmt->execute();
@@ -32,7 +32,7 @@ if(isset($_GET['del']))
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
-	<title>Manage Rooms</title>
+	<title>Manage Alinkar Rooms</title>
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
@@ -105,7 +105,7 @@ for ($i = 1; $i <= 10; $i++) {
 								<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 									<thead>
 										<tr>
-											<th>Sno.</th>
+											<th>No</th>
 											<th>Student Name</th>
 											<th>Reg no</th>
 											<th>Contact no </th>
@@ -130,7 +130,7 @@ while($row=$res->fetch_object())
 	  	?>
 <tr><td><?php echo $cnt;;?></td>
 <td><?php echo $row->name;?></td>
-<td><?php echo $row->regno;?></td>
+<td><?php echo $row->regNo;?></td>
 <td><?php echo $row->contactno;?></td>
 <td><?php echo $row->roomno;?></td>
 <td><?php echo $row->seater;?></td>
