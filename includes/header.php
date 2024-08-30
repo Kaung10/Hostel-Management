@@ -59,7 +59,7 @@
     <!-- Right elements -->
       <!-- Avatar -->
       <div class="dropdown px-0">
-        <a
+      <a
           data-mdb-dropdown-init
           class="dropdown-toggle d-flex align-items-center px-0 hidden-arrow"
           href="#"
@@ -67,11 +67,12 @@
           role="button"
           aria-expanded="false"
         >
+  
           <img
             src="../img/ts-avatar.jpg"
             class="border border-3 border-white rounded-circle"
-            width="45%" 
-			      height="45%"
+            width="50%" 
+			      height="50%"
             alt="Black and White Portrait of a Man"
           />
         </a>

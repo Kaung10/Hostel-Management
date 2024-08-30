@@ -5,7 +5,7 @@ include('includes/checklogin.php');
 check_login();
 
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
 
 <head>
@@ -29,6 +29,7 @@ check_login();
 </head>
 
 <body>
+
 <?php include("includes/header.php");?>
 
 	<div class="ts-main-content">
@@ -97,7 +98,7 @@ check_login();
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
 	
-	<script>
+	<!-- <script>
 		
 	window.onload = function(){
     
@@ -119,7 +120,7 @@ check_login();
 		window.myDoughnut = new Chart(doctx).Doughnut(doughnutData, {responsive : true});
 
 	}
-	</script>
+	</script> -->
 
 </body>
 

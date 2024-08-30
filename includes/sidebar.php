@@ -70,6 +70,13 @@
             background:#009688; 
         }
     </style> -->
+
+    <style>
+        .active{
+        background: #ffffff;
+        border-left: 3px solid blue;
+        }
+    </style>
 </head>
 <body>
 
@@ -77,27 +84,41 @@
 			<ul class="ts-sidebar-menu bg-white">
 			
 				<li class="ts-label mt-4 text-primary  bg-white">Main</li>
-				<li><a href="dashboard.php" class="text-primary  bg-white"><i class="fa fa-dashboard text-primary"></i> Dashboard</a></li>
-
-				<!-- <li><a href="#" class="text-primary"><i class="fa fa-desktop  text-primary"></i> Rooms</a>
-					<ul>
-						<li><a href="create-room.php" class="text-primary" >Add a Room</a></li>
-						<li><a href="manage-rooms.php" class="text-primary">Manage Rooms</a></li>
-                        <li><a href="update-fees.php" class="text-primary">Update fees</a></li>
-					</ul>
-				</li> -->
-
-				<!-- <li><a href="registration.php" class="text-primary"><i class="fa fa-user text-primary"></i>Student Registration</a></li> -->
-				<li><a href="book-hostel.php" class="text-primary  bg-white"><i class="fa fa-file-o text-primary"></i>Book Hostel</a></li>
-                <li><a href="room-details.php" class="text-primary  bg-white"><i class="fa fa-file-o text-primary"></i>Room Details</a></li>
-				<li><a href="my-profile.php" class="text-primary  bg-white"><i class="fa fa-user text-primary"></i>My Profile</a></li>
-                <li><a href="change-password.php" class="text-primary  bg-white"><i class="fa fa-files-o text-primary"></i>Change Password</a></li>
+				<li><a href="dashboard.php" class="text-primary nav_link  bg-white"><i class="fa fa-dashboard text-primary"></i> Dashboard</a></li>
+				<li><a href="book-hostel.php" class="text-primary nav_link  bg-white"><i class="fa fa-file-o text-primary"></i>Book Hostel</a></li>
+                <li><a href="room-details.php" class="text-primary nav_link  bg-white"><i class="fa fa-file-o text-primary"></i>Room Details</a></li>
+				<li><a href="my-profile.php" class="text-primary nav_link  bg-white"><i class="fa fa-user text-primary"></i>My Profile</a></li>
+                <li><a href="change-password.php" class="text-primary nav_link  bg-white"><i class="fa fa-files-o text-primary"></i>Change Password</a></li>
             </ul>
 		</nav>
 
         
     
 </body>
+
+<script>
+            document.addEventListener('DOMContentLoaded', function () {
+            // Get the current URL path and extract the last file name
+            const path = window.location.pathname;
+            const fileName = path.substring(path.lastIndexOf('/') + 1);
+
+            // Select all sidebar menu items (assuming they have a common class, e.g., 'sidebar-item')
+            const sidebarItems = document.querySelectorAll('.nav_link');
+
+            sidebarItems.forEach(function (item) {
+                // Get the href attribute of the anchor tag
+                const itemHref = item.getAttribute('href');
+
+                // Check if the href ends with the file name
+                if (itemHref && itemHref.endsWith(fileName)) {
+                    // Add the active class to the matching item
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        </script>
+
 <!-- MDB -->
 <script
 	type="text/javascript"
