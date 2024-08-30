@@ -44,10 +44,8 @@ check_login();
 											<th>Sno.</th>
 											<th>User Id</th>
 											<th>User Email / Reg No.</th>
-											<th>IP</th>
-											<th>City</th>
-											<th>Country</th>
 											<th>Login Time</th>
+											
 										</tr>
 									</thead>
 
@@ -63,12 +61,10 @@ $cnt=1;
 while($row=$res->fetch_object())
 	  {
 	  	?>
-<tr><td class="fs-6"><?php echo $cnt;;?></td>
+<tr><td class="fs-6"><?php echo $cnt;?></td>
 <td class="fs-6"><?php echo $row->userId;?></td>
 <td class="fs-6"><?php echo $row->userEmail;?></td>
-<td class="fs-6"><?php echo $row->userIp;?></td>
-<td class="fs-6"><?php echo $row->city;?></td>
-<td class="fs-6"><?php echo $row->country;?></td>
+ 
 <td class="fs-6"><?php echo $row->loginTime;?></td>
 										</tr>
 									<?php

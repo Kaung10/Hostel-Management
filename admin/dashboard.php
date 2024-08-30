@@ -53,8 +53,23 @@ check_login();
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
 									<div class="text-lg font-weight-bold text-primary text-uppercase mb-1">
-										Title Name</div>
+										Male</div>
 									<div class="h5 mb-0 font-weight-bold text-gray-800">Number Of Student</div>
+									<div class="text-lg font weight-bold text-gray-800">
+									
+									<?php
+$result ="SELECT count(*) FROM roomregistration WHERE Gender='Male' ";
+$stmt = $mysqli->prepare($result);
+$stmt->execute();
+$stmt->bind_result($count);
+$stmt->fetch();
+$stmt->close();
+?>
+
+													<div class="text-lg font weight-bold text-gray-800 "><?php echo $count;?></div>
+
+									</div>
+									
 
 									<div class="mt-2"><a href="manage-students.php" class="">Full Detail <i class="fa fa-arrow-right"></i></a></div>
 								</div>
@@ -73,8 +88,22 @@ check_login();
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
 									<div class="text-lg font-weight-bold text-success text-uppercase mb-1">
-										Title</div>
+										Female</div>
 									<div class="h5 mb-0 font-weight-bold text-gray-800">Number Of Student</div>
+									<div class="text-lg font weight-bold text-gray-800">
+									
+									<?php
+$result ="SELECT count(*) FROM roomregistration WHERE Gender='Female' ";
+$stmt = $mysqli->prepare($result);
+$stmt->execute();
+$stmt->bind_result($count);
+$stmt->fetch();
+$stmt->close();
+?>
+
+													<div class="text-lg font weight-bold text-gray-800 "><?php echo $count;?></div>
+
+									</div>
 
 									<div class="mt-2"><a href="manage-students.php" class="">Full Detail <i class="fa fa-arrow-right"></i></a></div>
 								</div>
@@ -96,7 +125,22 @@ check_login();
 									</div>
 									<div class="row no-gutters align-items-center">
 										<div class="col-auto">
-											<div class="h5 mb-0 font-weight-bold text-gray-800">Number Of Student</div>
+										<div class="h5 mb-0 font-weight-bold text-gray-800">Number Of Room</div>
+									<div class="text-lg font weight-bold text-gray-800">
+									
+									<?php
+$result ="SELECT count(*) FROM alinkar ";
+$stmt = $mysqli->prepare($result);
+$stmt->execute();
+$stmt->bind_result($count);
+$stmt->fetch();
+$stmt->close();
+?>
+
+													<div class="text-lg font weight-bold text-gray-800 "><?php echo $count;?></div>
+
+									</div>
+											
 
 											<div class="mt-2"><a href="manage-students.php" class="">Full Detail <i class="fa fa-arrow-right"></i></a></div>
 										</div>
@@ -125,7 +169,21 @@ check_login();
 								<div class="col mr-2">
 									<div class="text-lg font-weight-bold text-warning text-uppercase mb-1">
 										Mudra</div>
-									<div class="h5 mb-0 font-weight-bold text-gray-800">Number Of Students</div>
+										<div class="h5 mb-0 font-weight-bold text-gray-800">Number Of Room</div>
+									<div class="text-lg font weight-bold text-gray-800">
+									
+									<?php
+$result ="SELECT count(*) FROM mudra ";
+$stmt = $mysqli->prepare($result);
+$stmt->execute();
+$stmt->bind_result($count);
+$stmt->fetch();
+$stmt->close();
+?>
+
+													<div class="text-lg font weight-bold text-gray-800 "><?php echo $count;?></div>
+
+									</div>
 
 									<div class="mt-2"><a href="manage-students.php" class="">Full Detail <i class="fa fa-arrow-right"></i></a></div>
 								</div>

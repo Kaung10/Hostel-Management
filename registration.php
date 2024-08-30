@@ -5,28 +5,62 @@ if(isset($_POST['submit']))
 {
 $regno=$_POST['regno'];
 $name=$_POST['name'];
-
 $gender=$_POST['gender'];
 $contactno=$_POST['contact'];
 $emailid=$_POST['email'];
 $password=$_POST['password'];
-	$result ="SELECT count(*) FROM userRegistration WHERE email=? || regNo=?";
-		$stmt = $mysqli->prepare($result);
-		$stmt->bind_param('ss',$email,$regno);
-		$stmt->execute();
-$stmt->bind_result($count);
-$stmt->fetch();
-$stmt->close();
 
-if(!preg_match("/^YKPT-\d{5}$/", $regno)) {
+
+    // Check if email or regNo already exists
+    $query = "SELECT COUNT(*) FROM userregistration WHERE email = ? OR regNo = ?";
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param('ss', $emailid, $regno);
+    $stmt->execute();
+    $stmt->bind_result($count);
+    $stmt->fetch();
+    $stmt->close();
+
+    if ($count > 0) {
+        echo "<script>alert('Registration number or email id already registered.');</script>";
+        echo"<script>window.location.href = 'registration.php';</script>";
+    }
+
+    // Check if email is registered with a different regNo
+    $stmt = $mysqli->prepare("SELECT COUNT(*) FROM userregistration WHERE email = ? AND regNo != ?");
+    $stmt->bind_param('ss', $emailid, $regno);
+    $stmt->execute();
+    $stmt->bind_result($emailCount);
+    $stmt->fetch();
+    $stmt->close();
+
+    if ($emailCount > 0) {
+        echo "<script>alert('Email is already registered with a different registration number. Cannot submit the form.');</script>";
+        exit;
+    }
+
+    // Check if regNo is registered with a different email
+    $stmt = $mysqli->prepare("SELECT COUNT(*) FROM userregistration WHERE regNo = ? AND email != ?");
+    $stmt->bind_param('ss', $regno, $emailid);
+    $stmt->execute();
+    $stmt->bind_result($regNoCount);
+    $stmt->fetch();
+    $stmt->close();
+
+    if ($regNoCount > 0) {
+        echo "<script>alert('Registration number is already associated with a different email. Cannot submit the form.');</script>";
+        exit;
+    }
+
+    // Insert new user if all checks pass
+    if(!preg_match("/^YKPT-\d{5}$/", $regno)) {
     echo "<script>alert('Registration No format is invalid! Please follow the format YKPT-XXXXX.');</script>";
-} elseif($count > 0) {
+} else if($count > 0) {
     echo "<script>alert('Registration number or email id already registered.');</script>";
 }else{
 
 try
 {
-	$query="insert into  userRegistration(regNo,name,gender,contactNo,email,password) values(?,?,?,?,?,?)";
+    $query="insert into  userRegistration(regNo,name,gender,contactNo,email,password) values(?,?,?,?,?,?)";
 $stmt = $mysqli->prepare($query);
 $rc=$stmt->bind_param('sssiss',$regno,$name,$gender,$contactno,$emailid,$password);
 $stmt->execute();
@@ -36,11 +70,14 @@ echo"<script>window.location.href = 'index.php';</script>";
 }
 catch(Exception $e)
 {
-	echo "<script>alert('Error! Duplicate Email detected.')</script>";
+    echo "<script>alert('Error! Duplicate Email detected.')</script>";
 }
+
 }
+
 }
-?>
+
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -97,7 +134,7 @@ catch(Exception $e)
 					<div class="inputbox">
 					<ion-icon name="briefcase-outline"></ion-icon> 
 
-                        <input id="regno" type="text" placeholder="Registration No " name="regno" class="form-control " required="true" pattern="YKPT-\d{5}" title="YKPT-XXXXX">
+                        <input id="regno" type="text" placeholder="Registration No " name="regno" class="form-control " required="true" pattern="YKPT-\d{5}" title="YKPT-XXXXX" >
                         <label for="" class="text-uppercase text-sm">Registration No </label>
                     </div>
 
