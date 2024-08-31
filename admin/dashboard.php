@@ -3,6 +3,7 @@ session_start();
 include('includes/config.php');
 include('includes/checklogin.php');
 check_login();
+
 ?>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -332,10 +333,8 @@ $stmt1->close();
 
 	}
 	</script>
-	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-	<script src="../admin/js/chart.js/Chart.js"></script>
-	<script src="../admin/js/chart.js/graph.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	
+	<?php include("../admin/js/chart.js/loading.php"); ?>
 
 </body>
 

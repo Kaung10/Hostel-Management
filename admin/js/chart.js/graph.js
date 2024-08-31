@@ -7,15 +7,15 @@ document.addEventListener('DOMContentLoaded', function () {
             new Chart(chart, {
                 type: "bar",
                 data: {
-                    labels: ["Semester", "Semester", "Semester", "Semester", "Semester", "Semester"],
+                    labels: ["Semester 1", "Semester 2", "Semester 3", "Semester 4", "Semester 5", "Semester 6","Semester 7","Semester 8","Semester 9","Semester 10"],
                     datasets: [
                         {
-                            label: "Semester",
+                            label: "Semester 1",
                             tension: 0.4,
                             borderWidth: 0,
                             pointRadius: 0,
                             backgroundColor: "#52be80",
-                            data: [25, 20, 30, 22, 50, 100],
+                            data: semesterData,
                             maxBarThickness: 20,
                         },
                     ],
