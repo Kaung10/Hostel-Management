@@ -40,7 +40,7 @@
 <body>
 	
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg rounded-0 bg-primary sticky-top">
+<nav class="navbar navbar-expand-lg rounded-0 bg-primary sticky-top shadow-sm">
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Toggle button -->
@@ -71,7 +71,7 @@
             src="../img/ts-avatar.jpg"
             class="border border-3 border-white rounded-circle"
             width="45%" 
-			height="45%"
+			      height="45%"
             alt="Black and White Portrait of a Man"
           />
         </a>

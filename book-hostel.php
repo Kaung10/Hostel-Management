@@ -273,6 +273,29 @@ $uid=$_SESSION['login'];
 
 </div>
 
+<?php
+ $hostelName = "";
+    if($genderfilter === 'male'){
+        $hostelName = "alinkar";
+    }
+    else if ($genderfilter === 'female'){
+        $hostelName = "mudra"; 
+           }
+
+    echo $hostelName;
+    
+
+?>
+
+
+
+<div class="form-group">
+<label class="col-sm-2 control-label">Hostel Name : </label>
+<div class="col-sm-8">
+<input type="text" name="hostelname" id="hostelname"  class="form-control" value="<?php echo $hostelName; ?>" readonly >
+</div>
+</div>
+
 
 
 

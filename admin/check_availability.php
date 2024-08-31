@@ -57,13 +57,14 @@ else echo "<span style='color:red'> Password Not matched</span>";
 }
 
 // For room availbilty
-if(!empty($_POST["roomno"])) 
+if(!empty($_POST["roomno"] && !empty($_POST["gender"]))) 
 {
+$gender=$_POST['gender'];
 $roomno=$_POST["roomno"];
-$result ="SELECT count(*) FROM roomregistration WHERE roomno=?";
+$result ="SELECT count(*) FROM roomregistration WHERE roomno=? AND gender=?";
 //$result = "SELECT available From rooms where room_no=?";
 $stmt = $mysqli->prepare($result);
-$stmt->bind_param('i',$roomno);
+$stmt->bind_param('is',$roomno,$gender);
 $stmt->execute();
 $stmt->bind_result($count);
 $stmt->fetch();

@@ -70,7 +70,7 @@
 	
 
 
-<nav class="ts-sidebar bg-white ">
+<nav class="ts-sidebar bg-white shadow ">
 			<ul class="ts-sidebar-menu">
 			
 				<li class="ts-label mt-4 text-primary">Admin Mode</li>

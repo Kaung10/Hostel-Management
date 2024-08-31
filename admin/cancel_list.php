@@ -81,6 +81,13 @@ check_login();
 
         echo $stmt->execute() ? "success" : "error: " . $stmt->error;
         $stmt->close();
+        if ($status===1){
+        $query1 = "UPDATE $hostel SET available = available - 1 WHERE room_no = ?";
+        $stmt1 = $mysqli->prepare($query1);
+        $stmt1->bind_param("i", $roomno);
+        $stmt1->execute();
+        $stmt1->close();
+    }
     } else {
         echo "error: Invalid input";
     }
@@ -95,7 +102,7 @@ check_login();
 <!-- Need to modify -->
 <div>
     <?php
-$query = "SELECT * FROM roomregistration WHERE request = 1";
+$query = "SELECT * FROM roomregistration WHERE request = 0";
 $result = $mysqli->query($query);
 
 
@@ -110,6 +117,7 @@ if ($result->num_rows > 0) {
             echo '<td><span class="info fs-6">'.$hostel.'</span></td>';
             echo '<td><span class="info fs-6">'.$roomNumber.'</span></td>';
             echo '<td class=" text-center"><span class="actions">
+            <button class="confirm-button btn btn-success fs-5 me-md-2 " onclick="updateRequest(' . $id . ', 1, \'' . $hostel . '\', ' . $roomNumber . ')"><i class="fa-solid fa-check"></i></button>
                   <butoon class="btn btn-primary fs-5"><a href="student-details.php?id='.$id.'"><i class="fa-solid fa-desktop text-white"></i></a></butoon>                         
                   </span></td>';
             echo '</tr>';
