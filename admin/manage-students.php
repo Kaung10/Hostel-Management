@@ -6,24 +6,40 @@ check_login();
 
 if (isset($_GET['del'])) {
     $id = intval($_GET['del']);
-    $adn = "delete from roomregistration where id=?";
-    $stmt = $mysqli->prepare($adn);
-    $stmt->bind_param('i', $id);
-    $stmt->execute();
-    $stmt->close();
 
-    $adn = "update alinkar set available=available+1 where room_no in (select roomno from roomregistration where id=?)";
-    $stmt = $mysqli->prepare($adn);
-    $stmt->bind_param('i', $id);
-    $stmt->execute();
-    $stmt->close();
+    $query = "SELECT gender, roomno FROM roomregistration WHERE id=?";
+    if ($stmt = $mysqli->prepare($query)) {
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $stmt->bind_result($gender, $roomno);
+        $stmt->fetch();
+        $stmt->close();
 
-	$adn = "update mudra set available=available+1 where room_no in (select roomno from roomregistration where id=?)";
-    $stmt = $mysqli->prepare($adn);
-    $stmt->bind_param('i', $id);
-    $stmt->execute();
-    $stmt->close();
+        $deleteQuery = "DELETE FROM roomregistration WHERE id=?";
+        $stmt = $mysqli->prepare($deleteQuery);
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $stmt->close();
+
+        // Update the available count based on gender
+        if ($gender === 'male') {
+            $updateQuery = "UPDATE alinkar SET available = available + 1 WHERE room_no=?";
+        } else if ($gender === 'female') {
+            $updateQuery = "UPDATE mudra SET available = available + 1 WHERE room_no=?";
+        }
+
+        if (isset($updateQuery)) {
+            $stmt = $mysqli->prepare($updateQuery);
+            $stmt->bind_param('i', $roomno); // Bind only the roomno parameter
+            $stmt->execute();
+            $stmt->close();
+        }
+    } else {
+        die("Error in query preparation: " . $mysqli->error);
+    }
 }
+
+
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
