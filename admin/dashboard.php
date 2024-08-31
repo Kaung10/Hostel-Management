@@ -333,7 +333,7 @@ $stmt1->close();
 	}
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-	<script src="../admin/js/chart.js/Chart.js" defer></script>
+	<script src="../admin/js/chart.js/Chart.js"></script>
 	<script src="../admin/js/chart.js/graph.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
