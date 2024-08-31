@@ -3,7 +3,6 @@ session_start();
 include('includes/config.php');
 include('includes/checklogin.php');
 check_login();
-
 ?>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -25,8 +24,6 @@ check_login();
 	<link rel="stylesheet" href="css/fileinput.min.css">
 	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
 	<link rel="stylesheet" href="css/style.css">
-	
-
 
 </head>
 
@@ -336,7 +333,7 @@ $stmt1->close();
 	}
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-	<script src="../admin/js/chart.js/Chart.js"></script>
+	<script src="../admin/js/chart.js/Chart.js" defer></script>
 	<script src="../admin/js/chart.js/graph.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
