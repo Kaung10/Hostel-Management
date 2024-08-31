@@ -111,7 +111,7 @@ if(isset($_GET['del']))
                 <th>No</th>
                 <th>Room Number</th>
                 <th>Seat</th>
-                <th>Available Seat</th>
+                <th>Student Names</th>
 
                 <th>Action</th>
             </tr>
@@ -130,15 +130,33 @@ $res=$stmt->get_result();
 $cnt=1;
 while($row=$res->fetch_object())
 	  {
+        $roomno = $row->room_no;
 	  	?>
 
 
 <tr><td><?php echo $cnt;?></td>
-
-
-<td><?php echo $row->room_no;?></td> 
+<td><?php echo $roomno;?></td> 
 <td><?php echo $row->seater;?></td>
-<td><?php echo $row->available;?></td>
+
+<?php
+$names = [];
+$query = "SELECT name FROM roomregistration WHERE roomno=? AND gender='female'";
+if ($stmt = $mysqli->prepare($query)) {
+    $stmt->bind_param('i', $roomno);
+    $stmt->execute();
+    $stmt->bind_result($name);
+    while ($stmt->fetch()) {
+        $names[] = $name;
+    }
+    $stmt->close();
+} else {
+    die("Error in query preparation: " . $mysqli->error);
+}
+
+$namesList = implode(', ', $names);
+?>
+<td><?php echo htmlspecialchars($namesList, ENT_QUOTES, 'UTF-8'); ?></td>
+
 <td><a href="edit-room.php?id=<?php echo $row->id;?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
 <a href="manage-mudrarooms.php?del=<?php echo $row->id;?>" onclick="return confirm('Do you want to delete');"><i class="fa fa-close"></i></a></td>
 										</tr>
