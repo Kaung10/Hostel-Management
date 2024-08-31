@@ -16,17 +16,22 @@ try{
 		$stmt->close();
 
 		$_SESSION['id'] = $id;							
-		$_SESSION['login'] = $email;									
+		$_SESSION['login'] = $email;					
+
 		$ldate=date('d/m/Y h:i:s', time());				
 
 		if($rs)
 		{
+			// $id = $_SESSION['id'];
 			$uid = $_SESSION['id'];
 			$uemail = $_SESSION['login'];
-			
-		
-			
-			$log = "insert into userlog(userId,userEmail) values('$uid','$uemail')";
+
+
+			// $geopluginURL='http://www.geoplugin.net/php.gp?ip='.$ip;
+			// $addrDetailsArr = unserialize(file_get_contents($geopluginURL));
+
+			$log = "insert into userlog(userId,userEmail,loginTime) values('$uid','$uemail','$ldate')";
+
 			$mysqli -> query($log);
 
 			header("location:dashboard.php");
@@ -41,7 +46,6 @@ try{
 			$rs = $stmt -> fetch();
 
 			$_SESSION['id'] = $id;
-			$uip = $_SERVER['REMOTE_ADDR'];
 			$ldate = date('d/m/Y h:i:s', time());
 
 			if($rs)

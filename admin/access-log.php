@@ -60,10 +60,10 @@ $cnt=1;
 while($row=$res->fetch_object())
 	  {
 	  	?>
-<tr><td><?php echo $cnt;;?></td>
-<td><?php echo $row->userId;?></td>
-<td><?php echo $row->userEmail;?></td>
-<td><?php echo $row->loginTime;?></td>
+<tr><td class="fs-6"><?php echo $cnt;;?></td>
+<td class="fs-6"><?php echo $row->userId;?></td>
+<td class="fs-6"><?php echo $row->userEmail;?></td>
+<td class="fs-6"><?php echo $row->loginTime;?></td>
 										</tr>
 									<?php
 $cnt=$cnt+1;

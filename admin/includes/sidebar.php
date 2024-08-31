@@ -47,7 +47,24 @@
         .selected {
             background:#009688; 
         }
+
     </style> -->
+    <style>
+
+    .active{
+        background: #ffffff;
+        border-left: 3px solid blue;
+    }
+
+    /* .active {
+        color: #ffffff;
+    }
+
+    .request {
+        text-color: black;
+    } */
+
+    </style>
 </head>
 <body>
 	
@@ -57,11 +74,10 @@
 			<ul class="ts-sidebar-menu">
 			
 				<li class="ts-label mt-4 text-primary">Admin Mode</li>
-				<li><a href="dashboard.php" class="text-primary"><i class="fa fa-dashboard text-primary"></i> Dashboard</a></li>
+				<li class=""><a href="dashboard.php" class="text-primary nav_link"><i class="fa fa-dashboard text-primary"></i> Dashboard</a></li>
 
-					<li><a href="#" class="text-primary"><i class="fa fa-desktop  text-primary"></i> Rooms</a>
+					<li class=""><a href="#" class="text-primary"><i class="fa fa-desktop  text-primary"></i> Rooms</a>
 					<ul>
- 
 						<li><a href="create-room.php" class="text-primary" >Add a Room</a></li>
 						<li><a href="manage-alinkarrooms.php" class="text-primary">Manage Alinkar Rooms</a></li>
                         <li><a href="manage-mudrarooms.php" class="text-primary">Manage Mudra Rooms</a></li>
@@ -69,16 +85,36 @@
 					</ul>
 				</li>
 
-				<li><a href="registration.php" class="text-primary"><i class="fa fa-user text-primary"></i>Student Registration</a></li>
-				<li><a href="manage-students.php" class="text-primary"><i class="fa fa-user text-primary"></i>Manage Students</a></li>
-                <li><a href="requests.php" class="text-primary"><i class="fa fa-file  text-primary"></i>Request Forms</a></li>
-				<li><a href="access-log.php" class="text-primary"><i class="fa fa-file  text-primary"></i>User Access logs</a></li>
+				<li class=""><a href="registration.php" class="text-primary nav_link"><i class="fa fa-user text-primary"></i>Student Registration</a></li>
+				<li><a href="manage-students.php" class="text-primary nav_link"><i class="fa fa-user text-primary"></i>Manage Students</a></li>
+                <li><a href="requests.php" class="text-primary nav_link"><i class="fa-regular text-primary fa-newspaper"></i>Request Forms</a></li>
+                <li><a href="cancel_list.php" class="text-primary nav_link"><i class="fa-solid text-primary fa-rectangle-xmark"></i>Canceled Request List</a></li>
+				<li><a href="access-log.php" class="text-primary nav_link"><i class="fa fa-file  text-primary"></i>User Access logs</a></li>
+                
 
                 
 		</nav>
-
-
-
-
 		</body>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            // Get the current URL path and extract the last file name
+            const path = window.location.pathname;
+            const fileName = path.substring(path.lastIndexOf('/') + 1);
+
+            // Select all sidebar menu items (assuming they have a common class, e.g., 'sidebar-item')
+            const sidebarItems = document.querySelectorAll('.nav_link');
+
+            sidebarItems.forEach(function (item) {
+                // Get the href attribute of the anchor tag
+                const itemHref = item.getAttribute('href');
+
+                // Check if the href ends with the file name
+                if (itemHref && itemHref.endsWith(fileName)) {
+                    // Add the active class to the matching item
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        </script>
 </html>

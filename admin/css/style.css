@@ -696,8 +696,8 @@ li {
 }
 .ts-sidebar-menu li ul {
   display: block;
-  background: rgba(255, 0, 0, 0.12);
-  background: rgba(0, 0, 0, 0.32);
+  background: blue;
+  background: white;
   max-height: 0;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -709,9 +709,14 @@ li {
 .ts-sidebar-menu .open > a {
   background: rgba(51, 56, 62, 0.35);
 }
+
 .ts-sidebar-menu > .open > a {
-  background: #33383e;
-  border-left: 3px solid #37a6c4;
+  background: #ffffff;
+  border-left: 3px solid blue;
+}
+.ts-sidebar-menu > .open > a {
+  background: #ffffff;
+  border-left: 3px solid blue;
 }
 .ts-sidebar-menu .open > .more i {
   transform: rotate(180deg);
