@@ -43,10 +43,6 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 <!doctype html>
 <html lang="en" class="no-js">
 <head>

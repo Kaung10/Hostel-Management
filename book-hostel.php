@@ -281,8 +281,6 @@ $uid=$_SESSION['login'];
     else if ($genderfilter === 'female'){
         $hostelName = "mudra"; 
            }
-
-    echo $hostelName;
     
 
 ?>
@@ -334,7 +332,7 @@ while($row=$res->fetch_object())
 <?php }} ?>
 
 </select> 
-<span id="room-availability-status" style="font-size:12px;"></span>
+
 
 
 
@@ -347,6 +345,7 @@ while($row=$res->fetch_object())
 <div class="col-sm-8">
 <select name="room" id="room"class="form-control" onBlur="checkAvailability()" required> 
 <option value="">Select Room</option>
+<span id="room-availability-status" style="font-size:12px;"></span>
 <?php 
 
 if($genderfilter==='male'){
