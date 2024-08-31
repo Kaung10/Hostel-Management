@@ -12,7 +12,13 @@ if (isset($_GET['del'])) {
     $stmt->execute();
     $stmt->close();
 
-    $adn = "update rooms set available=available+1 where room_no in (select roomno from roomregistration where id=?)";
+    $adn = "update alinkar set available=available+1 where room_no in (select roomno from roomregistration where id=?)";
+    $stmt = $mysqli->prepare($adn);
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $stmt->close();
+
+	$adn = "update mudra set available=available+1 where room_no in (select roomno from roomregistration where id=?)";
     $stmt = $mysqli->prepare($adn);
     $stmt->bind_param('i', $id);
     $stmt->execute();

@@ -38,6 +38,24 @@ include('includes/config.php');
 
 if (!empty($_POST["seater"]) && !empty($_POST["gender"])) {
     $selectedSeater = $_POST["seater"];
+<<<<<<< HEAD
+
+    $query = "SELECT * FROM alinkar WHERE seater = ? AND available!=0";
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param('s', $selectedSeater);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $rooms = [];
+
+    while ($row = $res->fetch_object()) {
+        $alinkar[] = $row;
+    }
+
+    if (count($alinkar) > 0) {
+        foreach ($alinkar as $room) {
+            echo "<option value='{$room->room_no}'>{$room->room_no}</option>";
+        }
+=======
     $gender = $_POST["gender"];
     
     // Prepare the query based on gender
@@ -45,11 +63,34 @@ if (!empty($_POST["seater"]) && !empty($_POST["gender"])) {
         $query = "SELECT room_no FROM alinkar WHERE seater = ? AND available != 0";
     } else if ($gender === 'female') {
         $query = "SELECT room_no FROM mudra WHERE seater = ? AND available != 0";
+>>>>>>> master
     } else {
         echo "<option value=''>Invalid gender</option>";
         exit;
     }
 
+<<<<<<< HEAD
+if (!empty($_POST["room"])) {
+    $selectedSeater = $_POST["room"];
+        $query = "SELECT * FROM alinkar WHERE available != 0";
+        $stmt2 = $mysqli->prepare($query);
+    $stmt->bind_param('s', $selectedSeater);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $alinkar = [];
+
+    while ($row = $res->fetch_object()) {
+        $alinkar[] = $row;
+    }
+
+    if (count($alinkar) > 0) {
+        foreach ($alinkar as $room) {
+            echo "<option value='{$room->seater}'>{$room->seater}</option>";
+            if($room->seater == 3 ){
+                echo "<option value='2'>2</option>";
+            }else{
+                echo "<option value='3'>3</option>";
+=======
     $stmt = $mysqli->prepare($query);
     if ($stmt) {
         $stmt->bind_param('i', $selectedSeater);
@@ -64,6 +105,7 @@ if (!empty($_POST["seater"]) && !empty($_POST["gender"])) {
         if (count($rooms) > 0) {
             foreach ($rooms as $room) {
                 echo "<option value='{$room->room_no}'>{$room->room_no}</option>";      
+>>>>>>> master
             }
         } else {
             echo "<option value=''>No rooms available for the selected seater</option>";
@@ -106,6 +148,8 @@ if (!empty($_POST["room"]) && !empty($_POST["gender"])) {
 }
 
 
+<<<<<<< HEAD
+=======
 // $seater = $_POST["seater"];
 // $roomno = $_POST["room"];
 
@@ -228,4 +272,5 @@ $mysqli->close();
 
 
 
+>>>>>>> master
 ?>

@@ -21,6 +21,7 @@ check_login();
 //code for registration
 if(isset($_POST['submit'])) 
 {
+
     // Collecting POST data
     $roomno = $_POST['room'];
     $seater = $_POST['seater'];
@@ -105,6 +106,7 @@ if(isset($_POST['submit']))
      echo "<script>alert('Student Successfully registered');</script>";
     } 
       $stmt->close();
+
 }
 ?>
 <!doctype html>
@@ -153,6 +155,7 @@ if(isset($_POST['submit']))
 
 
 
+
 // $(document).ready(function () {
 // $('#seater').change(function () {
 // var selectedSeater = $(this).val();
@@ -171,6 +174,7 @@ if(isset($_POST['submit']))
 // });
 // }
 // });
+
 $(document).ready(function () {
     $('#hostelname').change(function () {
         var genderFilter = getHostel(); // Fetch gender from the hostel dropdown
@@ -242,6 +246,46 @@ function fromHostel(gender) {
     }
 });
 
+function getRoom(val) {
+$.ajax({
+type: "POST",
+url: "get_seater.php",
+data: 'seater=' + val,
+success: function (data) {
+$('#room').html(data);
+}
+});
+}
+
+
+$(document).ready(function () {
+$('#room').change(function () {
+var selectedRoom = $(this).val();
+getseat(selectedRoom);
+});
+
+function getseat(val) {
+$.ajax({
+type: "POST",
+url: "get_seater.php",
+data: 'room=' + val,
+success: function (data) {
+$('#seater').html(data);
+}
+});
+$.ajax({
+type: "POST",
+url: "get_seater.php",
+data:'rid='+val,
+success: function(data){
+//alert(data);
+$('#fpm').val(data);
+}
+});
+}
+});
+
+
 // function getSeater(val) {
 // $.ajax({
 // type: "POST",
@@ -254,17 +298,6 @@ function fromHostel(gender) {
 // });
 // }
 </script>
-<style> 
-	.btn-primary { 
-		background: #009688; 
-		transition: ease-in-out 0.5s; 
-	}
-
-	.btn-primary:hover {  
-		background: #004d42 !important; /* Darker shade for hover effect */
-		cursor: pointer; 
-	}
-</style>
 
 
 
@@ -284,7 +317,9 @@ function fromHostel(gender) {
 						<div class="row">
 							<div class="col-md-12">
 								<div class="panel panel-primary">
+
 									<div class="panel-heading" style="background:#009688">Fill all Info</div>
+
 									<div class="panel-body">
 										<form method="post" action="" class="form-horizontal">
 							<?php
@@ -318,11 +353,17 @@ $uid=$_SESSION['login'];
 								
 							?>			
 <div class="form-group">
+
 <label class="col-sm-4 control-label"><h4 style="color:white" align="left">Room Related info </h4> </label>
+
 
 
 </div>
 
+
+
+
+											
 <div class="form-group">
 <label class="col-sm-2 control-label">Hostel</label>
 <div class="col-sm-8">
@@ -343,10 +384,12 @@ $uid=$_SESSION['login'];
 <label class="col-sm-2 control-label">Seater</label>
 <div class="col-sm-8">
 <select name="seater" id="seater"class="form-control" required> 
+
 <option value="">Select Seater</option> 
 <option value="2">2</option>
 <option value="3">3</option>
 </select> 
+
 </div>
 </div>
 
@@ -354,7 +397,9 @@ $uid=$_SESSION['login'];
 <label class="col-sm-2 control-label">Room no. </label>
 <div class="col-sm-8">
 <select name="room" id="room"class="form-control" onBlur="checkAvailability()" required> 
+
 <option value="">Please select the Hostel first</option>
+
 
 
 </select> 
@@ -366,14 +411,6 @@ $uid=$_SESSION['login'];
 
 
 
-<!-- <div class="form-group">
-<label class="col-sm-2 control-label">Food Status</label>
-<div class="col-sm-8">
-<input type="radio" value="0" name="foodstatus"> Without Food
-<input type="radio" value="1" name="foodstatus" checked="checked"> With Food(90,000 mmk Per Month Extra)
-</div>
-</div>	 -->
-
 <div class="form-group">
 <label class="col-sm-2 control-label">Stay From</label>
 <div class="col-sm-8">
@@ -381,18 +418,10 @@ $uid=$_SESSION['login'];
 </div>
 </div>
 
-<div class="form-group">
-<label class="col-sm-2 control-label">Duration</label>
-<div class="col-sm-8">
-<!-- <select name="duration" id="duration" class="form-control"> -->
-<input type="text" name="duration" id="duration"  class="form-control" value="5" readonly >
-</div>
-</div>
-
 
 
 <div class="form-group">
-<label class="col-sm-2 control-label"><h4 style="color: white" align="left">Personal info </h4> </label>
+<label class="col-sm-2 control-label"><h4 style="color: green" align="left">Personal info </h4> </label>
 </div>
 
 <div class="form-group">
@@ -428,7 +457,9 @@ $aid=$_SESSION['id'];
 <div class="form-group">
 <label class="col-sm-2 control-label">Registration No : </label>
 <div class="col-sm-8">
-<input type="text" name="regno" id="regno"  class="form-control" required >
+
+<input type="text" name="regno" id="regno"  class="form-control" value="<?php echo $row->regNo;?>" readonly >
+
 </div>
 </div>
 
@@ -436,7 +467,9 @@ $aid=$_SESSION['id'];
 <div class="form-group">
 <label class="col-sm-2 control-label">Name : </label>
 <div class="col-sm-8">
-<input type="text" name="name" id="name"  class="form-control"required>
+
+<input type="text" name="name" id="name"  class="form-control" value="<?php echo $row->name;?>" >
+
 </div>
 </div>
 
@@ -444,18 +477,18 @@ $aid=$_SESSION['id'];
 <div class="form-group">
 <label class="col-sm-2 control-label">Gender</label>
 <div class="col-sm-8">
-<select name="gender" id="gender"class="form-control" required> 
-<option value="">Select Gender</option>
-<option value="male">Male</option>
-<option value="female">Female</option>
-</select>
+
+<input type="text" name="gender" value="<?php echo $row->gender;?>" class="form-control" readonly>
+
 </div>
 </div>
 
 <div class="form-group">
 <label class="col-sm-2 control-label">Contact No : </label>
 <div class="col-sm-8">
-<input type="text" name="contact" id="contact"  class="form-control" required>
+
+<input type="text" name="contact" id="contact" value="<?php echo $row->contactNo;?>"  class="form-control" readonly>
+
 </div>
 </div>
 
@@ -463,7 +496,9 @@ $aid=$_SESSION['id'];
 <div class="form-group">
 <label class="col-sm-2 control-label">Email id : </label>
 <div class="col-sm-8">
-<input type="email" name="email" id="email"  class="form-control" required>
+
+<input type="email" name="email" id="email"  class="form-control" value="<?php echo $row->email;?>"  readonly>
+
 </div>
 </div>
 <?php } ?>
@@ -496,7 +531,7 @@ $aid=$_SESSION['id'];
 </div>	
 
 <div class="form-group">
-<label class="col-sm-3 control-label"><h4 style="color: white" align="left">Correspondense Address </h4> </label>
+<label class="col-sm-3 control-label"><h4 style="color: green" align="left">Correspondense Address </h4> </label>
 </div>
 
 
@@ -533,7 +568,9 @@ while($row=$res->fetch_object())
 
 
 <div class="form-group">
-<label class="col-sm-3 control-label"><h4 style="color: white" align="left">Permanent Address </h4> </label>
+
+<label class="col-sm-3 control-label"><h4 style="color: green" align="left">Permanent Address </h4> </label>
+
 </div>
 
 
@@ -642,6 +679,7 @@ while($row=$res->fetch_object())
 </script>
 	<script>
 function checkAvailability() {
+
     $("#loaderIcon").show();
     
     // Collect the values of room number and gender
@@ -662,8 +700,10 @@ function checkAvailability() {
             alert('Error checking room availability.');
         }
     });
+
 }
 </script>
+
 
 
 
@@ -683,6 +723,7 @@ $(document).ready(function() {
 		
 
 })});
+
 
 
 </script>

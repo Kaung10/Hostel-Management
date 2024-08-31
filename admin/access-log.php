@@ -34,18 +34,17 @@ check_login();
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12">
-						<h2 class="page-title" style="margin-top:1%">Access Log</h2>
+						<h2 class="page-title" style="margin-top:4%">Access Log</h2>
 						<div class="panel panel-default">
 							<div class="panel-heading" style="background:#009688; color:white;">All Courses Details</div>
 							<div class="panel-body">
 								<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 									<thead>
 										<tr>
-											<th>Sno.</th>
+											<th>No</th>
 											<th>User Id</th>
 											<th>User Email / Reg No.</th>
 											<th>Login Time</th>
-											
 										</tr>
 									</thead>
 
@@ -61,10 +60,9 @@ $cnt=1;
 while($row=$res->fetch_object())
 	  {
 	  	?>
-<tr><td class="fs-6"><?php echo $cnt;?></td>
+<tr><td class="fs-6"><?php echo $cnt;;?></td>
 <td class="fs-6"><?php echo $row->userId;?></td>
 <td class="fs-6"><?php echo $row->userEmail;?></td>
- 
 <td class="fs-6"><?php echo $row->loginTime;?></td>
 										</tr>
 									<?php

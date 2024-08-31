@@ -9,7 +9,7 @@ if(isset($_POST['submit']))
 $seater=$_POST['seater'];
 $fees=$_POST['fees'];
 $id=$_GET['id'];
-$query="update rooms set seater=?,fees=? where id=?";
+$query="update alinkar set seater=?,fees=? where id=?";
 $stmt = $mysqli->prepare($query);
 $rc=$stmt->bind_param('iii',$seater,$fees,$id);
 $stmt->execute();
@@ -58,7 +58,7 @@ echo"<script>alert('Room Details has been Updated successfully');</script>";
 										<form method="post" class="form-horizontal">
 												<?php	
 												$id=$_GET['id'];
-	$ret="select * from rooms where id=?";
+	$ret="select * from alinkar where id=?";
 		$stmt= $mysqli->prepare($ret) ;
 	 $stmt->bind_param('i',$id);
 	 $stmt->execute() ;//ok

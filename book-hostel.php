@@ -21,6 +21,7 @@ $stmt->close();
 //code for registration
 if(isset($_POST['submit'])) 
 {
+
     // Collecting POST data
     $roomno = $_POST['room'];
     $seater = $_POST['seater'];
@@ -62,7 +63,9 @@ if(isset($_POST['submit']))
 
     // Provide feedback to the user
     echo "<script>alert('Student Successfully registered');</script>";
+
 }
+
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
@@ -159,6 +162,7 @@ $(document).ready(function () {
         getseat(selectedRoom, selectedGender);
     });
 
+
      function getseat(room, gender) {
         $.ajax({
             type: "POST",
@@ -186,6 +190,7 @@ $(document).ready(function () {
 
         }
     });
+
 
 // function getSeater(val) {
 // $.ajax({
@@ -259,12 +264,12 @@ $uid=$_SESSION['login'];
 									</div>
 								</div>
 				<?php }
-				else{
+				else
 								
 							?>			
 <div class="form-group">
 <label class="col-sm-4 control-label"><h4 style="color:white" align="left">Room Related info </h4> </label>
-
+				
 
 </div>
 
@@ -300,9 +305,11 @@ $uid=$_SESSION['login'];
 <div class="col-sm-8">
 <select name="seater" id="seater"class="form-control" required> 
 <option value="">Select Seater</option>
+
 <?php 
 if($genderfilter==='male'){
     $query ="SELECT DISTINCT seater FROM alinkar";
+
 $stmt2 = $mysqli->prepare($query);
 $stmt2->execute();
 $res=$stmt2->get_result();
@@ -327,7 +334,7 @@ while($row=$res->fetch_object())
 <?php }} ?>
 
 </select> 
-
+<span id="room-availability-status" style="font-size:12px;"></span>
 
 
 
@@ -345,6 +352,7 @@ while($row=$res->fetch_object())
 if($genderfilter==='male'){
     $query ="SELECT room_no FROM alinkar WHERE available != 0 ";
 $stmt2 = $mysqli->prepare($query);
+
 $stmt2->execute();
 $res=$stmt2->get_result();
 while($row=$res->fetch_object())
@@ -370,6 +378,7 @@ while($row=$res->fetch_object())
 
 </div>
 </div>
+
 
 
 <?php
@@ -433,25 +442,12 @@ $stmt->close();
 </div>
 </div>	 -->
 
+
 <div class="form-group">
 <label class="col-sm-2 control-label">Stay From</label>
 <div class="col-sm-8">
 <input type="date" name="stayf" id="stayf"  class="form-control" >
 </div>
-</div>
-
-<div class="form-group">
-<label class="col-sm-2 control-label">Duration</label>
-<div class="col-sm-8">
-<!-- <select name="duration" id="duration" class="form-control"> -->
-<input type="text" name="duration" id="duration"  class="form-control" value="5" readonly >
-</div>
-</div>
-
-
-
-<div class="form-group">
-<label class="col-sm-2 control-label"><h4 style="color: white" align="left">Personal info </h4> </label>
 </div>
 
 <div class="form-group">
@@ -639,7 +635,7 @@ while($row=$res->fetch_object())
 <input type="submit" name="submit" Value="Register" class="btn btn-primary" style="align:center; background:#009688;">
 </div>
 </form>
-<?php } ?>
+
 
 									</div>
 									</div>
@@ -710,28 +706,6 @@ error:function (){}
 });
 }
 </script>
-
-
-<script type="text/javascript">
-
-$(document).ready(function() {
-	$('#duration').keyup(function(){
-		var fetch_dbid = $(this).val();
-		$.ajax({
-		type:'POST',
-		url :"ins-amt.php?action=userid",
-		data :{userinfo:fetch_dbid},
-		success:function(data){
-	    $('.result').val(data);
-		}
-		});
-		
-
-})});
-
-
-</script>
-
 
 
 </html>

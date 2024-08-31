@@ -6,6 +6,7 @@ check_login();
 //code for add courses
 if (isset($_POST['submit'])) {
     $seater = $_POST['seater'];
+	$available = $_POST['available'];
     $roomno = $_POST['rmno'];
     $hostel = $_POST['hostel'];
 
@@ -32,9 +33,9 @@ if (isset($_POST['submit'])) {
         echo "<script>alert('Room number already exists in the selected hostel');</script>";
     } else {
         // Insert a new row into the selected table
-        $query = "INSERT INTO $table (seater, avaliable, room_no) VALUES (?, ?, ?)";
+        $query = "INSERT INTO $table (seater, available, room_no) VALUES (?, ?, ?)";
         $stmt2 = $mysqli->prepare($query);
-        $stmt2->bind_param('iii', $seater, $seater, $roomno); // Set 'available' column to the same value as 'seater'
+        $stmt2->bind_param('iii', $seater, $available, $roomno); // Set 'available' column to the same value as 'seater'
         $stmt2->execute();
         echo "<script>alert('Room has been added successfully');</script>";
     }
@@ -42,6 +43,10 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
 <!doctype html>
 <html lang="en" class="no-js">
 <head>
@@ -111,6 +116,20 @@ if (isset($_POST['submit'])) {
 </Select>
 </div>
 </div>
+
+											
+											<div class="form-group">
+												<label class="col-sm-2 control-label">Select Available  </label>
+												<div class="col-sm-8">
+												<Select name="available" class="form-control" required>
+<option value="">Select available</option>
+<option value="1">One available</option>
+<option value="2">Two available</option>
+<option value="3">Three available</option>
+</Select>
+</div>
+</div>
+
 <div class="form-group">
 <label class="col-sm-2 control-label">Room No.</label>
 <div class="col-sm-8">
