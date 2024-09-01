@@ -111,6 +111,7 @@ if(isset($_GET['del']))
                 <th>No</th>
                 <th>Room Number</th>
                 <th>Seat</th>
+                <th>Available Seat</th>
                 <th>Student Names</th>
 
                 <th>Action</th>
@@ -137,7 +138,7 @@ while($row=$res->fetch_object())
 <tr><td><?php echo $cnt;?></td>
 <td><?php echo $roomno;?></td> 
 <td><?php echo $row->seater;?></td>
-
+<td><?php echo $row->available;?></td>
 <?php
 $names = [];
 $query = "SELECT name FROM roomregistration WHERE roomno=? AND gender='female'";
