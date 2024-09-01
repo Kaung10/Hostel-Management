@@ -17,6 +17,7 @@ try{
 
 		$_SESSION['id'] = $id;							
 		$_SESSION['login'] = $email;					
+
 		$ldate=date('d/m/Y h:i:s', time());				
 
 		if($rs)
@@ -25,10 +26,12 @@ try{
 			$uid = $_SESSION['id'];
 			$uemail = $_SESSION['login'];
 
+
 			// $geopluginURL='http://www.geoplugin.net/php.gp?ip='.$ip;
 			// $addrDetailsArr = unserialize(file_get_contents($geopluginURL));
 
 			$log = "insert into userlog(userId,userEmail,loginTime) values('$uid','$uemail','$ldate')";
+
 			$mysqli -> query($log);
 
 			header("location:dashboard.php");
@@ -102,8 +105,9 @@ return true;
             <li><a href="index.php">Home</a></li>
             <li><a href="https://ucsy.edu.mm/">ACADEMIC</a></li>
             <li><a href="https://ucsy.edu.mm/page291.do">COLLABORATION</a></li>
+
             <li><a href="aboutus.html">ABOUT US</a></li>
-            <li><a href="#"> <ion-icon name="call-outline"> </ion-icon> (+95) 9 443440479</a></li>
+            <!-- <li><a href="#"> <ion-icon name="call-outline"> </ion-icon> (+95) 9 443440479</a></li> -->
            
         </ul>
     </div>

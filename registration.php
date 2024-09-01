@@ -60,18 +60,27 @@ $password=$_POST['password'];
 
 try
 {
-    $query="insert into  userRegistration(regNo,name,gender,contactNo,email,password) values(?,?,?,?,?,?)";
+    $query="insert into  userregistration(regNo,name,gender,contactNo,email,password) values(?,?,?,?,?,?)";
 $stmt = $mysqli->prepare($query);
 $rc=$stmt->bind_param('sssiss',$regno,$name,$gender,$contactno,$emailid,$password);
 $stmt->execute();
 echo"<script>alert('Student Succssfully register');</script>";
 
-echo"<script>window.location.href = 'dashboard.php';</script>";
 }
 catch(Exception $e)
 {
     echo "<script>alert('Error! Duplicate Email detected.')</script>";
 }
+$stmt1 = $mysqli->prepare("SELECT email, password, id FROM userregistration WHERE email=? AND password=?");
+$stmt1->bind_param('ss', $emailid, $password);
+$stmt1->execute();
+$stmt1->bind_result($dbEmail, $dbPassword, $id);
+if ($stmt1->fetch()) {
+    $_SESSION['id'] = $id;
+    $_SESSION['login'] = $dbEmail;
+}
+$stmt1->close();
+echo"<script>window.location.href = 'dashboard.php';</script>";
 
 }
 

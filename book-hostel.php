@@ -21,6 +21,7 @@ $stmt->close();
 //code for registration
 if(isset($_POST['submit'])) 
 {
+
     // Collecting POST data
     $roomno = $_POST['room'];
     $seater = $_POST['seater'];
@@ -52,17 +53,28 @@ if(isset($_POST['submit']))
     $stmt->execute();
     $stmt->close();
 
-    // Prepare and execute SQL query for userregistration
-    $hashedPassword = password_hash($contactno, PASSWORD_BCRYPT); // Hashing the password
-    $query1 = "INSERT INTO userregistration (regNo, Name, gender, contactNo, email, password) VALUES (?, ?, ?, ?, ?, ?)";
-    $stmt1 = $mysqli->prepare($query1);
-    $stmt1->bind_param('sssiss', $regNo, $name, $gender, $contactno, $emailid, $hashedPassword);
-    $stmt1->execute();
-    $stmt1->close();
+    if ($gender == 'male') {
+        // Update available seats in the alinkar table
+        $updateQuery = "UPDATE alinkar SET available = available - 1 WHERE room_no = ?";
+        $updateStmt = $mysqli->prepare($updateQuery);
+        $updateStmt->bind_param('i', $roomno);
+        $updateStmt->execute();
+        $updateStmt->close();
+    }
 
+     else if ($gender == 'female') {
+        // Update available seats in the alinkar table
+        $updateQuery = "UPDATE mudra SET available = available - 1 WHERE room_no = ?";
+        $updateStmt = $mysqli->prepare($updateQuery);
+        $updateStmt->bind_param('i', $roomno);
+        $updateStmt->execute();
+        $updateStmt->close();
+    }
     // Provide feedback to the user
     echo "<script>alert('Student Successfully registered');</script>";
+
 }
+
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
@@ -159,6 +171,7 @@ $(document).ready(function () {
         getseat(selectedRoom, selectedGender);
     });
 
+
      function getseat(room, gender) {
         $.ajax({
             type: "POST",
@@ -186,6 +199,7 @@ $(document).ready(function () {
 
         }
     });
+
 
 // function getSeater(val) {
 // $.ajax({
@@ -234,15 +248,21 @@ $(document).ready(function () {
 										<form method="post" action="" class="form-horizontal">
 							<?php
 $uid=$_SESSION['login'];
-							 $stmt=$mysqli->prepare("SELECT emailid FROM roomregistration WHERE emailid=? || regno=? ");
+							 $stmt=$mysqli->prepare("SELECT emailid,request FROM roomregistration WHERE emailid=? || regno=? ");
 				$stmt->bind_param('ss',$uid,$uid);
 				$stmt->execute();
-				$stmt -> bind_result($email);
+				$stmt -> bind_result($email,$requestnum);
 				$rs=$stmt->fetch();
 				$stmt->close();
 				if($rs)
-				{ ?>
-			<h3 style="color: red" align="center">Hostel already booked by you</h3>
+				{ 
+                    if($requestnum===0){?>
+			<h3 style="color: red" align="center">Unfortunately, your request has been CANCELLED.</h3>
+        <?php }else if($requestnum===1){?>
+            <h3 style="color: green" align="center">Your request has been successfully ACCEPTED.</h3>
+        <?php }else if($requestnum===2){?>
+            <h3 style="color: lightblue" align="center">Your request is currently in PROGRESS.</h3>
+        <?php } ?>
 			<div align="center">
 				<div class="col-md-4">&nbsp;</div>
 			<div class="col-md-4">
@@ -258,13 +278,12 @@ $uid=$_SESSION['login'];
 										</div>
 									</div>
 								</div>
-				<?php }
-				else{
+				<?php } else {
 								
 							?>			
 <div class="form-group">
 <label class="col-sm-4 control-label"><h4 style="color:white" align="left">Room Related info </h4> </label>
-
+				
 
 </div>
 
@@ -276,8 +295,6 @@ $uid=$_SESSION['login'];
     else if ($genderfilter === 'female'){
         $hostelName = "mudra"; 
            }
-
-    echo $hostelName;
     
 
 ?>
@@ -300,9 +317,11 @@ $uid=$_SESSION['login'];
 <div class="col-sm-8">
 <select name="seater" id="seater"class="form-control" required> 
 <option value="">Select Seater</option>
+
 <?php 
 if($genderfilter==='male'){
     $query ="SELECT DISTINCT seater FROM alinkar";
+
 $stmt2 = $mysqli->prepare($query);
 $stmt2->execute();
 $res=$stmt2->get_result();
@@ -340,11 +359,13 @@ while($row=$res->fetch_object())
 <div class="col-sm-8">
 <select name="room" id="room"class="form-control" onBlur="checkAvailability()" required> 
 <option value="">Select Room</option>
+<span id="room-availability-status" style="font-size:12px;"></span>
 <?php 
 
 if($genderfilter==='male'){
     $query ="SELECT room_no FROM alinkar WHERE available != 0 ";
 $stmt2 = $mysqli->prepare($query);
+
 $stmt2->execute();
 $res=$stmt2->get_result();
 while($row=$res->fetch_object())
@@ -370,6 +391,7 @@ while($row=$res->fetch_object())
 
 </div>
 </div>
+
 
 
 <?php
@@ -433,25 +455,12 @@ $stmt->close();
 </div>
 </div>	 -->
 
+
 <div class="form-group">
 <label class="col-sm-2 control-label">Stay From</label>
 <div class="col-sm-8">
 <input type="date" name="stayf" id="stayf"  class="form-control" >
 </div>
-</div>
-
-<div class="form-group">
-<label class="col-sm-2 control-label">Duration</label>
-<div class="col-sm-8">
-<!-- <select name="duration" id="duration" class="form-control"> -->
-<input type="text" name="duration" id="duration"  class="form-control" value="5" readonly >
-</div>
-</div>
-
-
-
-<div class="form-group">
-<label class="col-sm-2 control-label"><h4 style="color: white" align="left">Personal info </h4> </label>
 </div>
 
 <div class="form-group">
@@ -710,28 +719,6 @@ error:function (){}
 });
 }
 </script>
-
-
-<script type="text/javascript">
-
-$(document).ready(function() {
-	$('#duration').keyup(function(){
-		var fetch_dbid = $(this).val();
-		$.ajax({
-		type:'POST',
-		url :"ins-amt.php?action=userid",
-		data :{userinfo:fetch_dbid},
-		success:function(data){
-	    $('.result').val(data);
-		}
-		});
-		
-
-})});
-
-
-</script>
-
 
 
 </html>

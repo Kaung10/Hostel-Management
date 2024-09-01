@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 right: 60
             }
         },
-        series: [6, 55, 13, 33],
+        series: seriesData,
         labels: ['all seat Free', '1 seat Free', '2 seat Free', 'full'],
         colors: ['#F6FB7A', '#B4E380', '#88D66C', '#73BBA3'],
         responsive: [

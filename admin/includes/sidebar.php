@@ -55,7 +55,9 @@
         background: #ffffff;
         border-left: 3px solid blue;
     }
-
+    /*.parent-menu.open{
+        isplay: block;
+    }*/
     /* .active {
         color: #ffffff;
     }
@@ -76,13 +78,15 @@
 				<li class="ts-label mt-4 text-primary">Admin Mode</li>
 				<li class=""><a href="dashboard.php" class="text-primary nav_link"><i class="fa fa-dashboard text-primary"></i> Dashboard</a></li>
 
-					<li class=""><a href="#" class="text-primary"><i class="fa fa-desktop  text-primary"></i> Rooms</a>
-					<ul>
-						<li><a href="create-room.php" class="text-primary" >Add a Room</a></li>
-						<li><a href="manage-rooms.php" class="text-primary">Manage Rooms</a></li>
-                        <li><a href="update-fees.php" class="text-primary">Update fees</a></li>
-					</ul>
-				</li>
+					<li class="parent-menu">
+    <a href="#" class="text-primary"><i class="fa fa-desktop text-primary"></i> Rooms</a>
+    <ul>
+        <li><a href="create-room.php" class="nav_link text-primary">Add a Room</a></li>
+        <li><a href="manage-alinkarrooms.php" class="nav_link text-primary">Manage Alinkar Rooms</a></li>
+        <li><a href="manage-mudrarooms.php" class="nav_link text-primary">Manage Mudra Rooms</a></li>
+        <li><a href="update-fees.php" class="nav_link text-primary">Update fees</a></li>
+    </ul>
+</li>
 
 				<li class=""><a href="registration.php" class="text-primary nav_link"><i class="fa fa-user text-primary"></i>Student Registration</a></li>
 				<li><a href="manage-students.php" class="text-primary nav_link"><i class="fa fa-user text-primary"></i>Manage Students</a></li>
@@ -95,25 +99,31 @@
 		</nav>
 		</body>
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-            // Get the current URL path and extract the last file name
-            const path = window.location.pathname;
-            const fileName = path.substring(path.lastIndexOf('/') + 1);
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the current URL path and extract the last file name
+        const path = window.location.pathname;
+        const fileName = path.substring(path.lastIndexOf('/') + 1);
 
-            // Select all sidebar menu items (assuming they have a common class, e.g., 'sidebar-item')
-            const sidebarItems = document.querySelectorAll('.nav_link');
+        // Select all sidebar menu items (assuming they have a common class, e.g., 'nav_link')
+        const sidebarItems = document.querySelectorAll('.nav_link');
 
-            sidebarItems.forEach(function (item) {
-                // Get the href attribute of the anchor tag
-                const itemHref = item.getAttribute('href');
+        sidebarItems.forEach(function (item) {
+            // Get the href attribute of the anchor tag
+            const itemHref = item.getAttribute('href');
 
-                // Check if the href ends with the file name
-                if (itemHref && itemHref.endsWith(fileName)) {
-                    // Add the active class to the matching item
-                    item.classList.add('active');
+            // Check if the href ends with the file name
+            if (itemHref && itemHref.endsWith(fileName)) {
+                // Add the active class to the matching item
+                item.classList.add('active');
+
+                // Find the parent <li> that contains the dropdown menu and add an 'active' class to it
+                const parentMenu = item.closest('.parent-menu');
+                if (parentMenu) {
+                    parentMenu.classList.add('open'); // You can use the 'open' class to control visibility
                 }
-            });
+            }
         });
+    });
+</script>
 
-        </script>
 </html>

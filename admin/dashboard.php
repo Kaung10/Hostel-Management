@@ -25,8 +25,6 @@ check_login();
 	<link rel="stylesheet" href="css/fileinput.min.css">
 	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
 	<link rel="stylesheet" href="css/style.css">
-	
-
 
 </head>
 
@@ -142,7 +140,7 @@ $stmt->close();
 									</div>
 											
 
-											<div class="mt-2"><a href="manage-students.php" class="">Full Detail <i class="fa fa-arrow-right"></i></a></div>
+											<div class="mt-2"><a href="manage-alinkarrooms.php" class="">Full Detail <i class="fa fa-arrow-right"></i></a></div>
 										</div>
 										<div class="col">
 											<div class=" mr-2">
@@ -185,7 +183,7 @@ $stmt->close();
 
 									</div>
 
-									<div class="mt-2"><a href="manage-students.php" class="">Full Detail <i class="fa fa-arrow-right"></i></a></div>
+									<div class="mt-2"><a href="manage-mudrarooms.php" class="">Full Detail <i class="fa fa-arrow-right"></i></a></div>
 								</div>
 								<div class="col-auto">
 									<i class="fa-solid fa-house-user fs-1 text-gray-300"></i>
@@ -282,7 +280,7 @@ $stmt1->close();
 													<div class="stat-panel-title text-uppercase">Total Rooms </div>
 												</div>
 											</div>
-											<a href="manage-rooms.php" class="block-anchor panel-footer text-center">See All &nbsp; <i class="fa fa-arrow-right"></i></a>
+											<a href="manage-alinkarrooms.php" class="block-anchor panel-footer text-center">See All &nbsp; <i class="fa fa-arrow-right"></i></a>
 										</div>
 									</div>
 									
@@ -335,10 +333,8 @@ $stmt1->close();
 
 	}
 	</script>
-	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-	<script src="../admin/js/chart.js/Chart.js"></script>
-	<script src="../admin/js/chart.js/graph.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	
+	<?php include("../admin/js/chart.js/loading.php"); ?>
 
 </body>
 
