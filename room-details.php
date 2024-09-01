@@ -162,7 +162,7 @@ check_login();
                                         </tr>
                                         <tr>
                                             <td><b>Contact No. :</b></td>
-                                            <td><?php echo htmlspecialchars($row->contactno); ?></td>
+                                            <td>0<?php echo htmlspecialchars($row->contactno); ?></td>
                                             <td><b>Gender :</b></td>
                                             <td><?php echo htmlspecialchars($row->gender); ?></td>
                                             <td><b>Semester :</b></td>
@@ -170,7 +170,7 @@ check_login();
                                         </tr>
                                         <tr>
                                             <td><b>Emergency Contact No. :</b></td>
-                                            <td><?php echo htmlspecialchars($row->egycontactno); ?></td>
+                                            <td>0<?php echo htmlspecialchars($row->egycontactno); ?></td>
                                             <td><b>Guardian Name :</b></td>
                                             <td><?php echo htmlspecialchars($row->guardianName); ?></td>
                                             <td><b>Guardian Relation :</b></td>
@@ -178,7 +178,7 @@ check_login();
                                         </tr>
                                         <tr>
                                             <td><b>Guardian Contact No. :</b></td>
-                                            <td colspan="6"><?php echo htmlspecialchars($row->guardianContactno); ?></td>
+                                            <td colspan="6">0<?php echo htmlspecialchars($row->guardianContactno); ?></td>
                                         </tr>
                                         <tr>
                                             <td colspan="6" style="color:#009688;"><h4>Addresses</h4></td>

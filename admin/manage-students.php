@@ -155,7 +155,7 @@ if (isset($_GET['del'])) {
                                                 <td><?php echo $cnt; ?></td>
                                                 <td class="fs-6"><?php echo $row->name; ?></td>
                                                 <td class="fs-6"><?php echo $row->regNo; ?></td>
-                                                <td class="fs-6"><?php echo $row->contactno; ?></td>
+                                                <td class="fs-6">0<?php echo $row->contactno; ?></td>
                                                 <td class="fs-6"><?php echo $row->roomno; ?></td>
                                                 <td class="fs-6"><?php echo $row->seater; ?></td>
                                                 <td class="fs-6"><?php echo $row->semester; ?></td>
