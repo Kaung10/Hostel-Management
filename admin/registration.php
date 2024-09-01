@@ -105,7 +105,7 @@ if(isset($_POST['submit']))
     // Provide feedback to the user
      echo "<script>alert('Student Successfully registered');</script>";
     } 
-      $stmt->close();
+      // $stmt->close();
 
 }
 ?>
@@ -322,36 +322,7 @@ $('#fpm').val(data);
 
 									<div class="panel-body">
 										<form method="post" action="" class="form-horizontal">
-							<?php
-$uid=$_SESSION['login'];
-							 $stmt=$mysqli->prepare("SELECT emailid FROM roomregistration WHERE emailid=? || regno=? ");
-				$stmt->bind_param('ss',$uid,$uid);
-				$stmt->execute();
-				$stmt -> bind_result($email);
-				$rs=$stmt->fetch();
-				$stmt->close();
-				if($rs)
-				{ ?>
-			<h3 style="color: red" align="center">Hostel already booked by you</h3>
-			<div align="center">
-				<div class="col-md-4">&nbsp;</div>
-			<div class="col-md-4">
-										<div class="panel panel-default">
-											<div class="panel-body bk-success text-light">
-												<div class="stat-panel text-center">
-
-												<div class="stat-panel-number h1 ">My Room</div>
-													
-												</div>
-											</div>
-											<a href="room-details.php" class="block-anchor panel-footer text-center">See All &nbsp; <i class="fa fa-arrow-right"></i></a>
-										</div>
-									</div>
-								</div>
-				<?php }
-				else{
 								
-							?>			
 <div class="form-group">
 
 <label class="col-sm-4 control-label"><h4 style="color:white" align="left">Room Related info </h4> </label>
@@ -442,23 +413,13 @@ $uid=$_SESSION['login'];
 </select> </div>
 </div>
 
-<?php	
-$aid=$_SESSION['id'];
-	$ret="select * from userregistration where id=?";
-		$stmt= $mysqli->prepare($ret) ;
-	 $stmt->bind_param('i',$aid);
-	 $stmt->execute() ;//ok
-	 $res=$stmt->get_result();
-	 //$cnt=1;
-	   while($row=$res->fetch_object())
-	  {
-	  	?>
+
 
 <div class="form-group">
 <label class="col-sm-2 control-label">Registration No : </label>
 <div class="col-sm-8">
 
-<input type="text" name="regno" id="regno"  class="form-control" value="<?php echo $row->regNo;?>" readonly >
+<input type="text" name="regno" id="regno"  class="form-control" value="" required >
 
 </div>
 </div>
@@ -468,7 +429,7 @@ $aid=$_SESSION['id'];
 <label class="col-sm-2 control-label">Name : </label>
 <div class="col-sm-8">
 
-<input type="text" name="name" id="name"  class="form-control" value="<?php echo $row->name;?>" >
+<input type="text" name="name" id="name"  class="form-control" value="" required>
 
 </div>
 </div>
@@ -477,8 +438,12 @@ $aid=$_SESSION['id'];
 <div class="form-group">
 <label class="col-sm-2 control-label">Gender</label>
 <div class="col-sm-8">
+<select name="gender" id="gender"class="form-control" required> 
 
-<input type="text" name="gender" value="<?php echo $row->gender;?>" class="form-control" readonly>
+<option value="">Select Gender</option> 
+<option value="male">Male</option>
+<option value="female">Female</option>
+</select> 
 
 </div>
 </div>
@@ -487,7 +452,7 @@ $aid=$_SESSION['id'];
 <label class="col-sm-2 control-label">Contact No : </label>
 <div class="col-sm-8">
 
-<input type="text" name="contact" id="contact" value="<?php echo $row->contactNo;?>"  class="form-control" readonly>
+<input type="text" name="contact" id="contact" value=""  class="form-control" required>
 
 </div>
 </div>
@@ -497,11 +462,11 @@ $aid=$_SESSION['id'];
 <label class="col-sm-2 control-label">Email id : </label>
 <div class="col-sm-8">
 
-<input type="email" name="email" id="email"  class="form-control" value="<?php echo $row->email;?>"  readonly>
+<input type="email" name="email" id="email"  class="form-control" value="" required>
 
 </div>
 </div>
-<?php } ?>
+
 <div class="form-group">
 <label class="col-sm-2 control-label">Emergency Contact: </label>
 <div class="col-sm-8">
@@ -621,7 +586,7 @@ while($row=$res->fetch_object())
 <input type="submit" name="submit" Value="Register" class="btn btn-primary" style="align:center; background:#009688;">
 </div>
 </form>
-<?php } ?>
+
 
 									</div>
 									</div>

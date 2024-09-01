@@ -48,7 +48,7 @@ $password=$_POST['password'];
 
     if ($regNoCount > 0) {
         echo "<script>alert('Registration number is already associated with a different email. Cannot submit the form.');</script>";
-        exit;
+        exit; 
     }
 
     // Insert new user if all checks pass
