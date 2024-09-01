@@ -48,7 +48,7 @@ check_login();
 
 				<!-- Student Male Card -->
 				<div class="col-xl-3 col-md-6 mb-4">
-					<div class="card border-left-primary shadow-sm h-100 py-2">
+					<div class="card border-left-primary shadow h-100 py-2">
 						<div class="card-body">
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
@@ -83,7 +83,7 @@ $stmt->close();
 
 				<!-- Student Female Card  -->
 				<div class="col-xl-3 col-md-6 mb-4">
-					<div class="card border-left-success shadow-sm h-100 py-2">
+					<div class="card border-left-success shadow h-100 py-2">
 						<div class="card-body">
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
@@ -117,7 +117,7 @@ $stmt->close();
 
 				<!-- Alinkar Card -->
 				<div class="col-xl-3 col-md-6 mb-4">
-					<div class="card border-left-info shadow-sm h-100 py-2">
+					<div class="card border-left-info shadow h-100 py-2">
 						<div class="card-body">
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
@@ -163,7 +163,7 @@ $stmt->close();
 
 				<!-- Mudra -->
 				<div class="col-xl-3 col-md-6 mb-4">
-					<div class="card border-left-warning shadow-sm h-100 py-2">
+					<div class="card border-left-warning shadow h-100 py-2">
 						<div class="card-body">
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">

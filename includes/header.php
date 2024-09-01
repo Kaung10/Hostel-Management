@@ -5,8 +5,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 
-
-
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -27,7 +25,7 @@
 	rel="stylesheet"
 	/>
 
-	<style>
+  <style>
 		ul li a:hover 
 	{ 
 		
@@ -35,12 +33,15 @@
 		border radius: none !important; 
 	}
 	</style>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+
 </head>
 
 <body>
 	
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg rounded-0 bg-primary sticky-top">
+<nav class="navbar navbar-expand-lg rounded-0 bg-primary sticky-top shadow-sm">
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Toggle button -->
@@ -59,20 +60,19 @@
     <!-- Right elements -->
       <!-- Avatar -->
       <div class="dropdown px-0">
-      <a
-          data-mdb-dropdown-init
+        <a
           class="dropdown-toggle d-flex align-items-center px-0 hidden-arrow"
           href="#"
           id="navbarDropdownMenuAvatar"
           role="button"
           aria-expanded="false"
         >
-  
           <img
-            src="../img/ts-avatar.jpg"
+            src="img/avatar.jpg"
+            style="margin-right:80px;"
             class="border border-3 border-white rounded-circle"
-            width="50%" 
-			      height="50%"
+            width="55px" 
+            height="55px"
             alt="Black and White Portrait of a Man"
           />
         </a>
@@ -81,14 +81,13 @@
           aria-labelledby="navbarDropdownMenuAvatar"
         >
           <li>
-            <a class="dropdown-item btn fs-5 text-primary bg-white " href="my-profile.php">My profile</a>
+            <a class="dropdown-item btn fs-5 text-primary bg-white" href="my-profile.php">My profile</a>
           </li>
           <li>
             <a class="dropdown-item fs-5 text-primary bg-white" href="logout.php">Logout</a>
           </li>
         </ul>
       </div>
-    </div>
     <!-- Right elements -->
   </div>
   <!-- Container wrapper -->
@@ -102,4 +101,12 @@
 	type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"
 	></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('navbarDropdownMenuAvatar').addEventListener('click', function (event) {
+            event.preventDefault();
+            let dropdownMenu = this.nextElementSibling;
+            dropdownMenu.classList.toggle('show');
+        });
+    </script>
 </html>

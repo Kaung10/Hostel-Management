@@ -67,11 +67,12 @@
           role="button"
           aria-expanded="false"
         >
-          <img
-            src="../img/ts-avatar.jpg"
+        <img
+            src="../img/avatar.jpg"
+            style="margin-right:80px;"
             class="border border-3 border-white rounded-circle"
-            width="45%" 
-			      height="45%"
+            width="55px" 
+            height="55px"
             alt="Black and White Portrait of a Man"
           />
         </a>

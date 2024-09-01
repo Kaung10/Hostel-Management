@@ -66,7 +66,7 @@ $rc=$stmt->bind_param('sssiss',$regno,$name,$gender,$contactno,$emailid,$passwor
 $stmt->execute();
 echo"<script>alert('Student Succssfully register');</script>";
 
-echo"<script>window.location.href = 'index.php';</script>";
+echo"<script>window.location.href = 'dashboard.php';</script>";
 }
 catch(Exception $e)
 {

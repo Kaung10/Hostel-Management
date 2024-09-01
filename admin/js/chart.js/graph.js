@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
             new Chart(chart, {
                 type: "bar",
                 data: {
-                    labels: ["Semester", "Semester", "Semester", "Semester", "Semester", "Semester"],
+                    labels: ["Semester", "Semester", "Semester", "Semester", "Semester", "Semester", "Semester"],
                     datasets: [
                         {
                             label: "Semester",
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             borderWidth: 0,
                             pointRadius: 0,
                             backgroundColor: "#52be80",
-                            data: [25, 20, 30, 22, 50, 100],
+                            data: [25, 20, 30, 22, 50, 100, 38],
                             maxBarThickness: 20,
                         },
                     ],
