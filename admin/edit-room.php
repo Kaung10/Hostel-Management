@@ -7,11 +7,11 @@ check_login();
 if(isset($_POST['submit']))
 {
 $seater=$_POST['seater'];
-$fees=$_POST['fees'];
+$hostel=$_GET['hostel'];
 $id=$_GET['id'];
-$query="update alinkar set seater=?,fees=? where id=?";
+$query="update $hostel set seater=? where id=?";
 $stmt = $mysqli->prepare($query);
-$rc=$stmt->bind_param('iii',$seater,$fees,$id);
+$rc=$stmt->bind_param('ii',$seater,$id);
 $stmt->execute();
 echo"<script>alert('Room Details has been Updated successfully');</script>";
 }
@@ -29,7 +29,7 @@ echo"<script>alert('Room Details has been Updated successfully');</script>";
 	<title>Edit Room Details</title>
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">>
+	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
 	<link rel="stylesheet" href="css/bootstrap-social.css">
 	<link rel="stylesheet" href="css/bootstrap-select.css">
 	<link rel="stylesheet" href="css/fileinput.min.css">
@@ -58,7 +58,8 @@ echo"<script>alert('Room Details has been Updated successfully');</script>";
 										<form method="post" class="form-horizontal">
 												<?php	
 												$id=$_GET['id'];
-	$ret="select * from alinkar where id=?";
+												$hostel=$_GET['hostel'];
+	$ret="select * from $hostel where id=?";
 		$stmt= $mysqli->prepare($ret) ;
 	 $stmt->bind_param('i',$id);
 	 $stmt->execute() ;//ok
@@ -82,9 +83,9 @@ echo"<script>alert('Room Details has been Updated successfully');</script>";
 						 </div>
 						</div>
 <div class="form-group">
-									<label class="col-sm-2 control-label">Fees (PM) </label>
+									<label class="col-sm-2 control-label">Hostel Name</label>
 									<div class="col-sm-8">
-									<input type="text" class="form-control" name="fees" value="<?php echo $row->fees;?>" >
+									<input type="text" class="form-control" name="hostel" value="<?php echo $hostel;?>" disabled>
 												</div>
 											</div>
 

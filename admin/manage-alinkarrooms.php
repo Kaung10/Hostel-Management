@@ -159,7 +159,7 @@ $namesList = implode(', ', $names);
 ?>
 <td><?php echo htmlspecialchars($namesList, ENT_QUOTES, 'UTF-8'); ?></td>
 
-<td><a href="edit-room.php?id=<?php echo $row->id;?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+<td><a href="edit-room.php?id=<?php echo $row->id; ?>&hostel=alinkar"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
 <a href="manage-alinkarrooms.php?del=<?php echo $row->id;?>" onclick="return confirm('Do you want to delete');"><i class="fa fa-close"></i></a></td>
 										</tr>
 									<?php
