@@ -60,7 +60,7 @@ if (!empty($_POST["room"]) && !empty($_POST["gender"])) {
     if ($res->num_rows > 0) {
         while ($row = $res->fetch_object()) {
             echo "<option value='{$row->seater}'>{$row->seater}</option>";
-            if($room->seater == 3 )
+            if($row->seater === 3 )
                 {
                     echo "<option value='2'>2</option>";
                 }
