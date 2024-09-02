@@ -452,7 +452,7 @@ $('#fpm').val(data);
 <label class="col-sm-2 control-label">Contact No : </label>
 <div class="col-sm-8">
 
-<input type="text" name="contact" id="contact" value=""  class="form-control" required>
+<input type="text" name="contact" id="contact" value=""  class="form-control" required="required" pattern="09[0-9]{7,9}" title="09XXXXXXXXX">
 
 </div>
 </div>
@@ -470,7 +470,7 @@ $('#fpm').val(data);
 <div class="form-group">
 <label class="col-sm-2 control-label">Emergency Contact: </label>
 <div class="col-sm-8">
-<input type="text" name="econtact" id="econtact"  class="form-control" required="required">
+<input type="text" name="econtact" id="econtact"  class="form-control" required="required" pattern="09[0-9]{7,9}" title="09XXXXXXXXX">
 </div>
 </div>
 
@@ -491,7 +491,7 @@ $('#fpm').val(data);
 <div class="form-group">
 <label class="col-sm-2 control-label">Guardian Contact no : </label>
 <div class="col-sm-8">
-<input type="text" name="gcontact" id="gcontact"  class="form-control" required="required">
+<input type="text" name="gcontact" id="gcontact"  class="form-control" required="required" pattern="09[0-9]{7,9}" title="09XXXXXXXXX">
 </div>
 </div>	
 

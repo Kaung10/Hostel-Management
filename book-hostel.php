@@ -521,7 +521,7 @@ $aid=$_SESSION['id'];
 <div class="form-group">
 <label class="col-sm-2 control-label">Emergency Contact : </label>
 <div class="col-sm-8 mt-3">
-<input type="text" name="econtact" id="econtact"  class="form-control" required="required">
+<input type="text" name="econtact" id="econtact"  class="form-control" required="required" pattern="09[0-9]{7,9}" title="09XXXXXXXXX">
 </div>
 </div>
 
@@ -542,7 +542,7 @@ $aid=$_SESSION['id'];
 <div class="form-group">
 <label class="col-sm-2 control-label">Guardian Contact No. : </label>
 <div class="col-sm-8 mt-3">
-<input type="text" name="gcontact" id="gcontact"  class="form-control" required="required">
+<input type="text" name="gcontact" id="gcontact"  class="form-control" required="required" pattern="09[0-9]{7,9}" title="09XXXXXXXXX">
 </div>
 </div>	
     

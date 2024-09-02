@@ -80,7 +80,7 @@ if ($stmt1->fetch()) {
     $_SESSION['login'] = $dbEmail;
 }
 $stmt1->close();
-echo"<script>window.location.href = 'book-hsotel.php';</script>";
+echo"<script>window.location.href = 'book-hostel.php';</script>";
 
 }
 
