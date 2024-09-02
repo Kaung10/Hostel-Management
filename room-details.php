@@ -44,9 +44,9 @@ check_login();
             <div class="container-fluid">
                 <div class="row" id="print">
                     <div class="col-md-12">
-                        <h2 class="page-title" style="margin-top:3%">Rooms Details</h2>
+                        <h2 class="page-title ms-3" style="margin-top:3%">Rooms Details</h2>
                         <div class="panel panel-default">
-                            <div class="panel-heading" style="background:#009688; color:white;">All Room Details</div>
+                            <div class="panel-heading text-white bg-success bg-opacity-75">All Room Details</div>
                             <div class="panel-body">
                                 <span style="float:left">
                                     <i class="fa fa-print fa-2x" aria-hidden="true" onclick="CallPrint()" style="cursor:pointer" title="Print the Report"></i>
@@ -150,7 +150,7 @@ check_login();
 											
                                         </tr>
                                         <tr>
-                                            <td colspan="6" style="color:red"><h4>Personal Info</h4></td>
+                                            <td class="text-center" colspan="6" style="color:red"><h4>Personal Info</h4></td>
                                         </tr>
                                         <tr>
                                             <td><b>Reg No. :</b></td>
@@ -181,7 +181,7 @@ check_login();
                                             <td colspan="6">0<?php echo htmlspecialchars($row->guardianContactno); ?></td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" style="color:#009688;"><h4>Addresses</h4></td>
+                                            <td class="text-center" colspan="6" style="color:#009688;"><h4>Addresses</h4></td>
                                         </tr>
                                         <tr>
                                             <td><b>Correspondence Address</b></td>
@@ -194,7 +194,7 @@ check_login();
                                             <td colspan="2">
                                                 <?php echo htmlspecialchars($row->pmntAddress); ?><br />
                                                 <?php echo htmlspecialchars($row->pmntCity); ?><br />
-                                                <?php echo htmlspecialchars($row->pmnatetState); ?>
+                                                <?php echo htmlspecialchars($row->pmntState); ?>
                                             </td>
                                         </tr>
                                         <?php

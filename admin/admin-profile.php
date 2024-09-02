@@ -4,7 +4,7 @@ include('includes/config.php');
 include('includes/checklogin.php');
 check_login();
 //code for update email id
-if($_POST['update'])
+if(isset($_POST['update']))
 {
 $email=$_POST['emailid'];
 $aid=$_SESSION['id'];
@@ -56,7 +56,7 @@ $chngpwd1->bind_param('ssi',$np,$udate,$ai);
 	<title>Admin Profile</title>
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">>
+	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
 	<link rel="stylesheet" href="css/bootstrap-social.css">
 	<link rel="stylesheet" href="css/bootstrap-select.css">
 	<link rel="stylesheet" href="css/fileinput.min.css">
@@ -144,7 +144,7 @@ $aid=$_SESSION['id'];
 
 
 												<div class="col-sm-8 col-sm-offset-2">
-													<button class="btn btn-default" type="submit">Cancel</button>
+													<button class="btn btn-danger me-3" type="reset">Cancel</button>
 													<input class="btn btn-primary" type="submit" name="update" value="Update Profile">
 												</div>
 											</div>
@@ -188,7 +188,7 @@ $aid=$_SESSION['id'];
 
 
 												<div class="col-sm-6 col-sm-offset-4">
-													<button class="btn btn-default" type="submit">Cancel</button>
+													<button class="btn btn-danger me-3" type="reset">Cancel</button>
 													<input type="submit" name="changepwd" Value="Change Password" class="btn btn-primary">
 											</div>
 

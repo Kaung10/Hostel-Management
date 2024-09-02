@@ -34,7 +34,7 @@ try{
 
 			$mysqli -> query($log);
 
-			header("location:dashboard.php");
+			header("location:book-hostel.php");
 			exit();
 		}
 		else

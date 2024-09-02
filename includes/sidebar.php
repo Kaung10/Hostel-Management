@@ -80,12 +80,11 @@
 </head>
 <body>
 
-        <nav class="ts-sidebar bg-white ">
+        <nav class="ts-sidebar bg-white shadow">
 			<ul class="ts-sidebar-menu bg-white">
 			
 				<li class="ts-label mt-4 text-primary  bg-white">Main</li>
-				<li><a href="dashboard.php" class="text-primary nav_link  bg-white"><i class="fa fa-dashboard text-primary"></i> Dashboard</a></li>
-				<li><a href="book-hostel.php" class="text-primary nav_link  bg-white"><i class="fa fa-file-o text-primary"></i>Book Hostel</a></li>
+				<li><a href="book-hostel.php" class="text-primary nav_link  bg-white"><i class="fa-solid fa-house text-primary"></i>Home</a></li>
                 <li><a href="room-details.php" class="text-primary nav_link  bg-white"><i class="fa fa-file-o text-primary"></i>Room Details</a></li>
 				<li><a href="my-profile.php" class="text-primary nav_link  bg-white"><i class="fa fa-user text-primary"></i>My Profile</a></li>
                 <li><a href="change-password.php" class="text-primary nav_link  bg-white"><i class="fa fa-files-o text-primary"></i>Change Password</a></li>

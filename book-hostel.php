@@ -94,6 +94,8 @@ if(isset($_POST['submit']))
 	<link rel="stylesheet" href="css/fileinput.min.css">
 	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
 	<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+
 <script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>
 <script type="text/javascript" src="js/validation.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
@@ -234,20 +236,17 @@ $(document).ready(function () {
 		<?php include('includes/sidebar.php');?>
 		<div class="content-wrapper">
 			<div class="container-fluid">
-
 				<div class="row">
-					<div class="col-md-12">
-					
-						<h2 class="page-title">Registration </h2>
-
-						<div class="row">
-							<div class="col-md-12">
-								<div class="panel panel-primary">
-									<div class="panel-heading" style="background:#009688">Fill all Info</div>
-									<div class="panel-body">
-										<form method="post" action="" class="form-horizontal">
-							<?php
-$uid=$_SESSION['login'];
+						<h2 class="page-title ms-3">Registration </h2>
+			            <div class="mt-5">
+                        <div class="col-md-8 offset-2">
+                    <div class="card mx-4 shadow mt-3">
+                    <div class="card-header bg-success bg-opacity-75 text-center text-white fs-3">
+                        Booking Request
+                    </div>
+                    <div class="card-body my-4">
+                        <p class="card-text mb-2"><?php
+                        $uid=$_SESSION['login'];
 							 $stmt=$mysqli->prepare("SELECT emailid,request FROM roomregistration WHERE emailid=? || regno=? ");
 				$stmt->bind_param('ss',$uid,$uid);
 				$stmt->execute();
@@ -257,37 +256,28 @@ $uid=$_SESSION['login'];
 				if($rs)
 				{ 
                     if($requestnum===0){?>
-			<h3 style="color: red" align="center">Unfortunately, your request has been CANCELLED.</h3>
+			<h3 style="color: red" align="center">Unfortunately, your booking request has been CANCELLED.</h3>
         <?php }else if($requestnum===1){?>
-            <h3 style="color: green" align="center">Your request has been successfully ACCEPTED.</h3>
+            <h3 style="color: green" align="center">Your booking request has been successfully ACCEPTED.</h3>
         <?php }else if($requestnum===2){?>
-            <h3 style="color: lightblue" align="center">Your request is currently in PROGRESS.</h3>
-        <?php } ?>
-			<div align="center">
-				<div class="col-md-4">&nbsp;</div>
-			<div class="col-md-4">
-										<div class="panel panel-default">
-											<div class="panel-body bk-success text-light">
-												<div class="stat-panel text-center">
+            <h3 style="color: lightblue" align="center">Your booking request is currently in PROGRESS.</h3>
+        <?php } ?></p>
+                        <div class="text-center">
+                        <a href="room-details.php" class="btn btn-lg btn-primary mt-4 py-3">View Your Room Details</a>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-success bg-opacity-75 pb-4">
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+					</div>
+					</div>
+				<?php } else { ?>			
 
-												<div class="stat-panel-number h1 ">My Room</div>
-													
-												</div>
-											</div>
-											<a href="room-details.php" class="block-anchor panel-footer text-center">See All &nbsp; <i class="fa fa-arrow-right"></i></a>
-										</div>
-									</div>
-								</div>
-				<?php } else {
-								
-							?>			
-<div class="form-group">
-<label class="col-sm-4 control-label"><h4 style="color:white" align="left">Room Related info </h4> </label>
-				
-
-</div>
-
-<?php
+<div class="row">
+    <div class="col-12">
+    <?php
  $hostelName = "";
     if($genderfilter === 'male'){
         $hostelName = "alinkar";
@@ -295,12 +285,9 @@ $uid=$_SESSION['login'];
     else if ($genderfilter === 'female'){
         $hostelName = "mudra"; 
            }
-    
-
 ?>
 
-
-
+<form method="post" action="" class="form-horizontal">
 <div class="form-group">
 <label class="col-sm-2 control-label">Hostel Name : </label>
 <div class="col-sm-8">
@@ -442,7 +429,7 @@ $stmt->close();
 
 <div class="form-group">
 <label class="col-sm-2 control-label">Food Fee Per Month</label>
-<div class="col-sm-8">
+<div class="col-sm-8 mt-3">
 <input type="text" name="" id=""  class="form-control" value="<?php echo htmlspecialchars($meal_expenses); ?>" readonly="true">
 </div>
 </div>
@@ -495,7 +482,7 @@ $aid=$_SESSION['id'];
 
 <div class="form-group">
 <label class="col-sm-2 control-label">Registration No : </label>
-<div class="col-sm-8">
+<div class="col-sm-8 mt-3">
 <input type="text" name="regno" id="regno"  class="form-control" value="<?php echo $row->regNo;?>" readonly >
 </div>
 </div>
@@ -532,42 +519,37 @@ $aid=$_SESSION['id'];
 </div>
 <?php } ?>
 <div class="form-group">
-<label class="col-sm-2 control-label">Emergency Contact: </label>
-<div class="col-sm-8">
+<label class="col-sm-2 control-label">Emergency Contact : </label>
+<div class="col-sm-8 mt-3">
 <input type="text" name="econtact" id="econtact"  class="form-control" required="required">
 </div>
 </div>
 
 <div class="form-group">
 <label class="col-sm-2 control-label">Guardian  Name : </label>
-<div class="col-sm-8">
+<div class="col-sm-8 mt-3">
 <input type="text" name="gname" id="gname"  class="form-control" required="required">
 </div>
 </div>
 
 <div class="form-group">
 <label class="col-sm-2 control-label">Guardian  Relation : </label>
-<div class="col-sm-8">
+<div class="col-sm-8 mt-3">
 <input type="text" name="grelation" id="grelation"  class="form-control" required="required">
 </div>
 </div>
 
 <div class="form-group">
-<label class="col-sm-2 control-label">Guardian Contact no : </label>
-<div class="col-sm-8">
+<label class="col-sm-2 control-label">Guardian Contact No. : </label>
+<div class="col-sm-8 mt-3">
 <input type="text" name="gcontact" id="gcontact"  class="form-control" required="required">
 </div>
 </div>	
-
-<div class="form-group">
-<label class="col-sm-3 control-label"><h4 style="color: white" align="left">Correspondense Address </h4> </label>
-</div>
-
-
+    
 <div class="form-group">
 <label class="col-sm-2 control-label">Address : </label>
-<div class="col-sm-8">
-<textarea  rows="5" name="address"  id="address" class="form-control" required="required"></textarea>
+<div class="col-sm-8 mt-3">
+<textarea  rows="5" name="address"  id="address" class="form-control" placeholder="Type your current address....." required="required"></textarea>
 </div>
 </div>
 
@@ -579,7 +561,7 @@ $aid=$_SESSION['id'];
 </div>	
 
 <div class="form-group">
-<label class="col-sm-2 control-label">State </label>
+<label class="col-sm-2 control-label">State : </label>
 <div class="col-sm-8">
 <select name="state" id="state"class="form-control" required> 
 <option value="">Select State</option>
@@ -594,25 +576,21 @@ while($row=$res->fetch_object())
 <?php } ?>
 </select> </div>
 </div>							
-
-
-<div class="form-group">
-<label class="col-sm-3 control-label"><h4 style="color: white" align="left">Permanent Address </h4> </label>
+<br>
+<div class="form-group ms-5">
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" name="adcheck" value="1">
+  <label class="form-check-label" for="flexCheckDefault">
+    Permanent Address same as Current address
+  </label>
 </div>
-
-
-<div class="form-group">
-<label class="col-sm-5 control-label">Permanent Address same as Correspondense address : </label>
-<div class="col-sm-4">
-<input type="checkbox" name="adcheck" value="1"/>
-</div>
-</div>
+</div> 
 
 
 <div class="form-group">
 <label class="col-sm-2 control-label">Address : </label>
-<div class="col-sm-8">
-<textarea  rows="5" name="paddress"  id="paddress" class="form-control" required="required"></textarea>
+<div class="col-sm-8 mt-3">
+<textarea  rows="5" name="paddress"  id="paddress" placeholder="Type your permanent address....." class="form-control" required="required"></textarea>
 </div>
 </div>
 
@@ -624,7 +602,7 @@ while($row=$res->fetch_object())
 </div>	
 
 <div class="form-group">
-<label class="col-sm-2 control-label">State </label>
+<label class="col-sm-2 control-label">State : </label>
 <div class="col-sm-8">
 <select name="pstate" id="pstate"class="form-control" required> 
 <option value="">Select State</option>
@@ -643,25 +621,16 @@ while($row=$res->fetch_object())
 
 
 
-<div class="col-sm-6 col-sm-offset-4">
-<button class="btn btn-default" type="submit" style="align:center;">Cancel</button>
-<input type="submit" name="submit" Value="Register" class="btn btn-primary" style="align:center; background:#009688;">
+<div class="col-sm-6 col-sm-offset-4 mt-3">
+<button class="btn btn-lg btn-danger me-3" type="submit" style="align:center;">Cancel</button>
+<input type="submit" name="submit" Value="Register" class="btn btn-lg btn-success">
 </div>
 </form>
+    </div>
+</div>
 <?php } ?>
-
-									</div>
-									</div>
-								</div>
-							</div>
-						</div>
-							</div>
-						</div>
-					</div>
-				</div> 	
-			</div>
-		</div>
-	</div>
+</div>
+</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap-select.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -719,6 +688,9 @@ error:function (){}
 });
 }
 </script>
-
+<script
+	type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"
+	></script>
 
 </html>

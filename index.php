@@ -9,7 +9,7 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 </head>
 <body>
-    <div class="banner">
+<div class="banner">
         <div class="navbar">
             <img src="logo.svg" class="logo">
             <ul>

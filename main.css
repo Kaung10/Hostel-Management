@@ -12,7 +12,7 @@
     background-size:cover;
     background-repeat: no-repeat;
 }
-/* .navbar{
+.navbar{
     width:85% ;
     margin: auto; 
     padding: 35px 0; 
@@ -20,7 +20,7 @@
     align-items: center ; 
     justify-content: space-between; 
 
-} */
+}
 
 .logo{ 
     width:120px;

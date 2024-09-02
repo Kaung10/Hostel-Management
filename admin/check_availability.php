@@ -44,20 +44,19 @@ echo "<span style='color:red'> Registration number already exist. Please try aga
 if(!empty($_POST["oldpassword"])) 
 {
 $pass=$_POST["oldpassword"];
-$result ="SELECT password FROM userregistration WHERE password=?";
+$result ="SELECT password FROM admin WHERE password=?";
 $stmt = $mysqli->prepare($result);
 $stmt->bind_param('s',$pass);
 $stmt->execute();
-$stmt -> bind_result($result);
+$stmt -> bind_result($opass);
 $stmt -> fetch();
-$opass=$result;
-if($opass==$pass) 
-echo "<span style='color:green'> Password  matched .</span>";
-else echo "<span style='color:red'> Password Not matched</span>";
+if($opass==$pass){
+echo "<span style='color:green'> Password  matched .</span>";}
+else{ echo "<span style='color:red'> Password Not matched .</span>";}
 }
 
 // For room availbilty
-if(!empty($_POST["roomno"] && !empty($_POST["gender"]))) 
+if(!empty($_POST["roomno"]) && !empty($_POST["gender"])) 
 {
 $gender=$_POST['gender'];
 $roomno=$_POST["roomno"];

@@ -41,7 +41,7 @@
 <body>
 	
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg rounded-0 bg-primary sticky-top shadow-sm">
+<nav class="navbar navbar-expand-lg rounded-0 bg-primary sticky-top shadow">
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Toggle button -->
