@@ -144,7 +144,7 @@ if (isset($_GET['del'])) {
                                     <tbody>
                                         <?php
                                         $aid = $_SESSION['id'];
-                                        $ret = "select * from roomregistration";
+                                        $ret = "select * from roomregistration where request = 1";
                                         $stmt = $mysqli->prepare($ret);
                                         $stmt->execute();
                                         $res = $stmt->get_result();

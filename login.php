@@ -131,7 +131,7 @@ return true;
                     
                                    
                     <div class="forget">
-                        <label for=""><input type="checkbox">Remember Me<a href="forgot-password.php" class="text-light">Forgot password?</a></label>
+                        <label for=""><input type="checkbox">Remember Me<a href="forgot-password.php" class="text-light"><span style="display: inline-block; margin-left: 60px;"></span>Forgot password?</a></label>
                         
                         
                     </div>
