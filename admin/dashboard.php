@@ -56,7 +56,7 @@ check_login();
 									<div class="text-lg font weight-bold text-gray-800">
 									
 									<?php
-$result ="SELECT count(*) FROM roomregistration WHERE Gender='Male' ";
+$result ="SELECT count(*) FROM roomregistration WHERE Gender='Male' AND request=1";
 $stmt = $mysqli->prepare($result);
 $stmt->execute();
 $stmt->bind_result($count);
@@ -91,7 +91,7 @@ $stmt->close();
 									<div class="text-lg font weight-bold text-gray-800">
 									
 									<?php
-$result ="SELECT count(*) FROM roomregistration WHERE Gender='Female' ";
+$result ="SELECT count(*) FROM roomregistration WHERE Gender='Female' AND request=1";
 $stmt = $mysqli->prepare($result);
 $stmt->execute();
 $stmt->bind_result($count);

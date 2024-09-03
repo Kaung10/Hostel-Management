@@ -42,7 +42,8 @@ $query = "
         SUM(CASE WHEN semester = 'Semester 8' THEN 1 ELSE 0 END) AS semester8,
         SUM(CASE WHEN semester = 'Semester 9' THEN 1 ELSE 0 END) AS semester9,
         SUM(CASE WHEN semester = 'Semester 10' THEN 1 ELSE 0 END) AS semester10
-    FROM roomregistration;
+    FROM roomregistration
+    WHERE request != 0;
 ";
 
 if ($stmt = $mysqli->prepare($query)) {
