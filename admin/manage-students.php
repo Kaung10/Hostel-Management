@@ -114,7 +114,7 @@ if (isset($_GET['del'])) {
                                     <option value="all">Select</option>
                                     <?php
                                     for ($i = 1; $i <= 10; $i++) {
-                                        echo "<option value='$i'>$i</option>";
+                                        echo "<option value='Semester $i'>$i</option>";
                                     }
                                     ?>
                                 </select>
