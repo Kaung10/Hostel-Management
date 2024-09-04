@@ -101,7 +101,7 @@ return true;
 				<div class="row">
 					<div class="col-md-12">
 					
-						<h2 class="page-title">Admin Profile</h2>
+						<h2 class="page-title mb-5">Admin Profile</h2>
 	<?php	
 $aid=$_SESSION['id'];
 	$ret="select * from admin where id=?";
@@ -115,27 +115,25 @@ $aid=$_SESSION['id'];
 	  	?>
 						<div class="row">
 							<div class="col-md-6">
-								<div class="panel panel-default">
-									<div class="panel-heading" style="background:#009688; color:white;">Admin profile details</div>
+								<div class="panel panel-default border-0 shadow">
+									<div class="panel-heading fs-6 bg-success mb-3" style="color:white;">Admin profile details</div>
 									<div class="panel-body">
 										<form method="post" class="form-horizontal">
-											
-											<div class="hr-dashed"></div>
 											<div class="form-group">
-												<label class="col-sm-2 control-label">Username </label>
+												<label class="col-sm-2 control-label">Username :</label>
 												<div class="col-sm-10">
 													<input type="text" value="<?php echo $row->username;?>" disabled class="form-control"><span class="help-block m-b-none">
 													Username can't be changed.</span> </div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-2 control-label">Email</label>
+												<label class="col-sm-2 control-label">Email :</label>
 												<div class="col-sm-10">
 	<input type="email" class="form-control" name="emailid" id="emailid" value="<?php echo $row->email;?>" required="required">
 						 
 												</div>
 											</div>
 <div class="form-group">
-									<label class="col-sm-2 control-label">Reg Date</label>
+									<label class="col-sm-2 control-label">Reg Date :</label>
 									<div class="col-sm-10">
 									<input type="text" class="form-control" value="<?php echo $row->reg_date;?>" disabled >
 												</div>
@@ -143,9 +141,9 @@ $aid=$_SESSION['id'];
 
 
 
-												<div class="col-sm-8 col-sm-offset-2">
-													<button class="btn btn-danger me-3" type="reset">Cancel</button>
-													<input class="btn btn-primary" type="submit" name="update" value="Update Profile">
+												<div class="col-sm-8 col-sm-offset-2 text-center">
+													<button class="btn btn-lg btn-danger me-3" type="reset">Cancel</button>
+													<input class="btn btn-lg btn-primary" type="submit" name="update" value="Update Profile">
 												</div>
 											</div>
 
@@ -155,8 +153,8 @@ $aid=$_SESSION['id'];
 								</div>
 									<?php }  ?>
 								<div class="col-md-6">
-								<div class="panel panel-default">
-									<div class="panel-heading">Change Password</div>
+								<div class="panel panel-default border-0 shadow">
+									<div class="panel-heading bg-success fs-6 text-white">Change Password</div>
 									<div class="panel-body">
 				<form method="post" class="form-horizontal" name="changepwd" id="change-pwd" onSubmit="return valid();">
 
@@ -165,31 +163,30 @@ $aid=$_SESSION['id'];
 
 											<p style="color: red"><?php echo htmlentities($_SESSION['msg']); ?><?php echo htmlentities($_SESSION['msg']=""); ?></p>
 											<?php } ?>
-											<div class="hr-dashed"></div>
-											<div class="form-group">
-												<label class="col-sm-4 control-label">old Password </label>
+											<div class="form-group mt-4">
+												<label class="col-sm-3 control-label">Old Password : </label>
 												<div class="col-sm-8">
 				<input type="password" value="" name="oldpassword" id="oldpassword" class="form-control" onBlur="checkpass()" required="required">
 									 <span id="password-availability-status" class="help-block m-b-none" style="font-size:12px;"></span> </div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-4 control-label">New Password</label>
+												<label class="col-sm-3 control-label">New Password :</label>
 												<div class="col-sm-8">
-											<input type="password" class="form-control" name="newpassword" id="newpassword" value="" required="required">
+											<input type="password" class="form-control mb-2" name="newpassword" id="newpassword" value="" required="required">
 												</div>
 											</div>
-<div class="form-group">
-									<label class="col-sm-4 control-label">Confirm Password</label>
+											<div class="form-group">
+									<label class="col-sm-3 control-label">Confirm Password :</label>
 									<div class="col-sm-8">
-				<input type="password" class="form-control" value="" required="required" id="cpassword" name="cpassword" >
+				<input type="password" class="form-control mb-2" value="" required="required" id="cpassword" name="cpassword" >
 												</div>
 											</div>
 
 
 
-												<div class="col-sm-6 col-sm-offset-4">
-													<button class="btn btn-danger me-3" type="reset">Cancel</button>
-													<input type="submit" name="changepwd" Value="Change Password" class="btn btn-primary">
+												<div class="col-sm-8 col-sm-offset-2 text-center mb-2">
+													<button class="btn btn-lg btn-danger me-3" type="reset">Cancel</button>
+													<input type="submit" name="changepwd" Value="Change Password" class="btn btn-lg btn-primary">
 											</div>
 
 										</form>

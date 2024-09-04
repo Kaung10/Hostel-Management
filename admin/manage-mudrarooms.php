@@ -78,32 +78,35 @@ if(isset($_GET['del']))
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12">
-						<h2 class="page-title" style="margin-top: 4%">Room Management</h2>
+						<h2 class="page-title mt-3 ms-2">Room Management</h2>
 						<div class="panel panel-default">
-							<div class="panel-heading" style="color:white; background:#009688;">All Room Details</div>
+							<div class="panel-heading bg-success fs-6" style="color:white;">All Room Details</div>
 
 							<div class="panel-body">
 
 
 								<table >
 
-    
-
-    <label for="filterOne">Check availability  :</label>
-    <select id="filterOne" onchange="filterTable()">
+    <div class="d-flex">
+    <label class="mt-2 me-3"for="filterOne">Check availability  :</label>
+    <div class="">
+    <select class="form-select" id="filterOne" onchange="filterTable()">
         <option value="all">All seat statuses</option>
         <option value="1">1 seat available</option>
         <option value="2">2 seats available</option>
         <option value="3">3 seats available</option>
         <option value="full">All seats full</option>
     </select>
-
-    <label for="filterTwo" class="seat">Choose seat  :</label>
-    <select id="filterTwo" onchange="filterTable()">
+    </div>
+    <label class="mt-2 mx-3" for="filterTwo" class="seat">Choose seat  :</label>
+    <div class="">
+    <select class="form-select" id="filterTwo" onchange="filterTable()">
         <option value="all">Seater 2 or 3</option>
         <option value="2">Seater 2</option>
         <option value="3">Seater 3</option>
     </select>
+    </div>
+    </div>
 
     <table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
         <thead>
@@ -141,7 +144,7 @@ while($row=$res->fetch_object())
 <td><?php echo $row->available;?></td>
 <?php
 $names = [];
-$query = "SELECT name FROM roomregistration WHERE roomno=? AND gender='female'";
+$query = "SELECT name FROM roomregistration WHERE roomno=? AND gender='female' AND request!=0";
 if ($stmt = $mysqli->prepare($query)) {
     $stmt->bind_param('i', $roomno);
     $stmt->execute();

@@ -107,10 +107,13 @@ if (isset($_GET['del'])) {
                         <h2 class="page-title" style="margin-top:1%">Manage Registered Students</h2>
                         <div class="panel panel-default">
 
-                            <div class="panel-heading" style="background:#009688; color:white;">All Room Details</div>
+                            <div class="panel-heading bg-success fs-6" style=" color:white;">All Room Details</div>
                             <div class="panel-body">
-                                <label for="filterOne">Semester:</label>
-                                <select id="filterOne" onchange="filterTable()">
+
+                            <div class="d-flex">
+                            <label class="mt-2 mx-3" for="filterOne">Semester:</label>
+                            <div class="">
+                            <select class="form-select mb-3" id="filterOne" onchange="filterTable()">
                                     <option value="all">Select</option>
                                     <?php
                                     for ($i = 1; $i <= 10; $i++) {
@@ -118,13 +121,20 @@ if (isset($_GET['del'])) {
                                     }
                                     ?>
                                 </select>
-
-                                <label for="hostelSelect" style="margin-left:20px;">Hostel:</label>
-                                <select id="hostelSelect" onchange="filterTable()">
+                            </div>  
+                            <label class="mt-2 mx-3" for="hostelSelect" style="margin-left:20px;">Hostel:</label>
+                            <div class="">
+                            <select class="form-select" id="hostelSelect" onchange="filterTable()">
                                     <option value="all">Select</option>
                                     <option value="Alinkar">Alinkar</option>
                                     <option value="Mudra">Mudra</option>
                                 </select>
+                            </div>
+                            </div>
+
+
+                                
+                               
 
                                 <table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                                     <thead>

@@ -36,7 +36,7 @@ check_login();
                     <h2 class="page-title" style="margin-top:1%">Cancel Student Request Lists</h2>
 						<div class="panel panel-default">
 							
-							<div class="panel-heading text-white" style="background:#009688;">All Request</div>
+							<div class="panel-heading bg-success fs-6 text-white">All Request</div>
 							<div class="panel-body">
 
 							<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">

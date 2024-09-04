@@ -44,12 +44,12 @@ check_login();
             <div class="container-fluid">
                 <div class="row" id="print">
                     <div class="col-md-12">
-                        <h2 class="page-title ms-3" style="margin-top:3%">Rooms Details</h2>
-                        <div class="panel panel-default">
-                            <div class="panel-heading text-white bg-success bg-opacity-75">All Room Details</div>
+                        <h2 class="page-title ms-2">Rooms Details</h2>
+                        <div class="panel panel-default my-2">
+                            <div class="panel-heading text-white bg-success bg-opacity-75 fs-6">All Room Details</div>
                             <div class="panel-body">
-                                <span style="float:left">
-                                    <i class="fa fa-print fa-2x" aria-hidden="true" onclick="CallPrint()" style="cursor:pointer" title="Print the Report"></i>
+                                <span class="mb-3" style="float:left">
+                                    <i class="fa fa-print fa-2x " aria-hidden="true" onclick="CallPrint()" style="cursor:pointer" title="Print the Report"></i>
                                 </span>
                                 <table id="zctb" class="table table-bordered" cellspacing="0" width="100%" border="1">
                                     <tbody>
@@ -92,7 +92,7 @@ check_login();
 
                                         ?>
                                         <tr>
-                                            <td colspan="6" style="text-align:center; color:#009688"><h3>Room Related Info</h3></td>
+                                            <td colspan="6" style="text-align:center; color:#009688"><h3 class="mt-2" >Room Related Info</h3></td>
                                         </tr>
                                         <tr>
                                             <th>Registration Number :</th>
@@ -150,7 +150,7 @@ check_login();
 											
                                         </tr>
                                         <tr>
-                                            <td class="text-center" colspan="6" style="color:red"><h4>Personal Info</h4></td>
+                                            <td class="text-center" colspan="6" style="color:red"><h4 class="mt-2" >Personal Info</h4></td>
                                         </tr>
                                         <tr>
                                             <td><b>Reg No. :</b></td>
@@ -181,10 +181,10 @@ check_login();
                                             <td colspan="6">0<?php echo htmlspecialchars($row->guardianContactno); ?></td>
                                         </tr>
                                         <tr>
-                                            <td class="text-center" colspan="6" style="color:#009688;"><h4>Addresses</h4></td>
+                                            <td class="text-center" colspan="6" style="color:#009688;"><h4 class="mt-2">Addresses</h4></td>
                                         </tr>
                                         <tr>
-                                            <td><b>Correspondence Address</b></td>
+                                            <td><b>Current Address</b></td>
                                             <td colspan="2">
                                                 <?php echo htmlspecialchars($row->corresAddress); ?><br />
                                                 <?php echo htmlspecialchars($row->corresCIty); ?><br />

@@ -88,15 +88,11 @@ return true;
 			<div class="container-fluid">
 
 				<div class="row">
-					<div class="col-md-12">
 					
 						<h2 class="page-title ms-3">Change Password </h2>
-	
-						<div class="row">
-								<div class="col-md-2"></div>
-								<div class="col-md-8">
-								<div class="panel panel-default">
-									<div class="panel-heading bg-success bg-opacity-75 text-white">
+								<div class="col-md-8 offset-2">
+								<div class="panel border-0 shadow panel-default">
+									<div class="panel-heading border-0 bg-success fs-6 bg-opacity-75 text-white">
 <?php $result ="SELECT passUdateDate FROM userregistration WHERE id=?";
 $stmt = $mysqli->prepare($result);
 $stmt->bind_param('i',$ai);
@@ -104,7 +100,7 @@ $stmt->execute();
 $stmt -> bind_result($result);
 $stmt -> fetch(); ?>
 
-									Last Updation Date:&nbsp;<?php echo $result; ?> </div>
+									Information&nbsp;<?php echo $result; ?> </div>
 									<div class="panel-body">
 				<form method="post" class="form-horizontal" name="changepwd" id="change-pwd" onSubmit="return valid();">
     <?php            if(isset($_POST['changepwd']))
@@ -112,29 +108,29 @@ $stmt -> fetch(); ?>
 											<p style="color: red"><?php echo htmlentities($_SESSION['msg']); ?><?php echo htmlentities($_SESSION['msg']=""); ?></p>
                                             <?php } ?>
 											<div class="form-group my-4">
-												<label class="col-sm-2 control-label">Old Password </label>
-												<div class="offset-2 col-sm-8">
+												<label class="col-sm-2 control-label">Old Password :</label>
+												<div class="col-sm-8">
 				<input type="password" value="" name="oldpassword" id="oldpassword" class="form-control" onBlur="checkpass()" required="required">
 									 <span id="password-availability-status" class="help-block m-b-none" style="font-size:12px;"></span> </div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-2 control-label">New Password</label>
-												<div class="offset-2 col-sm-8">
+												<label class="col-sm-2 control-label">New Password :</label>
+												<div class="col-sm-8">
 											<input type="password" class="form-control" name="newpassword" id="newpassword" value="" required="required">
 												</div>
 											</div>
 <div class="form-group">
-									<label class="col-sm-2 control-label">Confirm Password</label>
-									<div class="offset-2 col-sm-8">
+									<label class="col-sm-2 control-label">Confirm Password :</label>
+									<div class="col-sm-8">
 				<input type="password" class="form-control" value="" required="required" id="cpassword" name="cpassword" >
 												</div>
 											</div>
 
 
 
-												<div class="col-sm-6 col-sm-offset-4">
+												<div class="col-sm-6 col-sm-offset-4 mb-3">
 													<button class="btn btn-danger me-4" type="submit">Cancel</button>
-													<input type="submit" name="changepwd" Value="Change Password" class="btn btn-primary">
+													<input type="submit" name="changepwd" Value="Change Password" class="btn btn-success">
 											</div>
 
 										</form>

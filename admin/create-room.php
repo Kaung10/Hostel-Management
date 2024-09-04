@@ -87,12 +87,14 @@ if (isset($_POST['submit'])) {
 			<div class="container-fluid">
 
 				<div class="row">
-					<div class="col-md-12">
+					<h2 class="page-title mt-3 ms-2">Add a Room </h2>
+					<div class="col col-2"></div>
+					<div class="col-md-8">
 					
-						<h2 class="page-title mt-3">Add a Room </h2>
+						
 	
-								<div class="panel panel-default">
-									<div class="panel-heading" style="color:white; background:#009688;">Add a Room</div>
+								<div class="panel panel-default border-0 shadow">
+									<div class="panel-heading bg-success fs-6" style="color:white;">Add a Room</div>
 									<div class="panel-body">
 									<?php if(isset($_POST['submit']))
 { ?>
@@ -100,9 +102,8 @@ if (isset($_POST['submit'])) {
 <?php } ?>
 										<form method="post" class="form-horizontal">
 											
-											<div class="hr-dashed"></div>
-											<div class="form-group">
-												<label class="col-sm-2 control-label">Select Seater  </label>
+											<div class="form-group my-3">
+												<label class="col-sm-2 control-label">Select Seater :  </label>
 												<div class="col-sm-8">
 												<Select name="seater" class="form-control" required>
 <option value="">Select Seater</option>
@@ -115,7 +116,7 @@ if (isset($_POST['submit'])) {
 
 											
 											<div class="form-group">
-												<label class="col-sm-2 control-label">Select Available  </label>
+												<label class="col-sm-2 control-label">Select Available :  </label>
 												<div class="col-sm-8">
 												<Select name="available" class="form-control" required>
 <option value="">Select available</option>
@@ -127,14 +128,14 @@ if (isset($_POST['submit'])) {
 </div>
 
 <div class="form-group">
-<label class="col-sm-2 control-label">Room No.</label>
+<label class="col-sm-2 control-label">Room No :</label>
 <div class="col-sm-8">
 <input type="number" min="0" class="form-control" name="rmno" id="rmno" value="" required="required">
 </div>
 </div>
 
 <div class="form-group">
-        <label class="col-sm-2 control-label">Select Hostel</label>
+        <label class="col-sm-2 control-label">Select Hostel :</label>
         <div class="col-sm-8">
             <select name="hostel" class="form-control" required>
                 <option value="">Select Hostel</option>
@@ -144,8 +145,8 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 
-<div class="col-sm-8 col-sm-offset-2">
-<input class="btn btn-primary" type="submit" name="submit" value="Create Room" >
+<div class="col-sm-8 col-sm-offset-2 text-center">
+<input class="btn btn-lg  btn-primary mb-2 mt-2" type="submit" name="submit" value="Create Room" >
 												</div>
 											</div>
 

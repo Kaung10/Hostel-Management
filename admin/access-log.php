@@ -34,9 +34,9 @@ check_login();
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12">
-						<h2 class="page-title" style="margin-top:4%">Access Log</h2>
+						<h2 class="page-title" style="margin-top:1%">Access Log</h2>
 						<div class="panel panel-default">
-							<div class="panel-heading" style="background:#009688; color:white;">All Courses Details</div>
+							<div class="panel-heading fs-6 bg-success" style="color:white;">All Courses Details</div>
 							<div class="panel-body">
 								<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 									<thead>

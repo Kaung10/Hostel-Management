@@ -310,33 +310,23 @@ $('#fpm').val(data);
 			<div class="container-fluid">
 
 				<div class="row">
-					<div class="col-md-12">
+
 					
-						<h2 class="page-title mt-3">Registration </h2>
+						<h2 class="page-title mt-3 ms-2">Registration </h2>
+                            <div class="col-1"></div>
+							<div class="col-md-10">
+								<div class="panel panel-primary border-0 shadow">
 
-						<div class="row">
-							<div class="col-md-12">
-								<div class="panel panel-primary">
-
-									<div class="panel-heading" style="background:#009688">Fill all Info</div>
+									<div class="panel-heading border-0 bg-success fs-6" >Fill all Info</div>
 
 									<div class="panel-body">
 										<form method="post" action="" class="form-horizontal">
-								
-<div class="form-group">
-
-<label class="col-sm-4 control-label"><h4 style="color:white" align="left">Room Related info </h4> </label>
-
-
-
-</div>
-
 
 
 
 											
-<div class="form-group">
-<label class="col-sm-2 control-label">Hostel</label>
+<div class="form-group mt-2">
+<label class="col-sm-2  control-label">Hostel :</label>
 <div class="col-sm-8">
 <select name="hostelname" id="hostelname"class="form-control" required> 
 <option value="">Select Hostel</option>
@@ -352,7 +342,7 @@ $('#fpm').val(data);
 
 											
 <div class="form-group">
-<label class="col-sm-2 control-label">Seater</label>
+<label class="col-sm-2 control-label">Seater : </label>
 <div class="col-sm-8">
 <select name="seater" id="seater"class="form-control" required> 
 
@@ -383,16 +373,18 @@ $('#fpm').val(data);
 
 
 <div class="form-group">
-<label class="col-sm-2 control-label">Stay From</label>
+<label class="col-sm-2 control-label">Stay From :</label>
 <div class="col-sm-8">
-<input type="date" name="stayf" id="stayf"  class="form-control" >
+<input type="date" name="stayf" id="stayf"  class="form-control mb-2" >
 </div>
 </div>
 
 
 
 <div class="form-group">
-<label class="col-sm-2 control-label"><h4 style="color: green" align="left">Personal info </h4> </label>
+<h3 class="text-center text-success">
+    Personal info
+</h3>
 </div>
 
 <div class="form-group">
@@ -491,12 +483,14 @@ $('#fpm').val(data);
 <div class="form-group">
 <label class="col-sm-2 control-label">Guardian Contact no : </label>
 <div class="col-sm-8">
-<input type="text" name="gcontact" id="gcontact"  class="form-control" required="required" pattern="09[0-9]{7,9}" title="09XXXXXXXXX">
+<input type="text" name="gcontact" id="gcontact"  class="form-control mb-2" required="required" pattern="09[0-9]{7,9}" title="09XXXXXXXXX">
 </div>
 </div>	
 
 <div class="form-group">
-<label class="col-sm-3 control-label"><h4 style="color: green" align="left">Correspondense Address </h4> </label>
+<h3 class="text-center text-success">
+    Current Address
+</h3>
 </div>
 
 
@@ -515,9 +509,9 @@ $('#fpm').val(data);
 </div>	
 
 <div class="form-group">
-<label class="col-sm-2 control-label">State </label>
+<label class="col-sm-2 control-label">State :</label>
 <div class="col-sm-8">
-<select name="state" id="state"class="form-control" required> 
+<select name="state" id="state"class="form-control mb-2" required> 
 <option value="">Select State</option>
 <?php $query ="SELECT * FROM states";
 $stmt2 = $mysqli->prepare($query);
@@ -533,18 +527,20 @@ while($row=$res->fetch_object())
 
 
 <div class="form-group">
-
-<label class="col-sm-3 control-label"><h4 style="color: green" align="left">Permanent Address </h4> </label>
-
+<h3 class="text-center text-success">
+    Permanent Address
+</h3>
 </div>
 
 
-<div class="form-group">
-<label class="col-sm-5 control-label">Permanent Address same as Correspondense address : </label>
-<div class="col-sm-4">
-<input type="checkbox" name="adcheck" value="1"/>
+<div class="form-group" style="margin-left:175px">
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" name="adcheck" value="1">
+  <label class="form-check-label" for="flexCheckDefault">
+    Permanent Address same as Current address
+  </label>
 </div>
-</div>
+</div> 
 
 
 <div class="form-group">
@@ -562,7 +558,7 @@ while($row=$res->fetch_object())
 </div>	
 
 <div class="form-group">
-<label class="col-sm-2 control-label">State </label>
+<label class="col-sm-2 control-label">State :</label>
 <div class="col-sm-8">
 <select name="pstate" id="pstate"class="form-control" required> 
 <option value="">Select State</option>
@@ -581,9 +577,9 @@ while($row=$res->fetch_object())
 
 
 
-<div class="col-sm-6 col-sm-offset-4">
-<button class="btn btn-default" type="submit" style="align:center;">Cancel</button>
-<input type="submit" name="submit" Value="Register" class="btn btn-primary" style="align:center; background:#009688;">
+<div class="col-sm-6 col-sm-offset-4 mb-3">
+<button class="btn btn-lg btn-danger me-3" type="submit" style="align:center;">Cancel</button>
+<input type="submit" name="submit" Value="Register" class="btn btn-lg btn-success" style="align:center;">
 </div>
 </form>
 

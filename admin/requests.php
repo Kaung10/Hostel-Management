@@ -37,8 +37,8 @@ check_login();
                     <h2 class="page-title" style="margin-top:1%">Hostel Request Forms</h2>
 						<div class="panel panel-default">
 							
-							<div class="panel-heading"style="background:#009688; color:white;">All Request</div>
-							<div class="panel-body">
+							<div class="panel-heading bg-success fs-6"style="color:white;">All Request</div>
+							<div class="panel-body mx-2">
 
 							<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 									<thead>

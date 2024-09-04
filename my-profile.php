@@ -78,15 +78,12 @@ $udate = date('d-m-Y h:i:s', time());
 	  {
 	  	?>	
 				<div class="row">
-					<div class="col-md-12">
 						<h2 class="page-title ms-3"><?php echo $row->name;?>'s&nbsp;Profile </h2>
+							<div class="col-md-8 offset-2">
+								<div class="panel panel-primary border-0 shadow">
+									<div class="panel-heading border-0 mb-3 fs-6 bg-success bg-opacity-75">
 
-						<div class="row">
-							<div class="col-md-12">
-								<div class="panel panel-primary">
-									<div class="panel-heading bg-success bg-opacity-75">
-
-Last Updation date :  <?php echo $row->updationDate;?> 
+Information <?php echo $row->updationDate;?> 
 </div>
 									
 
@@ -155,7 +152,7 @@ Last Updation date :  <?php echo $row->updationDate;?>
 
 <div class="col-sm-6 col-sm-offset-4">
 
-<input type="submit" name="update" Value="Update Profile" class="btn btn-success">
+<input type="submit" name="update" Value="Update Profile" class="btn btn-success mb-3">
 </div>
 </form>
 
